@@ -40,10 +40,70 @@
     right: 185px;
 }
 
+#body-area {
+    background: #D9D9D9;
+    font-family: 'Ubuntu', sans-serif;
+    display: grid;
+    overflow: auto;
+    object-fit: cover;
+    overflow-y: scroll;
+}
+
+#main-card {
+    margin: 0px;
+}
+
+#main-title,
+#row-state-select,
+#card-row-div,
+#card-row-div-sb,
 #row-city-input,
 #card-row {
     margin: 0px;
     padding: 0px;
+}
+
+#card-row-cb {
+    margin: 0px;
+    text-align: right;
+}
+
+#card-row-div-cb {
+    padding: 0px;
+    width: 25%;
+    text-align: left;
+}
+
+#card-row-div-cb-p {
+    margin: 0px;
+}
+
+
+#card-row-div-sb {
+    text-align: right;
+}
+
+#search-btn {
+    width: 50%;
+}
+
+
+.page-footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: orangered;
+    padding: 0px;
+    z-index: 5;
+}
+
+#main-footer {
+    width: 100%;
+    text-align: right;
+    padding-right: 8px;
+    max-width: none;
+    color: white;
 }
 
 /*Less*/
@@ -57,7 +117,7 @@
 @media (min-height: 568px) {
     
     #nav-row {
-        left:  80px;
+        left:  105px;
     }
 }
 
@@ -66,7 +126,7 @@
 @media (min-height: 640px) {
     
     #nav-row {
-        left:  80px;
+        left:  105px;
     }
 }
 
@@ -74,7 +134,7 @@
 @media (min-height: 667px) {
     
     #nav-row {
-        left:  80px;
+        left:  105px;
     }
 }
 
@@ -82,7 +142,7 @@
 @media (min-height: 731px) {
     
     #nav-row {
-        left:  80px;
+        left:  105px;
     }
 }
 
@@ -98,7 +158,7 @@
 @media (min-height: 736px) {
     
     #nav-row {
-        left:  80px;
+        left:  105px;
     }
 }
 
@@ -117,7 +177,7 @@
 @media (min-height: 812px) {
     
     #nav-row {
-        left:  80px;
+        left:  105px;
     }
 }
 
@@ -125,7 +185,7 @@
 @media (min-height: 823px) {
     
     #nav-row {
-        left:  80px;
+        left: 105px;
     }
 }
 
@@ -207,11 +267,23 @@
     }
 }
 
+/*NORMAL*/
+@media (max-height: 990px) {
+    
+    @media (min-width: 737px) {
+    
+        #nav-row {
+            left: 0px;
+        }
+
+    }
+}
+
 /*IPAD*/
 @media (min-height: 1024px) {
 
     #nav-row {
-        left: 80px;
+        left: 105px;
     }
 
 }
@@ -220,7 +292,9 @@
 @media (min-height: 1366px) {
     
     #nav-row {
-        left: 1px;
+        left: 0px;
     }
 
 }
+
+

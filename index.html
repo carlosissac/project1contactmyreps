@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,16 +16,13 @@
         <link rel="stylesheet" href="./assets/style.css">
     </head>
 </head>
-
-<body>
+<body id="body-area">
     <!-- NAV STARTS -->
     <nav id="nav-cont" class="nav-wrapper indigo">
-        <div class="container">
-            <div data-target="slide-out" class="sidenav-trigger" id="nav-row-div">
-                <a id="nav-row" href="#" class="brand-logo">
-                    <i id="nav-brand-icon" class="fas fa-flag-usa"></i> &nbsp;Contact.My.Reps
-                </a>
-            </div>
+        <div data-target="slide-out" class="sidenav-trigger" id="nav-row-div">
+            <a id="nav-row" href="#" class="brand-logo">
+                <i id="nav-brand-icon" class="fas fa-flag-usa"></i> &nbsp;Contact.My.Reps
+            </a>
         </div>
     </nav>
     <ul class="sidenav" id="slide-out">
@@ -43,13 +38,13 @@
             <div class="row">
                 <div class="col s12 m2"></div>
                 <div class="col s12 m8">
-                    <div class="card-panel">
+                    <div id="main-card"class="card-panel">
                         <form>
                             <div id="card-row" class="row">
-                                <h3>Search.For.Rep</h3>
+                                <h4 id="main-title">Search.Rep</h4>
                             </div>
                             <div id="card-row" class="row">
-                                <div class="col s12 m12">
+                                <div id="card-row-div" class="col s12 m12">
                                     <div class="input-field">
                                         <input type="text" name="address1" id="search-address1">
                                         <label for="search-address1">Address-1</label>
@@ -57,7 +52,7 @@
                                 </div>
                             </div>
                             <div id="card-row" class="row">
-                                <div class="col s12 m12">
+                                <div id="card-row-div" class="col s12 m12">
                                     <div class="input-field">
                                         <input type="text" name="address2" id="search-address2">
                                         <label for="search-address2">Address-2</label>
@@ -65,100 +60,122 @@
                                 </div>
                             </div>
                             <div id="card-row" class="row">
-                                <div class="col s12 m9">
+                                <div id="card-row-div" class="col s12 m7">
                                     <div id="row-city-input" class="input-field">
                                         <input type="text" name="search-city" id="search-city">
                                         <label for="search-city">City</label>
                                     </div>
                                 </div>
-                                <div class="col s12 m3">
-                                    <!-- Dropdown Trigger -->
-                                    <a class='dropdown-trigger btn' href='#' data-target='states-dd'>STATES</a>
-                                    <!-- Dropdown Structure -->
-                                    <ul id='states-dd' class='dropdown-content'>
-                                        <li><a href="#!">AL</a></li>
-                                        <li><a href="#!">AK</a></li>
-                                        <li><a href="#!">AZ</a></li>
-                                        <li><a href="#!">AR</a></li>
-                                        <li><a href="#!">CA</a></li>
-                                        <li><a href="#!">CO</a></li>
-                                        <li><a href="#!">CT</a></li>
-                                        <li><a href="#!">DE</a></li>
-                                        <li><a href="#!">FL</a></li>
-                                        <li><a href="#!">GA</a></li>
-                                        <li><a href="#!">HI</a></li>
-                                        <li><a href="#!">ID</a></li>
-                                        <li><a href="#!">IL</a></li>
-                                        <li><a href="#!">IN</a></li>
-                                        <li><a href="#!">IA</a></li>
-                                        <li><a href="#!">KS</a></li>
-                                        <li><a href="#!">KY</a></li>
-                                        <li><a href="#!">LA</a></li>
-                                        <li><a href="#!">ME</a></li>
-                                        <li><a href="#!">MD</a></li>
-                                        <li><a href="#!">MA</a></li>
-                                        <li><a href="#!">MI</a></li>
-                                        <li><a href="#!">MN</a></li>
-                                        <li><a href="#!">MS</a></li>
-                                        <li><a href="#!">MO</a></li>
-                                        <li><a href="#!">MT</a></li>
-                                        <li><a href="#!">NE</a></li>
-                                        <li><a href="#!">NV</a></li>
-                                        <li><a href="#!">NH</a></li>
-                                        <li><a href="#!">NJ</a></li>
-                                        <li><a href="#!">NM</a></li>
-                                        <li><a href="#!">NY</a></li>
-                                        <li><a href="#!">NC</a></li>
-                                        <li><a href="#!">ND</a></li>
-                                        <li><a href="#!">OH</a></li>
-                                        <li><a href="#!">OK</a></li>
-                                        <li><a href="#!">OR</a></li>
-                                        <li><a href="#!">PA</a></li>
-                                        <li><a href="#!">RI</a></li>
-                                        <li><a href="#!">SC</a></li>
-                                        <li><a href="#!">SD</a></li>
-                                        <li><a href="#!">TN</a></li>
-                                        <li><a href="#!">TX</a></li>
-                                        <li><a href="#!">UT</a></li>
-                                        <li><a href="#!">VT</a></li>
-                                        <li><a href="#!">VA</a></li>
-                                        <li><a href="#!">WA</a></li>
-                                        <li><a href="#!">WV</a></li>
-                                        <li><a href="#!">WI</a></li>
-                                        <li><a href="#!">WY</a></li>
-                                    </ul>
+                                <div id="card-row-div" class="col s12 m5">
+                                    <div id="row-state-select" class="input-field col s12">
+                                        <select>
+                                            <option value="" disabled selected>State</option>
+                                            <option value="AL">AL</option>
+                                            <option value="AK">AK</option>
+                                            <option value="AZ">AZ</option>
+                                            <option value="AR">AR</option>
+                                            <option value="CA">CA</option>
+                                            <option value="CO">CO</option>
+                                            <option value="CT">CT</option>
+                                            <option value="DE">DE</option>
+                                            <option value="FL">FL</option>
+                                            <option value="GA">GA</option>
+                                            <option value="HI">HI</option>
+                                            <option value="ID">ID</option>
+                                            <option value="IL">IL</option>
+                                            <option value="IN">IN</option>
+                                            <option value="IA">IA</option>
+                                            <option value="KS">KS</option>
+                                            <option value="KY">KY</option>
+                                            <option value="LA">LA</option>
+                                            <option value="ME">ME</option>
+                                            <option value="MD">MD</option>
+                                            <option value="MA">MA</option>
+                                            <option value="MI">MI</option>
+                                            <option value="MN">MN</option>
+                                            <option value="MS">MS</option>
+                                            <option value="MO">MO</option>
+                                            <option value="MT">MT</option>
+                                            <option value="NE">NE</option>
+                                            <option value="NV">NV</option>
+                                            <option value="NH">NH</option>
+                                            <option value="NJ">NJ</option>
+                                            <option value="NM">NM</option>
+                                            <option value="NY">NY</option>
+                                            <option value="NC">NC</option>
+                                            <option value="ND">ND</option>
+                                            <option value="OH">OH</option>
+                                            <option value="OK">OK</option>
+                                            <option value="OR">OR</option>
+                                            <option value="PA">PA</option>
+                                            <option value="RI">RI</option>
+                                            <option value="RI">SC</option>
+                                            <option value="RI">SD</option>
+                                            <option value="TN">TN</option>
+                                            <option value="TX">TX</option>
+                                            <option value="UT">UT</option>
+                                            <option value="VT">VT</option>
+                                            <option value="VA">VA</option>
+                                            <option value="WA">WA</option>
+                                            <option value="WV">WV</option>
+                                            <option value="WI">WI</option>
+                                            <option value="WY">WY</option>
+                                        </select>
+                                        <!-- <label>State</label> -->
+                                    </div>
                                 </div>
                             </div>
                             <div id="card-row" class="row">
-                                <div class="col s12 m12">
+                                <div id="card-row-div" class="col s12 m12">
                                     <div class="input-field">
                                         <input type="text" name="zipcode" id="search-zipcode">
                                         <label for="search-zipcode">Zip-Code</label>
                                     </div>
                                 </div>
                             </div>
-
-                            <div id="card-row" class="row">
-                                <div class="col s12 m12">
-                                    <label>
-                                        <input type="checkbox" class="filled-in"/>
-                                        <span>Local</span>
-                                    </label>
-                                    <label>
-                                        <input type="checkbox" class="filled-in"/>
-                                        <span>State</span>
-                                    </label>
-                                    <label>
-                                        <input type="checkbox" class="filled-in" />
-                                        <span>Federal</span>
-                                    </label>
+                            <div id="card-row-cb" class="row">
+                                <div id="card-row-div-cb" class="col s12 m3">
+                                    <p id="card-row-div-cb-p">
+                                        <label id="cb-cnty-lbl">
+                                            <input id="cb-cnty" type="checkbox" class="filled-in"/>
+                                            <span id="cb-cnty-sp">County</span>
+                                        </label>
+                                    </p>
+                                </div>
+                            </div>
+                            <div id="card-row-cb" class="row">
+                                <div id="card-row-div-cb" class="col s12 m3">
+                                    <p id="card-row-div-cb-p">
+                                        <label id="cb-lcl-lbl">
+                                            <input id="cb-lcl" type="checkbox" class="filled-in"/>
+                                            <span id="cb-lcl-sp">Local</span>
+                                        </label>
+                                    </p>
+                                </div>
+                            </div>
+                            <div id="card-row-cb" class="row">
+                                <div id="card-row-div-cb" class="col s12 m3">
+                                    <p id="card-row-div-cb-p">
+                                        <label id="cb-st-lbl">
+                                            <input id="cb-st" type="checkbox" class="filled-in"/>
+                                            <span id="cb-st-sp">State</span>
+                                        </label>
+                                    </p>
+                                </div>
+                            </div>
+                            <div id="card-row-cb" class="row">
+                                <div id="card-row-div-cb" class="col s12 m3">
+                                    <p id="card-row-div-cb-p">
+                                        <label id="cb-fd-lbl">
+                                            <input id="cb-fd" type="checkbox" class="filled-in"/>
+                                            <span id="cb-fd-sp">Federal</span>
+                                        </label>
+                                    </p>
                                 </div>
                             </div>
                             <div id="card-row" class="row">
-                                <div class="col s12 m12">
-                                    <div class="row">
-                                        <a class="waves-effect waves-light btn">Search</a>
-                                    </div>
+                                <div id="card-row-div-sb" class="col s12 m12">
+                                    <a id="search-btn" class="waves-effect waves-light btn-large">Search</a>
                                 </div>
                             </div>
                         </form>
@@ -171,12 +188,33 @@
         </div>
     </main>
     <!-- MAIN ENDS -->
+    <!-- STICKY FOOTER START -->
+    <footer class="page-footer">
+        <div id="main-footer-cp" class="footer-copyright">
+            <div id="main-footer"class="container right-align">Copyright © Gatito <i class="fas fa-cat"></i></div>
+        </div>
+    </footer>
+    <!-- STICKY FOOTER END -->
     <!-- JQEURY LINKAGE -->
     <script src="https://code.jquery.com/jquery.js"></script>
     <!-- MOMENT.JS LINKAGE -->
     <script src="https://momentjs.com/downloads/moment-with-locales.min.js"></script>
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- STICKY NAV START -->
+    <script>
+        $(document).ready(function(){
+            $(window).scroll(function(){
+                if($(window).scrollTop()>150) {
+                    $('nav').addClass('sticky-nav');
+                }
+                else {
+                    $('nav').removeClass('sticky-nav');
+                }
+            });
+        });
+    </script> 
+    <!-- STICKY NAV END -->
     <!-- SIDENAV HANDLER -->
     <script>
         $(document).ready(function(event) {
@@ -185,11 +223,10 @@
     </script>
     <!-- DROPDOWN HANDLER -->
     <script>
-        $('.dropdown-trigger').dropdown();
+    $(document).ready(function(){
+        $('select').formSelect();
+    });
     </script>
-    <!-- MOMENT.JS LINKAGE -->
-    <script src="https://momentjs.com/downloads/moment-with-locales.min.js"></script>
     <script src="./assets/search.js"></script>
 </body>
-
 </html>
