@@ -1,11 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Contact.My.Reps</title>
+        <!-- MATERIALIZE CSS LINKAGE -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <!-- FONTAWESOME LINKAGE -->    
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.1/css/all.css">
+        <!-- GOOGLE FONTS LINKAGE -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+        <!-- CSS LINKAGE -->
+        <link rel="stylesheet" href="./assets/style.css">
+    </head>
 </head>
 <body>
-    
+    <!-- NAV STARTS -->
+    <nav id="nav-cont" class="nav-wrapper indigo">
+        <div class="container">
+            <div data-target="slide-out" class="sidenav-trigger" id="nav-row-div">
+                <a id="nav-row" href="#" class="brand-logo">
+                    <i id="nav-brand-icon" class="fas fa-flag-usa"></i>
+                    &nbsp;Contact.My.Reps
+                </a>
+            </div>
+        </div>
+    </nav>
+    <ul class="sidenav" id="slide-out">
+        <li><a href="./about.html">About</a></li>
+        <li><a href="./directory.html">Directory</a></li>
+        <li><a href="./index.html">Home</a></li>
+    </ul>
+    <!-- NAV ENDS -->
+    <!-- MAIN STARTS -->
+    <main>
+        <div class="container">
+            <div class="row"></div>
+            <div class="row">
+                <div class="col s12 m2"></div>
+                <div class="col s12 m8">
+                    <div class="card-panel">
+                        <form>
+                            <div id="card-row" class="row">
+                                <h3>Search.For.Rep</h3>
+                            </div>
+                            <div id="card-row" class="row">
+                                <div class="col s12 m12">
+                                    <div class="input-field">
+                                        <input type="text" name="address1" id="search-address1">
+                                        <label for="search-address1">Address-1</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="card-row" class="row">
+                                <div class="col s12 m12">                       
+                                    <div class="input-field">
+                                        <input type="text" name="address2" id="search-address2">
+                                        <label for="search-address2">Address-2</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="card-row" class="row">                                                        
+                                    <div class="col s12 m9">
+                                        <div id="row-city-input" class="input-field">
+                                            <input type="text" name="search-city" id="search-city">
+                                            <label for="search-city">City</label>
+                                        </div>
+                                    </div>
+                                    <div class="col s12 m3">
+                                    <!-- Dropdown Trigger -->
+                                    <a class='dropdown-trigger btn' href='#' data-target='states-dd'>STATES</a>
+                                    <!-- Dropdown Structure -->
+                                    <ul id='states-dd' class='dropdown-content'>
+                                        <li><a href="#!">CA</a></li>
+                                        <li><a href="#!">OR</a></li>
+                                        <li><a href="#!">WA</a></li>
+                                        <li><a href="#!">AZ</a></li>
+                                        <li><a href="#!">NM</a></li>
+                                        <li><a href="#!">TX</a></li>
+                                        <li><a href="#!">NC</a></li>
+                                    </ul>
+                                    </div>
+                            </div>
+                            <div id="card-row" class="row">
+                                <div class="col s12 m12">   
+                                    <div class="input-field">
+                                        <input type="text" name="zipcode" id="search-zipcode">
+                                        <label for="search-zipcode">Zip-Code</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div id="card-row" class="row">
+                                <div class="col s12 m12">
+                                    <label>
+                                        <input type="checkbox" class="filled-in"/>
+                                        <span>Local</span>
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" class="filled-in"/>
+                                        <span>State</span>
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" class="filled-in" />
+                                        <span>Federal</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div id="card-row" class="row">
+                                <div class="col s12 m12">
+                                    <div class="row"> 
+                                        <a class="waves-effect waves-light btn">Search</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col s12 m2"></div>
+            </div>
+            <div class="row"></div>
+            <div class="row"></div>
+        </div>
+    </main>
+    <!-- MAIN ENDS -->
+    <!-- JQEURY LINKAGE -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- MOMENT.JS LINKAGE -->
+    <script src="https://momentjs.com/downloads/moment-with-locales.min.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- SIDENAV HANDLER -->
+    <script>
+        $(document).ready(function(event) {
+        $('.sidenav').sidenav();
+    });
+    </script>
+    <!-- DROPDOWN HANDLER -->
+    <script>
+    $('.dropdown-trigger').dropdown();
+    </script>
+    <!-- MOMENT.JS LINKAGE -->
+    <script src="https://momentjs.com/downloads/moment-with-locales.min.js"></script>
+    <script src="./assets/search.js"></script>
 </body>
 </html>
