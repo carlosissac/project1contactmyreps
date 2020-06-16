@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Contact.My.Reps</title>
+        <!-- MATERIALIZE CSS LINKAGE -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <!-- FONTAWESOME LINKAGE -->    
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.1/css/all.css">
+        <!-- GOOGLE FONTS LINKAGE -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+        <!-- CSS LINKAGE -->
+        <link rel="stylesheet" href="./assets/style.css">
+    </head>
+</head>
+<body>
+    <!-- NAV STARTS -->
+    <nav id="nav-cont" class="nav-wrapper indigo">
+        <div class="container">
+            <div data-target="slide-out" class="sidenav-trigger" id="nav-row-div">
+                <a id="nav-row" href="#" class="brand-logo">
+                    <i id="nav-brand-icon" class="fas fa-flag-usa"></i>
+                    &nbsp;Contact.My.Reps
+                </a>
+            </div>
+        </div>
+    </nav>
+    <ul class="sidenav" id="slide-out">
+        <li><a href="./about.html">About</a></li>
+        <li><a href="./directory.html">Directory</a></li>
+        <li><a href="./index.html">Home</a></li>
+    </ul>
+    <!-- NAV ENDS -->
+    <!-- MAIN STARTS -->
+    <main>
+        <div class="container">
+            <div class="row"></div>
+            <div class="row">
+                <div class="col s12 m2"></div>
+                <div class="col s12 m8">
+                    <div class="card-panel">
+                        <form>
+                            <h3>Directory</h3>
+                        </form>
+                    </div>
+                </div>
+                <div class="col s12 m2"></div>
+            </div>
+            <div class="row"></div>
+            <div class="row"></div>
+        </div>
+    </main>
+    <!-- MAIN ENDS -->
+    <!-- JQEURY LINKAGE -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- MOMENT.JS LINKAGE -->
+    <script src="https://momentjs.com/downloads/moment-with-locales.min.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- SIDENAV HANDLER -->
+    <script>
+        $(document).ready(function(event) {
+        $('.sidenav').sidenav();
+    });
+    </script>
+    <!-- MOMENT.JS LINKAGE -->
+    <script src="https://momentjs.com/downloads/moment-with-locales.min.js"></script>   
+</body>
+</html>
+

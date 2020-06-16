@@ -1,0 +1,226 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+.fas {
+    line-height: unset;
+}
+
+.nav {
+    position: fixed;
+}
+
+.body {
+    overflow: auto;
+}
+
+.sticky-nav {
+    position: fixed;
+    top: 0;
+    z-index: 5;
+}
+
+#nav-cont {
+    height: 4rem;
+    line-height: 3.5rem;
+}
+
+#nav-row {
+    font-size: x-large;
+    vertical-align: middle;
+    position: relative;
+    padding-left: 35px;
+}
+
+#nav-brand-icon {
+    margin: 0px;
+    padding: 0px;
+    font-size: xx-large;
+    position: absolute;
+    right: 185px;
+}
+
+#row-city-input,
+#card-row {
+    margin: 0px;
+    padding: 0px;
+}
+
+/*Less*/
+@media (max-height: 567px) {  
+    #nav-row {
+        left: 50px;
+    }
+}
+
+/*IP5SE*/
+@media (min-height: 568px) {
+    
+    #nav-row {
+        left:  80px;
+    }
+}
+
+/*MOTOG4*/
+/*GALAXYS5*/
+@media (min-height: 640px) {
+    
+    #nav-row {
+        left:  80px;
+    }
+}
+
+/*IP678*/
+@media (min-height: 667px) {
+    
+    #nav-row {
+        left:  80px;
+    }
+}
+
+/*PIXEL2*/
+@media (min-height: 731px) {
+    
+    #nav-row {
+        left:  80px;
+    }
+}
+
+/*MACBOOKPRO*/
+@media (min-height: 733px) {
+    
+    #nav-row {
+        left:  0px;
+    }
+}
+
+/*IP678++*/
+@media (min-height: 736px) {
+    
+    #nav-row {
+        left:  80px;
+    }
+}
+
+/*MACBOOKPRO*/
+@media (min-height: 798px) {
+    
+    @media (min-width: 992px) {
+        
+        #nav-row {
+            left:  0px;
+        }
+    }
+}
+
+/*IPX*/
+@media (min-height: 812px) {
+    
+    #nav-row {
+        left:  80px;
+    }
+}
+
+/*PIXEL2XL*/
+@media (min-height: 823px) {
+    
+    #nav-row {
+        left:  80px;
+    }
+}
+
+/*NORMAL*/
+@media (min-height: 863px) {
+    
+    @media (min-width: 967px) {
+    
+        #nav-row {
+            left: 0px;
+        }
+    }
+}
+/*NORMAL*/
+@media (min-height: 912px) {
+    
+    @media (min-width: 967px) {
+    
+        #nav-row {
+            left: 0px;
+        }
+    }
+}
+
+/*NORMAL*/
+@media (min-height: 978px) {
+    
+    @media (min-width: 967px) {
+    
+        #nav-row {
+            left: 0px;
+        }
+    }
+}
+
+/*NORMAL*/
+@media (min-height: 978px) {
+    
+    @media (min-width: 974px) {
+    
+        #nav-row {
+            left: 0px;
+        }
+    }
+}
+
+/*NORMAL*/
+@media (min-height: 978px) {
+    
+    @media (min-width: 988px) {
+    
+        #nav-row {
+            left: 0px;
+        }
+    }
+}
+
+/*NORMAL*/
+@media (min-height: 978px) {
+    
+    @media (min-width: 1232px) {
+    
+        #nav-row {
+            left: 0px;
+        }
+
+    }
+}
+
+/*NORMAL*/
+@media (min-height: 978px) {
+    
+    @media (min-width: 1679px) {
+    
+        #nav-row {
+            left: 0px;
+        }
+
+    }
+}
+
+/*IPAD*/
+@media (min-height: 1024px) {
+
+    #nav-row {
+        left: 80px;
+    }
+
+}
+
+/*IPADPRO*/
+@media (min-height: 1366px) {
+    
+    #nav-row {
+        left: 1px;
+    }
+
+}
