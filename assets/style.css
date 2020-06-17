@@ -69,7 +69,7 @@
 }
 
 #card-row-div-cb {
-    padding: 0px;
+    padding: 0.15rem;
     width: 25%;
     text-align: left;
 }
@@ -78,15 +78,20 @@
     margin: 0px;
 }
 
-
 #card-row-div-sb {
-    text-align: right;
+    text-align: center;
+    padding: 0.5rem;
+    margin: 0px;
 }
 
+#clear-btn,
 #search-btn {
-    width: 50%;
+    width: 100%;
 }
 
+#proceed-btn {
+    width: 100%;
+}
 
 .page-footer {
     position: fixed;

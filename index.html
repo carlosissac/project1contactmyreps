@@ -33,13 +33,13 @@
     <!-- NAV ENDS -->
     <!-- MAIN STARTS -->
     <main>
-        <div class="container">
+        <div id="main-container" class="container">
             <div class="row"></div>
             <div class="row">
                 <div class="col s12 m2"></div>
                 <div class="col s12 m8">
                     <div id="main-card"class="card-panel">
-                        <form>
+                        <form id="card-form">
                             <div id="card-row" class="row">
                                 <h4 id="main-title">Search.Rep</h4>
                             </div>
@@ -68,7 +68,7 @@
                                 </div>
                                 <div id="card-row-div" class="col s12 m5">
                                     <div id="row-state-select" class="input-field col s12">
-                                        <select>
+                                        <select id="ddl-sel">
                                             <option value="" disabled selected>State</option>
                                             <option value="AL">AL</option>
                                             <option value="AK">AK</option>
@@ -174,15 +174,27 @@
                                 </div>
                             </div>
                             <div id="card-row" class="row">
-                                <div id="card-row-div-sb" class="col s12 m12">
-                                    <a id="search-btn" class="waves-effect waves-light btn-large">Search</a>
+                                <div id="card-row-div-sb" class="col s12 m6">
+                                    <a id="clear-btn" class="waves-effect waves-light btn-large red">Clr.Frm</a>
+                                </div>
+                                <div id="card-row-div-sb" class="col s12 m6">
+                                    <a id="search-btn" class="waves-effect waves-light btn-large">Rslv.Addr</a>
                                 </div>
                             </div>
+                            <div id="card-row-d"></div>
                         </form>
                     </div>
                 </div>
                 <div class="col s12 m2"></div>
             </div>
+            <div class="row"></div>
+            <div class="row"></div>
+            <div class="row"></div>
+            <div class="row"></div>
+            <div class="row"></div>
+            <div class="row"></div>
+            <div class="row"></div>
+            <div class="row"></div>
             <div class="row"></div>
             <div class="row"></div>
         </div>
@@ -196,7 +208,7 @@
     </footer>
     <!-- STICKY FOOTER END -->
     <!-- JQEURY LINKAGE -->
-    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- MOMENT.JS LINKAGE -->
     <script src="https://momentjs.com/downloads/moment-with-locales.min.js"></script>
     <!-- Compiled and minified JavaScript -->
