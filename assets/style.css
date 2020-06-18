@@ -1,305 +1,273 @@
-*, *::before, *::after {
-    box-sizing: border-box;
-}
-
-.fas {
-    line-height: unset;
-}
-
-.nav {
-    position: fixed;
-}
-
-.body {
-    overflow: auto;
-}
-
-.sticky-nav {
-    position: fixed;
-    top: 0;
-    z-index: 5;
-}
-
-#nav-cont {
-    height: 4rem;
-    line-height: 3.5rem;
-}
-
-#nav-row {
-    font-size: x-large;
-    vertical-align: middle;
-    position: relative;
-    padding-left: 35px;
-}
-
-#nav-brand-icon {
-    margin: 0px;
-    padding: 0px;
-    font-size: xx-large;
-    position: absolute;
-    right: 185px;
-}
-
-#body-area {
-    background: #D9D9D9;
-    font-family: 'Ubuntu', sans-serif;
-    display: grid;
-    overflow: auto;
-    object-fit: cover;
-    overflow-y: scroll;
-}
-
-#main-card {
-    margin: 0px;
-}
-
-#main-title,
-#row-state-select,
-#card-row-div,
-#card-row-div-sb,
-#row-city-input,
-#card-row {
-    margin: 0px;
-    padding: 0px;
-}
-
-#card-row-cb {
-    margin: 0px;
-    text-align: right;
-}
-
-#card-row-div-cb {
-    padding: 0.15rem;
-    width: 25%;
-    text-align: left;
-}
-
-#card-row-div-cb-p {
-    margin: 0px;
-}
-
-#card-row-div-sb {
-    text-align: center;
-    padding: 0.5rem;
-    margin: 0px;
-}
-
-#clear-btn,
-#search-btn {
-    width: 100%;
-}
-
-#proceed-btn {
-    width: 100%;
-}
-
-.page-footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: orangered;
-    padding: 0px;
-    z-index: 5;
-}
-
-#main-footer {
-    width: 100%;
-    text-align: right;
-    padding-right: 8px;
-    max-width: none;
-    color: white;
-}
-
-/*Less*/
-@media (max-height: 567px) {  
-    #nav-row {
-        left: 50px;
-    }
-}
-
-/*IP5SE*/
-@media (min-height: 568px) {
-    
-    #nav-row {
-        left:  105px;
-    }
-}
-
-/*MOTOG4*/
-/*GALAXYS5*/
-@media (min-height: 640px) {
-    
-    #nav-row {
-        left:  105px;
-    }
-}
-
-/*IP678*/
-@media (min-height: 667px) {
-    
-    #nav-row {
-        left:  105px;
-    }
-}
-
-/*PIXEL2*/
-@media (min-height: 731px) {
-    
-    #nav-row {
-        left:  105px;
-    }
-}
-
-/*MACBOOKPRO*/
-@media (min-height: 733px) {
-    
-    #nav-row {
-        left:  0px;
-    }
-}
-
-/*IP678++*/
-@media (min-height: 736px) {
-    
-    #nav-row {
-        left:  105px;
-    }
-}
-
-/*MACBOOKPRO*/
-@media (min-height: 798px) {
-    
-    @media (min-width: 992px) {
-        
-        #nav-row {
-            left:  0px;
-        }
-    }
-}
-
-/*IPX*/
-@media (min-height: 812px) {
-    
-    #nav-row {
-        left:  105px;
-    }
-}
-
-/*PIXEL2XL*/
-@media (min-height: 823px) {
-    
-    #nav-row {
-        left: 105px;
-    }
-}
-
-/*NORMAL*/
-@media (min-height: 863px) {
-    
-    @media (min-width: 967px) {
-    
-        #nav-row {
-            left: 0px;
-        }
-    }
-}
-/*NORMAL*/
-@media (min-height: 912px) {
-    
-    @media (min-width: 967px) {
-    
-        #nav-row {
-            left: 0px;
-        }
-    }
-}
-
-/*NORMAL*/
-@media (min-height: 978px) {
-    
-    @media (min-width: 967px) {
-    
-        #nav-row {
-            left: 0px;
-        }
-    }
-}
-
-/*NORMAL*/
-@media (min-height: 978px) {
-    
-    @media (min-width: 974px) {
-    
-        #nav-row {
-            left: 0px;
-        }
-    }
-}
-
-/*NORMAL*/
-@media (min-height: 978px) {
-    
-    @media (min-width: 988px) {
-    
-        #nav-row {
-            left: 0px;
-        }
-    }
-}
-
-/*NORMAL*/
-@media (min-height: 978px) {
-    
-    @media (min-width: 1232px) {
-    
-        #nav-row {
-            left: 0px;
-        }
-
-    }
-}
-
-/*NORMAL*/
-@media (min-height: 978px) {
-    
-    @media (min-width: 1679px) {
-    
-        #nav-row {
-            left: 0px;
-        }
-
-    }
-}
-
-/*NORMAL*/
-@media (max-height: 990px) {
-    
-    @media (min-width: 737px) {
-    
-        #nav-row {
-            left: 0px;
-        }
-
-    }
-}
-
-/*IPAD*/
-@media (min-height: 1024px) {
-
-    #nav-row {
-        left: 105px;
-    }
-
-}
-
-/*IPADPRO*/
-@media (min-height: 1366px) {
-    
-    #nav-row {
-        left: 0px;
-    }
-
-}
-
-
+                    *,
+                    *::before,
+                    *::after {
+                        box-sizing: border-box;
+                    }
+                    
+                    .fas {
+                        line-height: unset;
+                    }
+                    
+                    .nav {
+                        position: fixed;
+                    }
+                    
+                    .body {
+                        overflow: auto;
+                    }
+                    
+                    .sticky-nav {
+                        position: fixed;
+                        top: 0;
+                        z-index: 5;
+                    }
+                    
+                    #nav-cont {
+                        height: 4rem;
+                        line-height: 3.5rem;
+                    }
+                    
+                    #nav-row {
+                        font-size: x-large;
+                        vertical-align: middle;
+                        position: relative;
+                        padding-left: 35px;
+                    }
+                    
+                    #nav-brand-icon {
+                        margin: 0px;
+                        padding: 0px;
+                        font-size: xx-large;
+                        position: absolute;
+                        right: 185px;
+                    }
+                    
+                    #body-area {
+                        background: #D9D9D9;
+                        font-family: 'Ubuntu', sans-serif;
+                        display: grid;
+                        overflow: auto;
+                        object-fit: cover;
+                        overflow-y: scroll;
+                    }
+                    
+                    #main-card {
+                        margin: 0px;
+                    }
+                    
+                    #main-title,
+                    #row-state-select,
+                    #card-row-div,
+                    #card-row-div-sb,
+                    #row-city-input,
+                    #card-row {
+                        margin: 0px;
+                        padding: 0px;
+                    }
+                    
+                    #card-row-cb {
+                        margin: 0px;
+                        text-align: right;
+                    }
+                    
+                    #card-row-div-cb {
+                        padding: 0.15rem;
+                        width: 25%;
+                        text-align: left;
+                    }
+                    
+                    #card-row-div-cb-p {
+                        margin: 0px;
+                    }
+                    
+                    #card-row-div-sb {
+                        text-align: center;
+                        padding: 0.5rem;
+                        margin: 0px;
+                    }
+                    
+                    #clear-btn,
+                    #search-btn {
+                        width: 100%;
+                    }
+                    
+                    #proceed-btn {
+                        width: 100%;
+                    }
+                    
+                    .page-footer {
+                        position: fixed;
+                        left: 0;
+                        bottom: 0;
+                        width: 100%;
+                        background-color: orangered;
+                        padding: 0px;
+                        z-index: 5;
+                    }
+                    
+                    #main-footer {
+                        width: 100%;
+                        text-align: right;
+                        padding-right: 8px;
+                        max-width: none;
+                        color: white;
+                    }
+                    /*Less*/
+                    
+                    @media (max-height: 567px) {
+                        #nav-row {
+                            left: 50px;
+                        }
+                    }
+                    /*IP5SE*/
+                    
+                    @media (min-height: 568px) {
+                        #nav-row {
+                            left: 105px;
+                        }
+                    }
+                    /*MOTOG4*/
+                    /*GALAXYS5*/
+                    
+                    @media (min-height: 640px) {
+                        #nav-row {
+                            left: 105px;
+                        }
+                    }
+                    /*IP678*/
+                    
+                    @media (min-height: 667px) {
+                        #nav-row {
+                            left: 105px;
+                        }
+                    }
+                    /*PIXEL2*/
+                    
+                    @media (min-height: 731px) {
+                        #nav-row {
+                            left: 105px;
+                        }
+                    }
+                    /*MACBOOKPRO*/
+                    
+                    @media (min-height: 733px) {
+                        #nav-row {
+                            left: 0px;
+                        }
+                    }
+                    /*IP678++*/
+                    
+                    @media (min-height: 736px) {
+                        #nav-row {
+                            left: 105px;
+                        }
+                    }
+                    /*MACBOOKPRO*/
+                    
+                    @media (min-height: 798px) {
+                        @media (min-width: 992px) {
+                            #nav-row {
+                                left: 0px;
+                            }
+                        }
+                    }
+                    /*IPX*/
+                    
+                    @media (min-height: 812px) {
+                        #nav-row {
+                            left: 105px;
+                        }
+                    }
+                    /*PIXEL2XL*/
+                    
+                    @media (min-height: 823px) {
+                        #nav-row {
+                            left: 105px;
+                        }
+                    }
+                    /*NORMAL*/
+                    
+                    @media (min-height: 863px) {
+                        @media (min-width: 967px) {
+                            #nav-row {
+                                left: 0px;
+                            }
+                        }
+                    }
+                    /*NORMAL*/
+                    
+                    @media (min-height: 912px) {
+                        @media (min-width: 967px) {
+                            #nav-row {
+                                left: 0px;
+                            }
+                        }
+                    }
+                    /*NORMAL*/
+                    
+                    @media (min-height: 978px) {
+                        @media (min-width: 967px) {
+                            #nav-row {
+                                left: 0px;
+                            }
+                        }
+                    }
+                    /*NORMAL*/
+                    
+                    @media (min-height: 978px) {
+                        @media (min-width: 974px) {
+                            #nav-row {
+                                left: 0px;
+                            }
+                        }
+                    }
+                    /*NORMAL*/
+                    
+                    @media (min-height: 978px) {
+                        @media (min-width: 988px) {
+                            #nav-row {
+                                left: 0px;
+                            }
+                        }
+                    }
+                    /*NORMAL*/
+                    
+                    @media (min-height: 978px) {
+                        @media (min-width: 1232px) {
+                            #nav-row {
+                                left: 0px;
+                            }
+                        }
+                    }
+                    /*NORMAL*/
+                    
+                    @media (min-height: 978px) {
+                        @media (min-width: 1679px) {
+                            #nav-row {
+                                left: 0px;
+                            }
+                        }
+                    }
+                    /*NORMAL*/
+                    
+                    @media (max-height: 990px) {
+                        @media (min-width: 737px) {
+                            #nav-row {
+                                left: 0px;
+                            }
+                        }
+                    }
+                    /*IPAD*/
+                    
+                    @media (min-height: 1024px) {
+                        #nav-row {
+                            left: 105px;
+                        }
+                    }
+                    /*IPADPRO*/
+                    
+                    @media (min-height: 1366px) {
+                        #nav-row {
+                            left: 0px;
+                        }
+                    }

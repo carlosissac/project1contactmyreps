@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,15 +18,16 @@
         <link rel="stylesheet" href="./assets/style.css">
     </head>
 </head>
+
 <body id="body-area">
     <!-- NAV STARTS -->
     <nav id="nav-cont" class="nav-wrapper indigo">
         <!-- <div class="container"> -->
-            <div data-target="slide-out" class="sidenav-trigger" id="nav-row-div">
-                <a id="nav-row" href="#" class="brand-logo">
-                    <i id="nav-brand-icon" class="fas fa-flag-usa"></i> &nbsp;Contact.My.Reps
-                </a>
-            </div>
+        <div data-target="slide-out" class="sidenav-trigger" id="nav-row-div">
+            <a id="nav-row" href="#" class="brand-logo">
+                <i id="nav-brand-icon" class="fas fa-flag-usa"></i> &nbsp;Contact.My.Reps
+            </a>
+        </div>
         <!-- </div> -->
     </nav>
     <ul class="sidenav" id="slide-out">
@@ -40,7 +43,7 @@
             <div class="row">
                 <div class="col s12 m2"></div>
                 <div class="col s12 m8">
-                    <div id="main-card"class="card-panel">
+                    <div id="main-card" class="card-panel">
                         <form>
                             <div id="card-row" class="row">
                                 <h4 id="main-title">About</h4>
@@ -58,7 +61,7 @@
     <!-- STICKY FOOTER START -->
     <footer class="page-footer">
         <div id="main-footer-cp" class="footer-copyright">
-            <div id="main-footer"class="container right-align">Copyright © Gatito <i class="fas fa-cat"></i></div>
+            <div id="main-footer" class="container right-align">Copyright © Gatito <i class="fas fa-cat"></i></div>
         </div>
     </footer>
     <!-- STICKY FOOTER END -->
@@ -70,17 +73,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <!-- STICKY NAV START -->
     <script>
-        $(document).ready(function(){
-            $(window).scroll(function(){
-                if($(window).scrollTop()>150) {
+        $(document).ready(function() {
+            $(window).scroll(function() {
+                if ($(window).scrollTop() > 150) {
                     $('nav').addClass('sticky-nav');
-                }
-                else {
+                } else {
                     $('nav').removeClass('sticky-nav');
                 }
             });
         });
-    </script> 
+    </script>
     <!-- STICKY NAV END -->
     <!-- SIDENAV HANDLER -->
     <script>
@@ -90,10 +92,11 @@
     </script>
     <!-- DROPDOWN HANDLER -->
     <script>
-    $(document).ready(function(){
-        $('select').formSelect();
-    });
+        $(document).ready(function() {
+            $('select').formSelect();
+        });
     </script>
     <script src="./assets/search.js"></script>
 </body>
+
 </html>
