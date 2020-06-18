@@ -1,74 +1,71 @@
 $(document).ready(function () {
 
+    /// searchUI Obj Manages all UI Input
+    /// AL UI INPUT IS SENT TO LOCAL STORAGE 
     let searchUI = {
 
-        "val_add1": "",
-        "val_add2": "",
-        "val_city": "",
         "val_state": "",
-        "val_zip": "",
-
-        "val-cnty": false,
-        "val-lcl": false,
-        "val-st": false,
-        "val-fd": false,
-
         "cb-cnty": false,
         "cb-lcl": false,
         "cb-st": false,
         "cb-fd": false,
 
-        "aICity": "",
-        "aTCity": "",
-        "aKG": "",
-
-
-
-
         resetInputValues: function () {
-            this.val_add1 = "";
-            this.val_add2 = "";
-            this.val_city = "";
-            this.val_state = "";
-            this.val_zip = "";
-
             this["cb-cnty"] = false;
             this["cb-lcl"] = false;
             this["cb-st"] = false;
             this["cb-fd"] = false;
-
         },
 
-        saveUILS: function () {
-
-            let add1 = $("#search-address1").val()
-            let add2 = $("#search-address2").val()
-            let city = $("#search-city").val()
-            let zip = $("#search-zipcode").val()
-
-            let cn = this["cb-cnty"];
-            let lcl = this["cb-lcl"];
-            let st = this["cb-st"];
-            let fd = this["cb-fd"];
-
-            localStorage.setItem("cbs_cn", JSON.stringify(cn));
-            localStorage.setItem("cbs_lcl", JSON.stringify(lcl));
-            localStorage.setItem("cbs_st", JSON.stringify(st));
-            localStorage.setItem("cbs_fd", JSON.stringify(fd));
+        saveUIInputLS: function () {
+            localStorage.setItem("add1", JSON.stringify($("#search-address1").val()));
+            localStorage.setItem("add2", JSON.stringify($("#search-address2").val()));
+            localStorage.setItem("city", JSON.stringify($("#search-city").val()));
+            localStorage.setItem("state", JSON.stringify(this.val_state));
+            localStorage.setItem("zip", JSON.stringify($("#search-zipcode").val()));            
+            localStorage.setItem("cbs_cn", JSON.stringify(this["cb-cnty"]));
+            localStorage.setItem("cbs_lcl", JSON.stringify(this["cb-lcl"]));
+            localStorage.setItem("cbs_st", JSON.stringify(this["cb-st"]));
+            localStorage.setItem("cbs_fd", JSON.stringify(this["cb-fd"]));
         },
 
-        resetCBLS: function () {
-            let cn = false;
-            let lcl = false;
-            let st = false;
-            let fd = false;
-
-            localStorage.setItem("cbs_cn", JSON.stringify(cn));
-            localStorage.setItem("cbs_lcl", JSON.stringify(lcl));
-            localStorage.setItem("cbs_st", JSON.stringify(st));
-            localStorage.setItem("cbs_fd", JSON.stringify(fd));
+        resetUIInputLS: function () {
+            localStorage.removeItem('add1');
+            localStorage.removeItem('add2');
+            localStorage.removeItem('city');
+            localStorage.removeItem('state');
+            localStorage.removeItem('zip');
+            localStorage.setItem("cbs_cn", JSON.stringify(false));
+            localStorage.setItem("cbs_lcl", JSON.stringify(false));
+            localStorage.setItem("cbs_st", JSON.stringify(false));
+            localStorage.setItem("cbs_fd", JSON.stringify(false));
         },
 
+        resetAPIRespLS: function () {
+            localStorage.removeItem('smartyStreetsApiResp');
+            localStorage.removeItem('civicInfoApiRespCounty');
+            localStorage.removeItem('civicInfoApiRespLocal');
+            localStorage.removeItem('civicInfoApiRespState');
+            localStorage.removeItem('civicInfoApiRespFederal');
+        },
+
+        clearUI: function () {
+            $("#search-address1").val("");
+            $("#search-address2").val("");
+            $("#search-city").val("");
+            $("#search-zipcode").val("");
+            $("#ddl-sel").val('1');
+            $("select").formSelect();
+            $("#cb-cnty").prop("checked", false);
+            $("#cb-lcl").prop("checked", false);
+            $("#cb-st").prop("checked", false);
+            $("#cb-fd").prop("checked", false);
+            $("#card-row-d").html("");
+        },
+
+        setState: function (state) {
+            this.val_state = state;
+        },
 
         cntyStatusTrue: function () {
             this["cb-cnty"] = true;
@@ -102,15 +99,53 @@ $(document).ready(function () {
             this["cb-fd"] = false;
         },
 
-
-
     };
 
+
+/// EVENT LISTENERS FOR UI
 su = searchUI;
+ah = apiHandler;
+
+$(document.body).on("click", "tr[card-row]", function() {
+        console.log("CLLLLICKEDDDDDDDD");
+    
+    
+    
+    
+    /*var eid = Number($(this).attr('event-id'));
+    var es = Number($(this).attr('e-stat'));
+    var ehr = String($(this).attr('e-hr'));
+    var ed = String($(this).attr('e-day'));
+    var rh = Number($(this).attr("real-hour"));
+    dp.saveRealHour(rh);
+    dp.saveEventId(eid);
+
+    if(!eid && (es === 2)) {
+        $("#new-modal-eventname").val("");
+        $("#new-modal-msgarea").text("");
+        $("#new-modal-msgarea").css('color', 'black');
+        $("#new-rad1").prop('checked', true);
+        $("#new-date-modal2-lbl").text(ed + " " + ehr);
+        $("#new-modal").modal("show");
+    }
+    else if (eid && (es === 2)) {
+        dp.editModalEventInfoLoad(eid);
+        $("#edit-date-modal2-lbl").text(ed + " " + ehr);
+        $("#edit-modal").modal("show");
+    }
+    else if ((eid && (es === 1)) || (eid && (es === 0))) {
+        dp.delModalEventInfoLoad(eid);
+        $("#del-date-modal2-lbl").text(ed + " " + ehr);
+        $("#del-modal").modal("show");
+    }
+    else {
+
+    }*/
+});
 
 $(document.body).on("click", "#proceed-btn", function () {
     event.preventDefault();
-    su.resolveCivicInformation();
+    ah.civicInfoResolve()
     return 0;
 });
 
@@ -161,35 +196,25 @@ $("#cb-fd").on("change", function () {
 
 $("#clear-btn").click(function (event) {
     event.preventDefault();
-    $("#search-address1").val("");
-    $("#search-address2").val("");
-    $("#search-city").val("");
-    $("#search-zipcode").val("");
-    $("#ddl-sel").val('1');
-    $("select").formSelect();
-    $("#cb-cnty").prop("checked", false);
-    $("#cb-lcl").prop("checked", false);
-    $("#cb-st").prop("checked", false);
-    $("#cb-fd").prop("checked", false);
-    $("#card-row-d").html("");
-    localStorage.removeItem('smartyStreetsRealAddress');
-    su.resetCBLS();
+    su.clearUI();
+    su.resetUIInputLS();
 });
 
 $("#search-btn").click(function (event) {
     event.preventDefault();
-    localStorage.removeItem('smartyStreetsRealAddress');
-    su.getUIInput();
-    su.resolveSmartyStreets();
+    su.saveUIInputLS();
+    ah.addressResolve();
+    
 });
 
 function initialState() {
     console.clear();
-    su.resetInputValues();
-    localStorage.removeItem('smartyStreetsRealAddress');
+    su.clearUI();
+    su.resetUIInputLS();
+    su.resetAPIRespLS();
+    ah.loadApiKeys();
 }
 
 initialState();
 
 });
-
