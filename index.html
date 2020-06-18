@@ -179,10 +179,10 @@
                             </div>
                             <div id="card-row" class="row">
                                 <div id="card-row-div-sb" class="col s12 m6">
-                                    <a id="clear-btn" class="waves-effect waves-light btn-large red">Clr.Frm</a>
+                                    <a id="clear-btn" class="waves-effect waves-light btn-large red">Clear</a>
                                 </div>
                                 <div id="card-row-div-sb" class="col s12 m6">
-                                    <a id="search-btn" class="waves-effect waves-light btn-large">Rslv.Addr</a>
+                                    <a id="search-btn" class="waves-effect waves-light btn-large green">Search Address</Address></a>
                                 </div>
                             </div>
                             <div id="card-row-d"></div>
@@ -219,12 +219,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <!-- STICKY NAV START -->
     <script>
-        $(document).ready(function () {
-            $(window).scroll(function () {
+        $(document).ready(function() {
+            $(window).scroll(function() {
                 if ($(window).scrollTop() > 150) {
                     $('nav').addClass('sticky-nav');
-                }
-                else {
+                } else {
                     $('nav').removeClass('sticky-nav');
                 }
             });
@@ -239,7 +238,7 @@
     </script>
     <!-- DROPDOWN HANDLER -->
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('select').formSelect();
         });
     </script>

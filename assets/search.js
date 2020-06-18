@@ -106,46 +106,9 @@ $(document).ready(function () {
 su = searchUI;
 ah = apiHandler;
 
-$(document.body).on("click", "tr[card-row]", function() {
-        console.log("CLLLLICKEDDDDDDDD");
-    
-    
-    
-    
-    /*var eid = Number($(this).attr('event-id'));
-    var es = Number($(this).attr('e-stat'));
-    var ehr = String($(this).attr('e-hr'));
-    var ed = String($(this).attr('e-day'));
-    var rh = Number($(this).attr("real-hour"));
-    dp.saveRealHour(rh);
-    dp.saveEventId(eid);
-
-    if(!eid && (es === 2)) {
-        $("#new-modal-eventname").val("");
-        $("#new-modal-msgarea").text("");
-        $("#new-modal-msgarea").css('color', 'black');
-        $("#new-rad1").prop('checked', true);
-        $("#new-date-modal2-lbl").text(ed + " " + ehr);
-        $("#new-modal").modal("show");
-    }
-    else if (eid && (es === 2)) {
-        dp.editModalEventInfoLoad(eid);
-        $("#edit-date-modal2-lbl").text(ed + " " + ehr);
-        $("#edit-modal").modal("show");
-    }
-    else if ((eid && (es === 1)) || (eid && (es === 0))) {
-        dp.delModalEventInfoLoad(eid);
-        $("#del-date-modal2-lbl").text(ed + " " + ehr);
-        $("#del-modal").modal("show");
-    }
-    else {
-
-    }*/
-});
-
 $(document.body).on("click", "#proceed-btn", function () {
     event.preventDefault();
-    ah.civicInfoResolve()
+    ah.civicInfoResolve();
     return 0;
 });
 
