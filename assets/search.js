@@ -186,6 +186,7 @@ let searchUI = {
         let addr = JSON.parse(localStorage.getItem('smartyStreetsRealAddress'));
         let key = JSON.parse(localStorage.getItem('aKG'));
         var queryURL = `https://www.googleapis.com/civicinfo/v2/representatives?address=${addr}&includeOffices=true&key=${key}&levels=administrativeArea2`;
+        console.log(queryURL);
         $.ajax({
                 url: queryURL,
                 method: "GET"
@@ -195,9 +196,122 @@ let searchUI = {
                 let cb = JSON.parse(localStorage.getItem('cbs_cn'));
                 //console.log(cb);
                 if(cb) {
-                    let persLen = resp_cn.officials.length; 
-                    let posLen  = resp_cn.offices.length;
-                    console.log(`${persLen}  ${posLen}`);
+
+                    let persLen = "";
+                    if(!resp_cn.hasOwnProperty('officials')) {
+                        persLen = "";
+                    }
+                    else {
+                        persLen = resp_cn.officials.length;
+                    }
+                    let posLen = "";
+                    if(!resp_cn.hasOwnProperty('offices')) {
+                        posLen = "";
+                    }
+                    else {
+                        posLen = resp_cn.offices.length;
+                    }
+                    //console.log(`OFFICCESSSS OFFICIALS ${persLen} ${posLen}`);
+                    if((persLen) && (posLen)) { 
+                        ////////////////////API HANDLER STARTS /////////////////////
+                        let persLen = resp_cn.officials.length; 
+                        let posLen  = resp_cn.offices.length;
+                        //console.log(`${persLen}  ${posLen}`);
+                        let crh = $("<div id=\"card-row\" class=\"row\">");
+                        let crds = $("<div id=\"card-row-div-sb\" class=\"col s12 m12\">");
+                        let crdt = $("<h5>").text("Local.Reps");
+                        $(crdt).css("color","blue");
+                        crds.append(crdt);
+                        crh.append(crds);
+                        $("#card-row-d").append(crh);
+                        for(var i=0;i<posLen;i++) {
+                            let repOffice = resp_cn.offices[i].name;
+                            let oilen = resp_cn.offices[i].officialIndices.length;
+                            //console.log(`${repOffice} ${oilen}`);
+                            for(var j=0;j<oilen;j++) {
+                                        /////// INFO PARSE API STARTS //////////////////////////////////
+                                        oi = resp_cn.offices[i].officialIndices[j];
+                                        //console.log(`${repOffice} ${oilen} ${oi}`);
+                                        let repName = resp_cn.officials[oi].name;
+                                        let repParty = resp_cn.officials[oi].party;
+                                        //console.log(`${repOffice} ${oilen} ${oi} ${repName} ${repParty}`);
+                                        let repPartyDisp = "";
+                                        if(repParty === "Republican Party") {
+                                            repPartyDisp = "(R)";
+                                        }
+                                        else if (repParty === "Democratic Party") {
+                                            repPartyDisp = "(D)";
+                                        }
+                                        else if (repParty === "Nonpartisan") {
+                                            repPartyDisp = "(I)";
+                                        }
+                                        else {
+                                            console.log("NA PARTY DISP");
+                                        }
+                                        //console.log(`${repOffice} ${oilen} ${oi} ${repName} ${repParty} ${repPartyDisp}`);
+                                        let repEmail = "";
+                                        if(!resp_cn.officials[oi].hasOwnProperty('emails')) {
+                                            repEmail = "";
+                                        }
+                                        else {
+                                            repEmail = resp_cn.officials[oi].emails[0];
+                                        }
+                                        //console.log(`${repOffice} ${oilen} ${oi} ${repName} ${repParty} ${repPartyDisp} ${repEmail}`);
+                                        let repPhone = "";
+                                        if(!resp_cn.officials[oi].hasOwnProperty('phones')) {
+                                            repPhones = "";
+                                        }
+                                        else {
+                                            repPhones = resp_cn.officials[oi].phones[0];
+                                        }
+                                        //console.log(`${repOffice} ${oilen} ${oi} ${repName} ${repParty} ${repPartyDisp} ${repEmail} ${repPhones}`);
+                                        let repPhotoUrl = "";
+                                        if(!resp_cn.officials[oi].hasOwnProperty('photoUrl')) {
+                                            repPhotoUrl = "./assets/blank-person.jpg";
+                                        }
+                                        else {
+                                            repPhotoUrl = resp_cn.officials[oi].photoUrl;
+                                        }
+                                        //console.log(`${repOffice} ${oilen} ${oi} ${repName} ${repParty} ${repPartyDisp} ${repEmail} ${repPhones} ${repPhotoUrl}`);
+                                        let repAddr = "";
+                                        if(!resp_cn.officials[oi].hasOwnProperty('address')) {
+                                            repAddr = "";
+                                        }
+                                        else {
+                                            repAddr = resp_cn.officials[oi].address[0].line1;
+                                        }
+                                        /////// INFO PARSE API ENDS //////////////////////////////////
+                                        /////// LIST BUILDER STARTS //////////////////////////////////
+                                        let crh = $("<div id=\"card-row\" class=\"row\">");
+                                        let crds1 = $("<div id=\"card-row-div-sb\" class=\"col s12 m4\">");
+                                        let crds2 = $("<div id=\"card-row-div-sb\" class=\"col s12 m4\">");
+                                        let crds3 = $("<div id=\"card-row-div-sb\" class=\"col s12 m4\">");
+                                        let crdt1 = $("<h6>").text(repName+repPartyDisp);
+                                        let crdt2 = $("<h6>").text(repOffice);
+                                        let crdp = $("<img id=\"rep-pic\">");
+                                        crdp.attr('src',repPhotoUrl);
+                                        crdp.appendTo('#repPic');
+                                        
+                                        crds1.append(crdt1);
+                                        crds2.append(crdt2);
+                                        crds3.append(crdp);
+                                        crh.append(crds1);
+                                        crh.append(crds2);
+                                        crh.append(crds3);
+                                        $("#card-row-d").append(crh);
+                                        /////// LIST BUILDER ENDS //////////////////////////////////
+                                }
+                        }
+                    }
+                    else {
+                        let crh = $("<div id=\"card-row\" class=\"row\">");
+                        let crds = $("<div id=\"card-row-div-sb\" class=\"col s12 m12\">");
+                        let crdt = $("<h5>").text("No.Local.Reps.Found");
+                        $(crdt).css("color","blue");
+                        crds.append(crdt);
+                        crh.append(crds);
+                        $("#card-row-d").append(crh);
+                    }
 
                 }
                 /////CNNNNNTY DISPLAY ENDS/////////
@@ -206,31 +320,297 @@ let searchUI = {
                 let addr = JSON.parse(localStorage.getItem('smartyStreetsRealAddress'));
                 let key = JSON.parse(localStorage.getItem('aKG'));
                 var queryURL = `https://www.googleapis.com/civicinfo/v2/representatives?address=${addr}&includeOffices=true&key=${key}&levels=locality`;
+                console.log(queryURL);
                 $.ajax({
                         url: queryURL,
                         method: "GET"
                         }).then(function(resp_lcl) {
-                        //console.log(resp_lcl);
+                        console.log(resp_lcl);
                         /////LCLLLLLLLL DISPLAY STARTS///////
                         let cb = JSON.parse(localStorage.getItem('cbs_lcl'));
                         //console.log(cb);
                         if(cb) {
 
+                            let persLen = "";
+                            if(!resp_lcl.hasOwnProperty('officials')) {
+                                persLen = "";
+                            }
+                            else {
+                                persLen = resp_lcl.officials.length;
+                            }
+                            let posLen = "";
+                            if(!resp_lcl.hasOwnProperty('offices')) {
+                                posLen = "";
+                            }
+                            else {
+                                posLen = resp_lcl.offices.length;
+                            }
+                            //console.log(`OFFICCESSSS OFFICIALS ${persLen} ${posLen}`);
+                            if((persLen) && (posLen)) { 
+                                ////////////////////API HANDLER STARTS /////////////////////
+                                let persLen = resp_lcl.officials.length; 
+                                let posLen  = resp_lcl.offices.length;
+                                //console.log(`${persLen}  ${posLen}`);
+                                let crh = $("<div id=\"card-row\" class=\"row\">");
+                                let crds = $("<div id=\"card-row-div-sb\" class=\"col s12 m12\">");
+                                let crdt = $("<h5>").text("Local.Reps");
+                                $(crdt).css("color","blue");
+                                crds.append(crdt);
+                                crh.append(crds);
+                                $("#card-row-d").append(crh);
+                                for(var i=0;i<posLen;i++) {
+                                    let repOffice = resp_lcl.offices[i].name;
+                                    let oilen = resp_lcl.offices[i].officialIndices.length;
+                                    //console.log(`${repOffice} ${oilen}`);
+                                    for(var j=0;j<oilen;j++) {
+                                                /////// INFO PARSE API STARTS //////////////////////////////////
+                                                oi = resp_lcl.offices[i].officialIndices[j];
+                                                //console.log(`${repOffice} ${oilen} ${oi}`);
+                                                let repName = resp_lcl.officials[oi].name;
+                                                let repParty = resp_lcl.officials[oi].party;
+                                                //console.log(`${repOffice} ${oilen} ${oi} ${repName} ${repParty}`);
+                                                let repPartyDisp = "";
+                                                if(repParty === "Republican Party") {
+                                                    repPartyDisp = "(R)";
+                                                }
+                                                else if (repParty === "Democratic Party") {
+                                                    repPartyDisp = "(D)";
+                                                }
+                                                else if (repParty === "Nonpartisan") {
+                                                    repPartyDisp = "(I)";
+                                                }
+                                                else {
+                                                    console.log("NA PARTY DISP");
+                                                }
+                                                //console.log(`${repOffice} ${oilen} ${oi} ${repName} ${repParty} ${repPartyDisp}`);
+                                                let repEmail = "";
+                                                if(!resp_lcl.officials[oi].hasOwnProperty('emails')) {
+                                                    repEmail = "";
+                                                }
+                                                else {
+                                                    repEmail = resp_lcl.officials[oi].emails[0];
+                                                }
+                                                //console.log(`${repOffice} ${oilen} ${oi} ${repName} ${repParty} ${repPartyDisp} ${repEmail}`);
+                                                let repPhone = "";
+                                                if(!resp_lcl.officials[oi].hasOwnProperty('phones')) {
+                                                    repPhones = "";
+                                                }
+                                                else {
+                                                    repPhones = resp_lcl.officials[oi].phones[0];
+                                                }
+                                                //console.log(`${repOffice} ${oilen} ${oi} ${repName} ${repParty} ${repPartyDisp} ${repEmail} ${repPhones}`);
+                                                let repPhotoUrl = "";
+                                                if(!resp_lcl.officials[oi].hasOwnProperty('photoUrl')) {
+                                                    repPhotoUrl = "./assets/blank-person.jpg";
+                                                }
+                                                else {
+                                                    repPhotoUrl = resp_lcl.officials[oi].photoUrl;
+                                                }
+                                                //console.log(`${repOffice} ${oilen} ${oi} ${repName} ${repParty} ${repPartyDisp} ${repEmail} ${repPhones} ${repPhotoUrl}`);
+                                                let repAddr = "";
+                                                if(!resp_lcl.officials[oi].hasOwnProperty('address')) {
+                                                    repAddr = "";
+                                                }
+                                                else {
+                                                    repAddr = resp_lcl.officials[oi].address[0].line1;
+                                                }
+                                                /////// INFO PARSE API ENDS //////////////////////////////////
+                                                /////// LIST BUILDER STARTS //////////////////////////////////
+                                                let crh = $("<div id=\"card-row\" class=\"row\">");
+                                                let crds1 = $("<div id=\"card-row-div-sb\" class=\"col s12 m4\">");
+                                                let crds2 = $("<div id=\"card-row-div-sb\" class=\"col s12 m4\">");
+                                                let crds3 = $("<div id=\"card-row-div-sb\" class=\"col s12 m4\">");
+                                                let crdt1 = $("<h6>").text(repName+repPartyDisp);
+                                                let crdt2 = $("<h6>").text(repOffice);
+                                                let crdp = $("<img id=\"rep-pic\">");
+                                                crdp.attr('src',repPhotoUrl);
+                                                crdp.appendTo('#repPic');
+                                                
+                                                crds1.append(crdt1);
+                                                crds2.append(crdt2);
+                                                crds3.append(crdp);
+                                                crh.append(crds1);
+                                                crh.append(crds2);
+                                                crh.append(crds3);
+                                                $("#card-row-d").append(crh);
+                                                /////// LIST BUILDER ENDS //////////////////////////////////
+                                        }
+                                }
+                            }
+                            else {
+                                let crh = $("<div id=\"card-row\" class=\"row\">");
+                                let crds = $("<div id=\"card-row-div-sb\" class=\"col s12 m12\">");
+                                let crdt = $("<h5>").text("No.County.Reps.Found");
+                                $(crdt).css("color","blue");
+                                crds.append(crdt);
+                                crh.append(crds);
+                                $("#card-row-d").append(crh);
+                            }
                         }
                         /////LCLLLLLLLL DISPLAY ENDS/////////
+
                         //STATE
                         let addr = JSON.parse(localStorage.getItem('smartyStreetsRealAddress'));
                         let key = JSON.parse(localStorage.getItem('aKG'));
                         var queryURL = `https://www.googleapis.com/civicinfo/v2/representatives?address=${addr}&includeOffices=true&key=${key}&levels=administrativeArea1`;
+                        console.log(queryURL);
                         $.ajax({
                                 url: queryURL,
                                 method: "GET"
                                 }).then(function(resp_st) {
-                                //console.log(resp_st);
+                                console.log(resp_st);
                                 /////STTTATTTTTTE DISPLAY STARTS///////
                                 let cb = JSON.parse(localStorage.getItem('cbs_st'));
                                 //console.log(cb);
                                 if(cb) {
+
+
+
+
+
+
+                                    let persLen = "";
+                                    if(!resp_st.hasOwnProperty('officials')) {
+                                        persLen = "";
+                                    }
+                                    else {
+                                        persLen = resp_st.officials.length;
+                                    }
+                                    let posLen = "";
+                                    if(!resp_st.hasOwnProperty('offices')) {
+                                        posLen = "";
+                                    }
+                                    else {
+                                        posLen = resp_st.offices.length;
+                                    }
+                                    //console.log(`OFFICCESSSS OFFICIALS ${persLen} ${posLen}`);
+                                    if((persLen) && (posLen)) { 
+                                        ////////////////////API HANDLER STARTS /////////////////////
+                                        let persLen = resp_st.officials.length; 
+                                        let posLen  = resp_st.offices.length;
+                                        //console.log(`${persLen}  ${posLen}`);
+                                        let crh = $("<div id=\"card-row\" class=\"row\">");
+                                        let crds = $("<div id=\"card-row-div-sb\" class=\"col s12 m12\">");
+                                        let crdt = $("<h5>").text("State.Reps");
+                                        $(crdt).css("color","blue");
+                                        crds.append(crdt);
+                                        crh.append(crds);
+                                        $("#card-row-d").append(crh);
+                                        for(var i=0;i<posLen;i++) {
+                                            let repOffice = resp_st.offices[i].name;
+                                            let oilen = resp_st.offices[i].officialIndices.length;
+                                            //console.log(`${repOffice} ${oilen}`);
+                                            for(var j=0;j<oilen;j++) {
+                                                        /////// INFO PARSE API STARTS //////////////////////////////////
+                                                        oi = resp_st.offices[i].officialIndices[j];
+                                                        //console.log(`${repOffice} ${oilen} ${oi}`);
+                                                        let repName = "";
+                                                        if(!resp_st.officials[oi].hasOwnProperty('name')) {
+                                                            repName = "";
+                                                        }
+                                                        else {
+                                                            repName = resp_st.officials[oi].name;
+                                                        }
+                                                        let repParty = "";
+                                                        if(!resp_st.officials[oi].hasOwnProperty('party')) {
+                                                            repParty = "";
+                                                        }
+                                                        else {
+                                                            repParty = resp_st.officials[oi].name;
+                                                        }
+                                                        //console.log(`${repOffice} ${oilen} ${oi} ${repName} ${repParty}`);
+                                                        let repPartyDisp = "";
+                                                        if(repParty === "Republican Party") {
+                                                            repPartyDisp = "(R)";
+                                                        }
+                                                        else if (repParty === "Democratic Party") {
+                                                            repPartyDisp = "(D)";
+                                                        }
+                                                        else if (repParty === "Nonpartisan") {
+                                                            repPartyDisp = "(I)";
+                                                        }
+                                                        else {
+                                                            console.log("NA PARTY DISP");
+                                                        }
+                                                        //console.log(`${repOffice} ${oilen} ${oi} ${repName} ${repParty} ${repPartyDisp}`);
+                                                        let repEmail = "";
+                                                        if(!resp_st.officials[oi].hasOwnProperty('emails')) {
+                                                            repEmail = "";
+                                                        }
+                                                        else {
+                                                            repEmail = resp_st.officials[oi].emails[0];
+                                                        }
+                                                        //console.log(`${repOffice} ${oilen} ${oi} ${repName} ${repParty} ${repPartyDisp} ${repEmail}`);
+                                                        let repPhone = "";
+                                                        if(!resp_st.officials[oi].hasOwnProperty('phones')) {
+                                                            repPhones = "";
+                                                        }
+                                                        else {
+                                                            repPhones = resp_st.officials[oi].phones[0];
+                                                        }
+                                                        //console.log(`${repOffice} ${oilen} ${oi} ${repName} ${repParty} ${repPartyDisp} ${repEmail} ${repPhones}`);
+                                                        let repPhotoUrl = "";
+                                                        if(!resp_st.officials[oi].hasOwnProperty('photoUrl')) {
+                                                            repPhotoUrl = "./assets/blank-person.jpg";
+                                                        }
+                                                        else {
+                                                            repPhotoUrl = resp_st.officials[oi].photoUrl;
+                                                        }
+                                                        //console.log(`${repOffice} ${oilen} ${oi} ${repName} ${repParty} ${repPartyDisp} ${repEmail} ${repPhones} ${repPhotoUrl}`);
+                                                        let repAddr = "";
+                                                        if(!resp_st.officials[oi].hasOwnProperty('address')) {
+                                                            repAddr = "";
+                                                        }
+                                                        else {
+                                                            repAddr = resp_st.officials[oi].address[0].line1;
+                                                        }
+                                                        /////// INFO PARSE API ENDS //////////////////////////////////
+                                                        /////// LIST BUILDER STARTS //////////////////////////////////
+                                                        let crh = $("<div id=\"card-row\" class=\"row\">");
+                                                        let crds1 = $("<div id=\"card-row-div-sb\" class=\"col s12 m4\">");
+                                                        let crds2 = $("<div id=\"card-row-div-sb\" class=\"col s12 m4\">");
+                                                        let crds3 = $("<div id=\"card-row-div-sb\" class=\"col s12 m4\">");
+                                                        let crdt1 = $("<h6>").text(repName+repPartyDisp);
+                                                        let crdt2 = $("<h6>").text(repOffice);
+                                                        let crdp = $("<img id=\"rep-pic\">");
+                                                        crdp.attr('src',repPhotoUrl);
+                                                        crdp.appendTo('#repPic');
+                                                        
+                                                        crds1.append(crdt1);
+                                                        crds2.append(crdt2);
+                                                        crds3.append(crdp);
+                                                        crh.append(crds1);
+                                                        crh.append(crds2);
+                                                        crh.append(crds3);
+                                                        $("#card-row-d").append(crh);
+                                                        /////// LIST BUILDER ENDS //////////////////////////////////
+                                                }
+                                        }
+                                    }
+                                    else {
+                                        let crh = $("<div id=\"card-row\" class=\"row\">");
+                                        let crds = $("<div id=\"card-row-div-sb\" class=\"col s12 m12\">");
+                                        let crdt = $("<h5>").text("No.State.Reps.Found");
+                                        $(crdt).css("color","blue");
+                                        crds.append(crdt);
+                                        crh.append(crds);
+                                        $("#card-row-d").append(crh);
+                                    }
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                 }                
                                 /////STTTATTTTTTE DISPLAY ENDS/////////
 
@@ -238,15 +618,146 @@ let searchUI = {
                                 let addr = JSON.parse(localStorage.getItem('smartyStreetsRealAddress'));
                                 let key = JSON.parse(localStorage.getItem('aKG'));
                                 var queryURL = `https://www.googleapis.com/civicinfo/v2/representatives?address=${addr}&includeOffices=true&key=${key}&levels=country`;
+                                console.log(queryURL);
                                 $.ajax({
                                         url: queryURL,
                                         method: "GET"
                                         }).then(function(resp_fd) {
-                                        //console.log(resp_fd);
+                                        console.log(resp_fd);
                                         /////FEDERALLLL DISPLAY STARTS///////
                                         let cb = JSON.parse(localStorage.getItem('cbs_fd'));
                                         //console.log(cb);
                                         if(cb) {
+
+
+                                            let persLen = "";
+                                            if(!resp_fd.hasOwnProperty('officials')) {
+                                                persLen = "";
+                                            }
+                                            else {
+                                                persLen = resp_fd.officials.length;
+                                            }
+                                            let posLen = "";
+                                            if(!resp_fd.hasOwnProperty('offices')) {
+                                                posLen = "";
+                                            }
+                                            else {
+                                                posLen = resp_fd.offices.length;
+                                            }
+                                            //console.log(`OFFICCESSSS OFFICIALS ${persLen} ${posLen}`);
+                                            if((persLen) && (posLen)) { 
+                                                ////////////////////API HANDLER STARTS /////////////////////
+                                                let persLen = resp_fd.officials.length; 
+                                                let posLen  = resp_fd.offices.length;
+                                                //console.log(`${persLen}  ${posLen}`);
+                                                let crh = $("<div id=\"card-row\" class=\"row\">");
+                                                let crds = $("<div id=\"card-row-div-sb\" class=\"col s12 m12\">");
+                                                let crdt = $("<h5>").text("State.Reps");
+                                                $(crdt).css("color","blue");
+                                                crds.append(crdt);
+                                                crh.append(crds);
+                                                $("#card-row-d").append(crh);
+                                                for(var i=0;i<posLen;i++) {
+                                                    let repOffice = resp_fd.offices[i].name;
+                                                    let oilen = resp_fd.offices[i].officialIndices.length;
+                                                    //console.log(`${repOffice} ${oilen}`);
+                                                    for(var j=0;j<oilen;j++) {
+                                                                /////// INFO PARSE API STARTS //////////////////////////////////
+                                                                oi = resp_fd.offices[i].officialIndices[j];
+                                                                //console.log(`${repOffice} ${oilen} ${oi}`);
+                                                                let repName = "";
+                                                                if(!resp_fd.officials[oi].hasOwnProperty('name')) {
+                                                                    repName = "";
+                                                                }
+                                                                else {
+                                                                    repName = resp_st.officials[oi].name;
+                                                                }
+                                                                let repParty = "";
+                                                                if(!resp_fd.officials[oi].hasOwnProperty('party')) {
+                                                                    repParty = "";
+                                                                }
+                                                                else {
+                                                                    repParty = resp_fd.officials[oi].name;
+                                                                }
+                                                                //console.log(`${repOffice} ${oilen} ${oi} ${repName} ${repParty}`);
+                                                                let repPartyDisp = "";
+                                                                if(repParty === "Republican Party") {
+                                                                    repPartyDisp = "(R)";
+                                                                }
+                                                                else if (repParty === "Democratic Party") {
+                                                                    repPartyDisp = "(D)";
+                                                                }
+                                                                else if (repParty === "Nonpartisan") {
+                                                                    repPartyDisp = "(I)";
+                                                                }
+                                                                else {
+                                                                    console.log("NA PARTY DISP");
+                                                                }
+                                                                //console.log(`${repOffice} ${oilen} ${oi} ${repName} ${repParty} ${repPartyDisp}`);
+                                                                let repEmail = "";
+                                                                if(!resp_fd.officials[oi].hasOwnProperty('emails')) {
+                                                                    repEmail = "";
+                                                                }
+                                                                else {
+                                                                    repEmail = resp_fd.officials[oi].emails[0];
+                                                                }
+                                                                //console.log(`${repOffice} ${oilen} ${oi} ${repName} ${repParty} ${repPartyDisp} ${repEmail}`);
+                                                                let repPhone = "";
+                                                                if(!resp_fd.officials[oi].hasOwnProperty('phones')) {
+                                                                    repPhones = "";
+                                                                }
+                                                                else {
+                                                                    repPhones = resp_fd.officials[oi].phones[0];
+                                                                }
+                                                                //console.log(`${repOffice} ${oilen} ${oi} ${repName} ${repParty} ${repPartyDisp} ${repEmail} ${repPhones}`);
+                                                                let repPhotoUrl = "";
+                                                                if(!resp_fd.officials[oi].hasOwnProperty('photoUrl')) {
+                                                                    repPhotoUrl = "./assets/blank-person.jpg";
+                                                                }
+                                                                else {
+                                                                    repPhotoUrl = resp_fd.officials[oi].photoUrl;
+                                                                }
+                                                                //console.log(`${repOffice} ${oilen} ${oi} ${repName} ${repParty} ${repPartyDisp} ${repEmail} ${repPhones} ${repPhotoUrl}`);
+                                                                let repAddr = "";
+                                                                if(!resp_fd.officials[oi].hasOwnProperty('address')) {
+                                                                    repAddr = "";
+                                                                }
+                                                                else {
+                                                                    repAddr = resp_st.officials[oi].address[0].line1;
+                                                                }
+                                                                /////// INFO PARSE API ENDS //////////////////////////////////
+                                                                /////// LIST BUILDER STARTS //////////////////////////////////
+                                                                let crh = $("<div id=\"card-row\" class=\"row\">");
+                                                                let crds1 = $("<div id=\"card-row-div-sb\" class=\"col s12 m4\">");
+                                                                let crds2 = $("<div id=\"card-row-div-sb\" class=\"col s12 m4\">");
+                                                                let crds3 = $("<div id=\"card-row-div-sb\" class=\"col s12 m4\">");
+                                                                let crdt1 = $("<h6>").text(repName+repPartyDisp);
+                                                                let crdt2 = $("<h6>").text(repOffice);
+                                                                let crdp = $("<img id=\"rep-pic\">");
+                                                                crdp.attr('src',repPhotoUrl);
+                                                                crdp.appendTo('#repPic');
+                                                                
+                                                                crds1.append(crdt1);
+                                                                crds2.append(crdt2);
+                                                                crds3.append(crdp);
+                                                                crh.append(crds1);
+                                                                crh.append(crds2);
+                                                                crh.append(crds3);
+                                                                $("#card-row-d").append(crh);
+                                                                /////// LIST BUILDER ENDS //////////////////////////////////
+                                                        }
+                                                }
+                                            }
+                                            else {
+                                                let crh = $("<div id=\"card-row\" class=\"row\">");
+                                                let crds = $("<div id=\"card-row-div-sb\" class=\"col s12 m12\">");
+                                                let crdt = $("<h5>").text("No.Federal.Reps.Found");
+                                                $(crdt).css("color","blue");
+                                                crds.append(crdt);
+                                                crh.append(crds);
+                                                $("#card-row-d").append(crh);
+                                            }
+
                                         }
                                         /////FEDERALLLL DISPLAY ENDS/////////
                                 });
@@ -340,8 +851,8 @@ function initialState() {
     su.resetInputValues();
     localStorage.removeItem('smartyStreetsRealAddress');
     /*TEMP*/
-    localStorage.setItem("aICity", JSON.stringify("cdc47e30-51ff-ea66-8d9d-5620f5658d99"));
-    localStorage.setItem("aTCity", JSON.stringify("e44LyMX0izU6e9hyL7xD"));
+    localStorage.setItem("aICity", JSON.stringify("942ac2b5-1d6c-5c87-9c02-f7e1a6c74c32"));
+    localStorage.setItem("aTCity", JSON.stringify("IGKyW6I6E1MuUTtrwWuO"));
     localStorage.setItem("aKG", JSON.stringify("AIzaSyDYsucFLhfwF4iEpT9CrAD7rCFdUvrQ87E"));
     /*TEMP*/ 
     su.setKeys();

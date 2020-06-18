@@ -14,6 +14,14 @@
     overflow: auto;
 }
 
+.img {
+    vertical-align: middle;
+}
+
+.img-rounded {
+    border-radius: 6px;
+}
+
 .sticky-nav {
     position: fixed;
     top: 0;
@@ -91,6 +99,11 @@
 
 #proceed-btn {
     width: 100%;
+}
+
+#rep-pic {
+    /*object-fit: contain;*/
+    max-width: 50px;
 }
 
 .page-footer {
