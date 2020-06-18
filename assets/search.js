@@ -1,143 +1,143 @@
 $(document).ready(function() {
 
-let searchUI = {
+    let searchUI = {
 
-    "val_add1" : "",
-    "val_add2" : "",
-    "val_city" : "",
-    "val_state" : "",
-    "val_zip" : "",
+        "val_add1": "",
+        "val_add2": "",
+        "val_city": "",
+        "val_state": "",
+        "val_zip": "",
 
-    "val-cnty" : false,
-    "val-lcl" : false,
-    "val-st" : false,
-    "val-fd" : false,
+        "val-cnty": false,
+        "val-lcl": false,
+        "val-st": false,
+        "val-fd": false,
 
-    "cb-cnty" : false,
-    "cb-lcl" : false,
-    "cb-st" : false,
-    "cb-fd" : false,
+        "cb-cnty": false,
+        "cb-lcl": false,
+        "cb-st": false,
+        "cb-fd": false,
 
-    "aICity" : "",
-    "aTCity" : "",
-    "aKG" : "",
+        "aICity": "",
+        "aTCity": "",
+        "aKG": "",
 
 
-    setKeys: function() {
+        setKeys: function() {
 
-        this.aICity = JSON.parse(localStorage.getItem("aICity"));
-        this.aTCity = JSON.parse(localStorage.getItem("aTCity"));
-        this.aKG = JSON.parse(localStorage.getItem("aKG"));
+            this.aICity = JSON.parse(localStorage.getItem("aICity"));
+            this.aTCity = JSON.parse(localStorage.getItem("aTCity"));
+            this.aKG = JSON.parse(localStorage.getItem("aKG"));
 
-    },
+        },
 
-    resetInputValues: function() {
-        this.val_add1 = "";
-        this.val_add2 = "";
-        this.val_city = "";
-        this.val_state = "";
-        this.val_zip = "";
+        resetInputValues: function() {
+            this.val_add1 = "";
+            this.val_add2 = "";
+            this.val_city = "";
+            this.val_state = "";
+            this.val_zip = "";
 
-        this["cb-cnty"] = false;
-        this["cb-lcl"] = false;
-        this["cb-st"] = false;
-        this["cb-fd"] = false;
+            this["cb-cnty"] = false;
+            this["cb-lcl"] = false;
+            this["cb-st"] = false;
+            this["cb-fd"] = false;
 
-    },
+        },
 
-    setAdd1: function(add1) {
-        this.val_add1 = add1;
-    },
+        setAdd1: function(add1) {
+            this.val_add1 = add1;
+        },
 
-    setAdd2: function(add2) {
-        this.val_add2 = add2;
-    },
+        setAdd2: function(add2) {
+            this.val_add2 = add2;
+        },
 
-    setCity: function(city) {
-        this.val_city = city;
-    },
+        setCity: function(city) {
+            this.val_city = city;
+        },
 
-    setState: function(state) {
-        this.val_state = state;
-    },
+        setState: function(state) {
+            this.val_state = state;
+        },
 
-    setZip: function(zipCode) {
-        this.val_zip = zipCode;
-    },
+        setZip: function(zipCode) {
+            this.val_zip = zipCode;
+        },
 
-    saveCBLS: function() {
-        let cn = this["cb-cnty"];
-        let lcl = this["cb-lcl"];
-        let st = this["cb-st"];
-        let fd = this["cb-fd"];
+        saveCBLS: function() {
+            let cn = this["cb-cnty"];
+            let lcl = this["cb-lcl"];
+            let st = this["cb-st"];
+            let fd = this["cb-fd"];
 
-        localStorage.setItem("cbs_cn", JSON.stringify(cn));
-        localStorage.setItem("cbs_lcl", JSON.stringify(lcl));
-        localStorage.setItem("cbs_st", JSON.stringify(st));
-        localStorage.setItem("cbs_fd", JSON.stringify(fd));
-    },
+            localStorage.setItem("cbs_cn", JSON.stringify(cn));
+            localStorage.setItem("cbs_lcl", JSON.stringify(lcl));
+            localStorage.setItem("cbs_st", JSON.stringify(st));
+            localStorage.setItem("cbs_fd", JSON.stringify(fd));
+        },
 
-    resetCBLS: function() {
-        let cn = false;
-        let lcl = false;
-        let st = false;
-        let fd = false;
+        resetCBLS: function() {
+            let cn = false;
+            let lcl = false;
+            let st = false;
+            let fd = false;
 
-        localStorage.setItem("cbs_cn", JSON.stringify(cn));
-        localStorage.setItem("cbs_lcl", JSON.stringify(lcl));
-        localStorage.setItem("cbs_st", JSON.stringify(st));
-        localStorage.setItem("cbs_fd", JSON.stringify(fd));
-    },
-    
+            localStorage.setItem("cbs_cn", JSON.stringify(cn));
+            localStorage.setItem("cbs_lcl", JSON.stringify(lcl));
+            localStorage.setItem("cbs_st", JSON.stringify(st));
+            localStorage.setItem("cbs_fd", JSON.stringify(fd));
+        },
 
-    cntyStatusTrue: function() {
-        this["cb-cnty"] = true;
-    },
 
-    cntyStatusFalse: function() {
-        this["cb-cnty"] = false;
-    },
+        cntyStatusTrue: function() {
+            this["cb-cnty"] = true;
+        },
 
-    lclStatusTrue: function() {
-        this["cb-lcl"] = true;
-    },
+        cntyStatusFalse: function() {
+            this["cb-cnty"] = false;
+        },
 
-    lclStatusFalse: function() {
-        this["cb-lcl"] = false;
-    },
+        lclStatusTrue: function() {
+            this["cb-lcl"] = true;
+        },
 
-    stStatusTrue: function() {
-        this["cb-st"] = true;
-    },
+        lclStatusFalse: function() {
+            this["cb-lcl"] = false;
+        },
 
-    stStatusFalse: function() {
-        this["cb-st"] = false;
-    },
+        stStatusTrue: function() {
+            this["cb-st"] = true;
+        },
 
-    fdStatusTrue: function() {
-        this["cb-fd"] = true;
-    },
+        stStatusFalse: function() {
+            this["cb-st"] = false;
+        },
 
-    fdStatusFalse: function() {
-        this["cb-fd"] = false;
-    },
+        fdStatusTrue: function() {
+            this["cb-fd"] = true;
+        },
 
-    getUIInput: function() {
-        this.setAdd1($("#search-address1").val());
-        this.setAdd2($("#search-address2").val());
-        this.setCity($("#search-city").val());
-        this.setZip($("#search-zipcode").val());
-        this.saveCBLS();
-    },
+        fdStatusFalse: function() {
+            this["cb-fd"] = false;
+        },
 
-    resolveSmartyStreets: function() {
-        $("#card-row-d").html("");
-        let conf = false;
-        let resp = "";
+        getUIInput: function() {
+            this.setAdd1($("#search-address1").val());
+            this.setAdd2($("#search-address2").val());
+            this.setCity($("#search-city").val());
+            this.setZip($("#search-zipcode").val());
+            this.saveCBLS();
+        },
 
-        var queryURL = `https://us-street.api.smartystreets.com/street-address?auth-id=${this.aICity}&auth-token=${this.aTCity}&candidates=1&match=invalid&street=${this.val_add1}&street2=${this.val_add2}&city=${this.val_city}&state=${this.val_state}&zipcode=${this.val_zip}`;
+        resolveSmartyStreets: function() {
+            $("#card-row-d").html("");
+            let conf = false;
+            let resp = "";
 
-        $.ajax({
+            var queryURL = `https://us-street.api.smartystreets.com/street-address?auth-id=${this.aICity}&auth-token=${this.aTCity}&candidates=1&match=invalid&street=${this.val_add1}&street2=${this.val_add2}&city=${this.val_city}&state=${this.val_state}&zipcode=${this.val_zip}`;
+
+            $.ajax({
                 url: queryURL,
                 method: "GET"
             }).then(function(smartyStreets) {
@@ -147,12 +147,11 @@ let searchUI = {
                 let lock = false;
                 //console.log(`PRECISSSIONNNNNN ${pre}`);    
                 //console.log(`DMMMMMMMCCCCC ${dmc}`);
-                if(dmc !== "Y") {
+                if (dmc !== "Y") {
                     lock = false;
-                }
-                else {
+                } else {
                     lock = true;
-                } 
+                }
                 let addrLine1 = smartyStreets[0].delivery_line_1;
                 let addrLine2 = smartyStreets[0].last_line;
                 let addrReal = `${addrLine1} ${addrLine2}`;
@@ -162,41 +161,40 @@ let searchUI = {
                 var cr = $("<div id=\"card-row\" class=\"row\">");
                 var crds1 = $("<div id=\"card-row-div-sb\" class=\"col s12 m6\">");
                 var crds2 = $("<div id=\"card-row-div-sb\" class=\"col s12 m6\">");
-                if(lock) {
+                if (lock) {
                     var crdt = $("<h6>").text(addrReal);
                     var crdb = $("<div id=\"proceed-btn\" class=\"waves-effect waves-light btn-large orange\">");
                     $(crdb).text("Srch.Rep");
-                }
-                else {
+                } else {
                     var crdt = $("<h6>").text("Address could not be Resolved");
-                    $(crdt).css("color","red");
-                }                
+                    $(crdt).css("color", "red");
+                }
                 crds1.append(crdt);
                 crds2.append(crdb);
                 cr.append(crds1);
                 cr.append(crds2);
                 $("#card-row-d").append(cr);
-            });    
+            });
 
-        return 0;
-    },
+            return 0;
+        },
 
-    resolveCivicInformation: function() {
-        //COUNTY
-        let addr = JSON.parse(localStorage.getItem('smartyStreetsRealAddress'));
-        let key = JSON.parse(localStorage.getItem('aKG'));
-        var queryURL = `https://www.googleapis.com/civicinfo/v2/representatives?address=${addr}&includeOffices=true&key=${key}&levels=administrativeArea2`;
-        $.ajax({
+        resolveCivicInformation: function() {
+            //COUNTY
+            let addr = JSON.parse(localStorage.getItem('smartyStreetsRealAddress'));
+            let key = JSON.parse(localStorage.getItem('aKG'));
+            var queryURL = `https://www.googleapis.com/civicinfo/v2/representatives?address=${addr}&includeOffices=true&key=${key}&levels=administrativeArea2`;
+            $.ajax({
                 url: queryURL,
                 method: "GET"
-                }).then(function(resp_cn) {
+            }).then(function(resp_cn) {
                 console.log(resp_cn);
                 /////CNNNNNTY DISPLAY STARTS///////
                 let cb = JSON.parse(localStorage.getItem('cbs_cn'));
                 //console.log(cb);
-                if(cb) {
-                    let persLen = resp_cn.officials.length; 
-                    let posLen  = resp_cn.offices.length;
+                if (cb) {
+                    let persLen = resp_cn.officials.length;
+                    let posLen = resp_cn.offices.length;
                     console.log(`${persLen}  ${posLen}`);
 
                 }
@@ -207,149 +205,142 @@ let searchUI = {
                 let key = JSON.parse(localStorage.getItem('aKG'));
                 var queryURL = `https://www.googleapis.com/civicinfo/v2/representatives?address=${addr}&includeOffices=true&key=${key}&levels=locality`;
                 $.ajax({
+                    url: queryURL,
+                    method: "GET"
+                }).then(function(resp_lcl) {
+                    //console.log(resp_lcl);
+                    /////LCLLLLLLLL DISPLAY STARTS///////
+                    let cb = JSON.parse(localStorage.getItem('cbs_lcl'));
+                    //console.log(cb);
+                    if (cb) {
+
+                    }
+                    /////LCLLLLLLLL DISPLAY ENDS/////////
+                    //STATE
+                    let addr = JSON.parse(localStorage.getItem('smartyStreetsRealAddress'));
+                    let key = JSON.parse(localStorage.getItem('aKG'));
+                    var queryURL = `https://www.googleapis.com/civicinfo/v2/representatives?address=${addr}&includeOffices=true&key=${key}&levels=administrativeArea1`;
+                    $.ajax({
                         url: queryURL,
                         method: "GET"
-                        }).then(function(resp_lcl) {
-                        //console.log(resp_lcl);
-                        /////LCLLLLLLLL DISPLAY STARTS///////
-                        let cb = JSON.parse(localStorage.getItem('cbs_lcl'));
+                    }).then(function(resp_st) {
+                        //console.log(resp_st);
+                        /////STTTATTTTTTE DISPLAY STARTS///////
+                        let cb = JSON.parse(localStorage.getItem('cbs_st'));
                         //console.log(cb);
-                        if(cb) {
+                        if (cb) {}
+                        /////STTTATTTTTTE DISPLAY ENDS/////////
 
-                        }
-                        /////LCLLLLLLLL DISPLAY ENDS/////////
-                        //STATE
+                        //FEDERAL
                         let addr = JSON.parse(localStorage.getItem('smartyStreetsRealAddress'));
                         let key = JSON.parse(localStorage.getItem('aKG'));
-                        var queryURL = `https://www.googleapis.com/civicinfo/v2/representatives?address=${addr}&includeOffices=true&key=${key}&levels=administrativeArea1`;
+                        var queryURL = `https://www.googleapis.com/civicinfo/v2/representatives?address=${addr}&includeOffices=true&key=${key}&levels=country`;
                         $.ajax({
-                                url: queryURL,
-                                method: "GET"
-                                }).then(function(resp_st) {
-                                //console.log(resp_st);
-                                /////STTTATTTTTTE DISPLAY STARTS///////
-                                let cb = JSON.parse(localStorage.getItem('cbs_st'));
-                                //console.log(cb);
-                                if(cb) {
-                                }                
-                                /////STTTATTTTTTE DISPLAY ENDS/////////
-
-                                //FEDERAL
-                                let addr = JSON.parse(localStorage.getItem('smartyStreetsRealAddress'));
-                                let key = JSON.parse(localStorage.getItem('aKG'));
-                                var queryURL = `https://www.googleapis.com/civicinfo/v2/representatives?address=${addr}&includeOffices=true&key=${key}&levels=country`;
-                                $.ajax({
-                                        url: queryURL,
-                                        method: "GET"
-                                        }).then(function(resp_fd) {
-                                        //console.log(resp_fd);
-                                        /////FEDERALLLL DISPLAY STARTS///////
-                                        let cb = JSON.parse(localStorage.getItem('cbs_fd'));
-                                        //console.log(cb);
-                                        if(cb) {
-                                        }
-                                        /////FEDERALLLL DISPLAY ENDS/////////
-                                });
+                            url: queryURL,
+                            method: "GET"
+                        }).then(function(resp_fd) {
+                            //console.log(resp_fd);
+                            /////FEDERALLLL DISPLAY STARTS///////
+                            let cb = JSON.parse(localStorage.getItem('cbs_fd'));
+                            //console.log(cb);
+                            if (cb) {}
+                            /////FEDERALLLL DISPLAY ENDS/////////
                         });
+                    });
                 });
-        });
+            });
+            return 0;
+        }
+
+    };
+
+    su = searchUI;
+
+    $(document.body).on("click", "#proceed-btn", function() {
+        event.preventDefault();
+        su.resolveCivicInformation();
         return 0;
+    });
+
+    $("#row-state-select").change(function() {
+        event.preventDefault();
+        su.setState($('#ddl-sel').val());
+    });
+
+    $("#cb-cnty").on("change", function() {
+        event.preventDefault();
+        if ($(this).is(":checked")) {
+            su.cntyStatusTrue();
+        } else {
+            su.cntyStatusFalse();
+        }
+    });
+
+    $("#cb-lcl").on("change", function() {
+        event.preventDefault();
+        if ($(this).is(":checked")) {
+            su.lclStatusTrue();
+        } else {
+            su.lclStatusFalse();
+        }
+    });
+
+    $("#cb-st").on("change", function() {
+        event.preventDefault();
+        if ($(this).is(":checked")) {
+            su.stStatusTrue();
+        } else {
+            su.stStatusFalse();
+        }
+    });
+
+    $("#cb-fd").on("change", function() {
+        event.preventDefault();
+        if ($(this).is(":checked")) {
+            su.fdStatusTrue();
+        } else {
+            su.fdStatusFalse();
+        }
+    });
+
+    $("#clear-btn").click(function(event) {
+        event.preventDefault();
+        $("#search-address1").val("");
+        $("#search-address2").val("");
+        $("#search-city").val("");
+        $("#search-zipcode").val("");
+        $("#ddl-sel").val('1');
+        $("select").formSelect();
+        $("#cb-cnty").prop("checked", false);
+        $("#cb-lcl").prop("checked", false);
+        $("#cb-st").prop("checked", false);
+        $("#cb-fd").prop("checked", false);
+        $("#card-row-d").html("");
+        localStorage.removeItem('smartyStreetsRealAddress');
+        su.resetCBLS();
+    });
+
+    $("#search-btn").click(function(event) {
+        event.preventDefault();
+        localStorage.removeItem('smartyStreetsRealAddress');
+        su.getUIInput();
+        su.resolveSmartyStreets();
+    });
+
+    function initialState() {
+        console.clear();
+        su.resetInputValues();
+        localStorage.removeItem('smartyStreetsRealAddress');
+        /*TEMP*/
+        localStorage.setItem("aICity", JSON.stringify("cdc47e30-51ff-ea66-8d9d-5620f5658d99"));
+        localStorage.setItem("aTCity", JSON.stringify("e44LyMX0izU6e9hyL7xD"));
+        localStorage.setItem("aKG", JSON.stringify("AIzaSyDYsucFLhfwF4iEpT9CrAD7rCFdUvrQ87E"));
+        /*TEMP*/
+        su.setKeys();
+        su.resetCBLS();
+
     }
 
-};
-
-su = searchUI;
-
-$(document.body).on("click", "#proceed-btn", function() {
-    event.preventDefault();
-    su.resolveCivicInformation();
-    return 0;
-});
-
-$("#row-state-select").change(function() {
-    event.preventDefault();
-    su.setState($('#ddl-sel').val());
-});
-
-$("#cb-cnty").on("change", function() {
-    event.preventDefault();
-    if ($(this).is(":checked")) {
-        su.cntyStatusTrue();
-    }
-    else {
-        su.cntyStatusFalse();
-    }
-});
-
-$("#cb-lcl").on("change", function() {
-    event.preventDefault();
-    if ($(this).is(":checked")) {
-        su.lclStatusTrue();
-    }
-    else {
-        su.lclStatusFalse();
-    }
-});
-
-$("#cb-st").on("change", function() {
-    event.preventDefault();
-    if ($(this).is(":checked")) {
-        su.stStatusTrue();
-    }
-    else {
-        su.stStatusFalse();
-    }
-});
-
-$("#cb-fd").on("change", function() {
-    event.preventDefault();
-    if ($(this).is(":checked")) {
-        su.fdStatusTrue();
-    }
-    else {
-        su.fdStatusFalse();
-    }
-});
-
-$("#clear-btn").click(function(event) {
-    event.preventDefault();
-    $("#search-address1").val("");
-    $("#search-address2").val("");
-    $("#search-city").val("");
-    $("#search-zipcode").val("");
-    $("#ddl-sel").val('1');
-    $("select").formSelect();
-    $("#cb-cnty").prop("checked",false); 
-    $("#cb-lcl").prop("checked",false);
-    $("#cb-st").prop("checked",false); 
-    $("#cb-fd").prop("checked",false);
-    $("#card-row-d").html("");
-    localStorage.removeItem('smartyStreetsRealAddress');
-    su.resetCBLS();
-});
-
-$("#search-btn").click(function(event) {
-    event.preventDefault();
-    localStorage.removeItem('smartyStreetsRealAddress');
-    su.getUIInput();
-    su.resolveSmartyStreets();
-});
-
-function initialState() { 
-    console.clear();
-    su.resetInputValues();
-    localStorage.removeItem('smartyStreetsRealAddress');
-    /*TEMP*/
-    localStorage.setItem("aICity", JSON.stringify("cdc47e30-51ff-ea66-8d9d-5620f5658d99"));
-    localStorage.setItem("aTCity", JSON.stringify("e44LyMX0izU6e9hyL7xD"));
-    localStorage.setItem("aKG", JSON.stringify("AIzaSyDYsucFLhfwF4iEpT9CrAD7rCFdUvrQ87E"));
-    /*TEMP*/ 
-    su.setKeys();
-    su.resetCBLS();
-    
-}
-
-initialState();
+    initialState();
 
 });
-

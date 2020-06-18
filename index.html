@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,6 +18,7 @@
         <link rel="stylesheet" href="./assets/style.css">
     </head>
 </head>
+
 <body id="body-area">
     <!-- NAV STARTS -->
     <nav id="nav-cont" class="nav-wrapper indigo">
@@ -38,7 +41,7 @@
             <div class="row">
                 <div class="col s12 m2"></div>
                 <div class="col s12 m8">
-                    <div id="main-card"class="card-panel">
+                    <div id="main-card" class="card-panel">
                         <form id="card-form">
                             <div id="card-row" class="row">
                                 <h4 id="main-title">Search.Rep</h4>
@@ -175,10 +178,10 @@
                             </div>
                             <div id="card-row" class="row">
                                 <div id="card-row-div-sb" class="col s12 m6">
-                                    <a id="clear-btn" class="waves-effect waves-light btn-large red">Clr.Frm</a>
+                                    <a id="clear-btn" class="waves-effect waves-light btn-large red">Clear</a>
                                 </div>
                                 <div id="card-row-div-sb" class="col s12 m6">
-                                    <a id="search-btn" class="waves-effect waves-light btn-large">Rslv.Addr</a>
+                                    <a id="search-btn" class="waves-effect waves-light btn-large green">Search Address</Address></a>
                                 </div>
                             </div>
                             <div id="card-row-d"></div>
@@ -203,7 +206,7 @@
     <!-- STICKY FOOTER START -->
     <footer class="page-footer">
         <div id="main-footer-cp" class="footer-copyright">
-            <div id="main-footer"class="container right-align">Copyright © Gatito <i class="fas fa-cat"></i></div>
+            <div id="main-footer" class="container right-align">Copyright © Gatito <i class="fas fa-cat"></i></div>
         </div>
     </footer>
     <!-- STICKY FOOTER END -->
@@ -215,17 +218,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <!-- STICKY NAV START -->
     <script>
-        $(document).ready(function(){
-            $(window).scroll(function(){
-                if($(window).scrollTop()>150) {
+        $(document).ready(function() {
+            $(window).scroll(function() {
+                if ($(window).scrollTop() > 150) {
                     $('nav').addClass('sticky-nav');
-                }
-                else {
+                } else {
                     $('nav').removeClass('sticky-nav');
                 }
             });
         });
-    </script> 
+    </script>
     <!-- STICKY NAV END -->
     <!-- SIDENAV HANDLER -->
     <script>
@@ -235,10 +237,11 @@
     </script>
     <!-- DROPDOWN HANDLER -->
     <script>
-    $(document).ready(function(){
-        $('select').formSelect();
-    });
+        $(document).ready(function() {
+            $('select').formSelect();
+        });
     </script>
     <script src="./assets/search.js"></script>
 </body>
+
 </html>
