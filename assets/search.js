@@ -139,7 +139,7 @@ $(document.body).on("click", "div[rep-office]", function() {
     $('.modal').modal('open', "#modal1");
     /// when you click on a representative row modal is invoqued
     /// incovation >>>>> $('.modal').modal('open', "#modal1");
-    
+    /// close >>>>>>>> $('.modal').modal('close', "#modal1");
     /// please create a function inside searchUI Object and use the following parameters to load display data in the UI
     /// repOffice
     /// repName
