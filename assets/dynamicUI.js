@@ -13,7 +13,6 @@ let dynamicUi = {
     repPhotoUrl : "",
     
     parseAddress: function (response) {
-        
         let pre = response[0][0].metadata.precision;
         let dmc = response[0][0].analysis.dpv_match_code;     
         if (dmc !== "Y") {
@@ -76,30 +75,34 @@ let dynamicUi = {
 
     representativeRowBuilder: function (level) {
 
-        let crh = $("<div id=\"card-row\" class=\"row\">");
+        let tr = $("<div id=\"card-row-rep\" class=\"row\">");
+        $(tr).attr("rep-office",this.repOffice);
+        $(tr).attr("rep-name",this.repName);
+        $(tr).attr("rep-party",this.repParty);
+        $(tr).attr("rep-party-display",this.repPartyDisplay);
+        $(tr).attr("rep-email",this.repEmail);
+        $(tr).attr("rep-phone",this.repPhone);
+        $(tr).attr("rep-photo-url",this.repPhotoUrl);
+        $(tr).attr("rep-address",this.repAddress);
         let crds1 = $("<div id=\"card-row-div-sb\" class=\"col s12 m4\">");
         let crds2 = $("<div id=\"card-row-div-sb\" class=\"col s12 m4\">");
         let crds3 = $("<div id=\"card-row-div-sb\" class=\"col s12 m4\">");
-        let crdt1 = $("<h6>").text(this.repName + this.repPartyDisp);
+        let crdt1 = $("<h6>").text(this.repName + this.repPartyDisplay);
         let crdt2 = $("<h6>").text(this.repOffice);
         let crdp = $("<img id=\"rep-pic\">");
         crdp.attr('src', this.repPhotoUrl);
         crdp.appendTo('#repPic');
-
         crds1.append(crdt1);
         crds2.append(crdt2);
         crds3.append(crdp);
-        crh.append(crds1);
-        crh.append(crds2);
-        crh.append(crds3);
-        $("#card-row-d").append(crh);
-
+        tr.append(crds1);
+        tr.append(crds2);
+        tr.append(crds3);
+        $("#card-row-d").append(tr);
     },
 
     parseRepresentativeInfo: function (response,level) {
 
-        //console.log(response);
-        //console.log(level);
         let personsArrayLenght = "";
         if (!response[0].hasOwnProperty('officials')) {
             personsArrayLenght = "";
@@ -121,72 +124,63 @@ let dynamicUi = {
             for(let i=0; i<positionsArrayLenght; i++) {
                 this.repOffice = response[0].offices[i].name;
                 let oilen = response[0].offices[i].officialIndices.length;
-                //console.log(`${this.repOffice} ${oilen}`);
                 for(let j=0; j<oilen; j++) {
                     oi = response[0].offices[i].officialIndices[j];
-                    //console.log(`${this.repOffice} ${oilen} ${oi}`);
                     if (!response[0].officials[oi].hasOwnProperty('name')) {
                         this.repName = "";
                     }
                     else {
                         this.repName = response[0].officials[oi].name;
                     }
-                    //console.log(`${this.repOffice} ${oilen} ${oi} ${this.repName}`);
                     if (!response[0].officials[oi].hasOwnProperty('party')) {
                         this.repParty = "";
                     }
                     else {
                         this.repParty = response[0].officials[oi].party;
                     }
-                    //console.log(`${this.repOffice} ${oilen} ${oi} ${this.repName} ${this.repParty}`);
                     if (this.repParty === "Republican Party") {
-                        this.repPartyDisp = "(R)";
+                        this.repPartyDisplay = "(R)";
                     }
                     else if (this.repParty === "Democratic Party") {
-                        this.repPartyDisp = "(D)";
+                        this.repPartyDisplay = "(D)";
                     }
                     else if (this.repParty === "Nonpartisan") {
-                        this.repPartyDisp = "(I)";
+                        this.repPartyDisplay = "(I)";
                     }
                     else {
                         console.log("NA PARTY DISP");
                     }
                     if(this.repName === "VACANT") {
-                        this.repPartyDisp = "";
+                        this.repPartyDisplay = "";
                     }
-                    //console.log(`${this.repOffice} ${oilen} ${oi} ${this.repName} ${this.repPartyDisp}`);
                     if (!response[0].officials[oi].hasOwnProperty('emails')) {
                         this.repEmail = "";
                     }
                     else {
                         this.repEmail = response[0].officials[oi].emails[0];
                     }
-                    //console.log(`${this.repOffice} ${oilen} ${oi} ${this.repName} ${this.repPartyDisp} ${this.repEmail}`);
                     if (!response[0].officials[oi].hasOwnProperty('phones')) {
                         this.repPhone = "";
                     }
                     else {
                         this.repPhone = response[0].officials[oi].phones[0];;
                     }
-                    //console.log(`${this.repOffice} ${oilen} ${oi} ${this.repName} ${this.repPartyDisp} ${this.repEmail} ${this.repPhone}`);
                     if (!response[0].officials[oi].hasOwnProperty('photoUrl')) {
                         this.repPhotoUrl = "./assets/blank-person.jpg";
                     }
                     else {
                         this.repPhotoUrl = response[0].officials[oi].photoUrl;;
                     }
-                    //console.log(`${this.repOffice} ${oilen} ${oi} ${this.repName} ${this.repPartyDisp} ${this.repEmail} ${this.repPhone}`);
                     if (!response[0].officials[oi].hasOwnProperty('address')) {
                         this.repAddress = "";
                     }
                     else {
                         this.repAddress = response[0].officials[oi].address[0].line1;;
                     }
-                    //console.log(`${this.repOffice} ${oilen} ${oi} ${this.repName} ${this.repPartyDisp} ${this.repEmail} ${this.repPhone} ${this.repPhotoUrl} ${this.repAddress}`);
-
                     this.representativeRowBuilder();
                 }
             }
+
         }
         else {
             this.displayNoInfoFound(level);

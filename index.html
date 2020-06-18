@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +17,6 @@
         <link rel="stylesheet" href="./assets/style.css">
     </head>
 </head>
-
 <body id="body-area">
     <!-- NAV STARTS -->
     <nav id="nav-cont" class="nav-wrapper indigo">
@@ -125,7 +123,6 @@
                                             <option value="WI">WI</option>
                                             <option value="WY">WY</option>
                                         </select>
-                                        <!-- <label>State</label> -->
                                     </div>
                                 </div>
                             </div>
@@ -193,17 +190,20 @@
             </div>
             <div class="row"></div>
             <div class="row"></div>
-            <div class="row"></div>
-            <div class="row"></div>
-            <div class="row"></div>
-            <div class="row"></div>
-            <div class="row"></div>
-            <div class="row"></div>
-            <div class="row"></div>
-            <div class="row"></div>
         </div>
     </main>
     <!-- MAIN ENDS -->
+    <!-- MODAL CONTACT STARTS -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <h4>Modal Header</h4>
+            <p>A bunch of text</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+        </div>
+    </div>
+    <!-- MODAL CONTACT ENDS -->
     <!-- STICKY FOOTER START -->
     <footer class="page-footer">
         <div id="main-footer-cp" class="footer-copyright">
@@ -212,7 +212,7 @@
     </footer>
     <!-- STICKY FOOTER END -->
     <!-- JQEURY LINKAGE -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery.js"></script>
     <!-- MOMENT.JS LINKAGE -->
     <script src="https://momentjs.com/downloads/moment-with-locales.min.js"></script>
     <!-- Compiled and minified JavaScript -->
@@ -242,10 +242,15 @@
             $('select').formSelect();
         });
     </script>
+    <!-- MODAL HANDLER -->
+    <script>
+        $(document).ready(function(){
+            $('.modal').modal();
+        });
+    </script>
     <script src="./assets/dynamicUI.js"></script>
     <script src="./assets/apiHandler.js"></script>
     <script src="./assets/search.js"></script>
-    <!-- <script src="./assets/search2.js"></script> -->
 </body>
 
 </html>
