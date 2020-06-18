@@ -1,346 +1,183 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
+    /// searchUI Obj Manages all UI Input
+    /// AL UI INPUT IS SENT TO LOCAL STORAGE 
     let searchUI = {
 
-        "val_add1": "",
-        "val_add2": "",
-        "val_city": "",
         "val_state": "",
-        "val_zip": "",
-
-        "val-cnty": false,
-        "val-lcl": false,
-        "val-st": false,
-        "val-fd": false,
-
         "cb-cnty": false,
         "cb-lcl": false,
         "cb-st": false,
         "cb-fd": false,
 
-        "aICity": "",
-        "aTCity": "",
-        "aKG": "",
-
-
-        setKeys: function() {
-
-            this.aICity = JSON.parse(localStorage.getItem("aICity"));
-            this.aTCity = JSON.parse(localStorage.getItem("aTCity"));
-            this.aKG = JSON.parse(localStorage.getItem("aKG"));
-
-        },
-
-        resetInputValues: function() {
-            this.val_add1 = "";
-            this.val_add2 = "";
-            this.val_city = "";
-            this.val_state = "";
-            this.val_zip = "";
-
+        resetInputValues: function () {
             this["cb-cnty"] = false;
             this["cb-lcl"] = false;
             this["cb-st"] = false;
             this["cb-fd"] = false;
-
         },
 
-        setAdd1: function(add1) {
-            this.val_add1 = add1;
+        saveUIInputLS: function () {
+            localStorage.setItem("add1", JSON.stringify($("#search-address1").val()));
+            localStorage.setItem("add2", JSON.stringify($("#search-address2").val()));
+            localStorage.setItem("city", JSON.stringify($("#search-city").val()));
+            localStorage.setItem("state", JSON.stringify(this.val_state));
+            localStorage.setItem("zip", JSON.stringify($("#search-zipcode").val()));            
+            localStorage.setItem("cbs_cn", JSON.stringify(this["cb-cnty"]));
+            localStorage.setItem("cbs_lcl", JSON.stringify(this["cb-lcl"]));
+            localStorage.setItem("cbs_st", JSON.stringify(this["cb-st"]));
+            localStorage.setItem("cbs_fd", JSON.stringify(this["cb-fd"]));
         },
 
-        setAdd2: function(add2) {
-            this.val_add2 = add2;
+        resetUIInputLS: function () {
+            localStorage.removeItem('add1');
+            localStorage.removeItem('add2');
+            localStorage.removeItem('city');
+            localStorage.removeItem('state');
+            localStorage.removeItem('zip');
+            localStorage.setItem("cbs_cn", JSON.stringify(false));
+            localStorage.setItem("cbs_lcl", JSON.stringify(false));
+            localStorage.setItem("cbs_st", JSON.stringify(false));
+            localStorage.setItem("cbs_fd", JSON.stringify(false));
         },
 
-        setCity: function(city) {
-            this.val_city = city;
+        resetAPIRespLS: function () {
+            localStorage.removeItem('smartyStreetsApiResp');
+            localStorage.removeItem('civicInfoApiRespCounty');
+            localStorage.removeItem('civicInfoApiRespLocal');
+            localStorage.removeItem('civicInfoApiRespState');
+            localStorage.removeItem('civicInfoApiRespFederal');
         },
 
-        setState: function(state) {
+        clearUI: function () {
+            $("#search-address1").val("");
+            $("#search-address2").val("");
+            $("#search-city").val("");
+            $("#search-zipcode").val("");
+            $("#ddl-sel").val('1');
+            $("select").formSelect();
+            $("#cb-cnty").prop("checked", false);
+            $("#cb-lcl").prop("checked", false);
+            $("#cb-st").prop("checked", false);
+            $("#cb-fd").prop("checked", false);
+            $("#card-row-d").html("");
+        },
+
+        setState: function (state) {
             this.val_state = state;
         },
 
-        setZip: function(zipCode) {
-            this.val_zip = zipCode;
-        },
-
-        saveCBLS: function() {
-            let cn = this["cb-cnty"];
-            let lcl = this["cb-lcl"];
-            let st = this["cb-st"];
-            let fd = this["cb-fd"];
-
-            localStorage.setItem("cbs_cn", JSON.stringify(cn));
-            localStorage.setItem("cbs_lcl", JSON.stringify(lcl));
-            localStorage.setItem("cbs_st", JSON.stringify(st));
-            localStorage.setItem("cbs_fd", JSON.stringify(fd));
-        },
-
-        resetCBLS: function() {
-            let cn = false;
-            let lcl = false;
-            let st = false;
-            let fd = false;
-
-            localStorage.setItem("cbs_cn", JSON.stringify(cn));
-            localStorage.setItem("cbs_lcl", JSON.stringify(lcl));
-            localStorage.setItem("cbs_st", JSON.stringify(st));
-            localStorage.setItem("cbs_fd", JSON.stringify(fd));
-        },
-
-
-        cntyStatusTrue: function() {
+        cntyStatusTrue: function () {
             this["cb-cnty"] = true;
         },
 
-        cntyStatusFalse: function() {
+        cntyStatusFalse: function () {
             this["cb-cnty"] = false;
         },
 
-        lclStatusTrue: function() {
+        lclStatusTrue: function () {
             this["cb-lcl"] = true;
         },
 
-        lclStatusFalse: function() {
+        lclStatusFalse: function () {
             this["cb-lcl"] = false;
         },
 
-        stStatusTrue: function() {
+        stStatusTrue: function () {
             this["cb-st"] = true;
         },
 
-        stStatusFalse: function() {
+        stStatusFalse: function () {
             this["cb-st"] = false;
         },
 
-        fdStatusTrue: function() {
+        fdStatusTrue: function () {
             this["cb-fd"] = true;
         },
 
-        fdStatusFalse: function() {
+        fdStatusFalse: function () {
             this["cb-fd"] = false;
         },
 
-        getUIInput: function() {
-            this.setAdd1($("#search-address1").val());
-            this.setAdd2($("#search-address2").val());
-            this.setCity($("#search-city").val());
-            this.setZip($("#search-zipcode").val());
-            this.saveCBLS();
-        },
-
-        resolveSmartyStreets: function() {
-            $("#card-row-d").html("");
-            let conf = false;
-            let resp = "";
-
-            var queryURL = `https://us-street.api.smartystreets.com/street-address?auth-id=${this.aICity}&auth-token=${this.aTCity}&candidates=1&match=invalid&street=${this.val_add1}&street2=${this.val_add2}&city=${this.val_city}&state=${this.val_state}&zipcode=${this.val_zip}`;
-
-            $.ajax({
-                url: queryURL,
-                method: "GET"
-            }).then(function(smartyStreets) {
-                //console.log(smartyStreets);
-                let pre = smartyStreets[0].metadata.precision;
-                let dmc = smartyStreets[0].analysis.dpv_match_code;
-                let lock = false;
-                //console.log(`PRECISSSIONNNNNN ${pre}`);    
-                //console.log(`DMMMMMMMCCCCC ${dmc}`);
-                if (dmc !== "Y") {
-                    lock = false;
-                } else {
-                    lock = true;
-                }
-                let addrLine1 = smartyStreets[0].delivery_line_1;
-                let addrLine2 = smartyStreets[0].last_line;
-                let addrReal = `${addrLine1} ${addrLine2}`;
-                //console.log(addrReal);
-                localStorage.setItem('smartyStreetsRealAddress', JSON.stringify(addrReal));
-                //console.log(JSON.parse(localStorage.getItem('smartyStreetsRealAddress')));
-                var cr = $("<div id=\"card-row\" class=\"row\">");
-                var crds1 = $("<div id=\"card-row-div-sb\" class=\"col s12 m6\">");
-                var crds2 = $("<div id=\"card-row-div-sb\" class=\"col s12 m6\">");
-                if (lock) {
-                    var crdt = $("<h6>").text(addrReal);
-                    var crdb = $("<div id=\"proceed-btn\" class=\"waves-effect waves-light btn-large orange\">");
-                    $(crdb).text("Srch.Rep");
-                } else {
-                    var crdt = $("<h6>").text("Address could not be Resolved");
-                    $(crdt).css("color", "red");
-                }
-                crds1.append(crdt);
-                crds2.append(crdb);
-                cr.append(crds1);
-                cr.append(crds2);
-                $("#card-row-d").append(cr);
-            });
-
-            return 0;
-        },
-
-        resolveCivicInformation: function() {
-            //COUNTY
-            let addr = JSON.parse(localStorage.getItem('smartyStreetsRealAddress'));
-            let key = JSON.parse(localStorage.getItem('aKG'));
-            var queryURL = `https://www.googleapis.com/civicinfo/v2/representatives?address=${addr}&includeOffices=true&key=${key}&levels=administrativeArea2`;
-            $.ajax({
-                url: queryURL,
-                method: "GET"
-            }).then(function(resp_cn) {
-                console.log(resp_cn);
-                /////CNNNNNTY DISPLAY STARTS///////
-                let cb = JSON.parse(localStorage.getItem('cbs_cn'));
-                //console.log(cb);
-                if (cb) {
-                    let persLen = resp_cn.officials.length;
-                    let posLen = resp_cn.offices.length;
-                    console.log(`${persLen}  ${posLen}`);
-
-                }
-                /////CNNNNNTY DISPLAY ENDS/////////
-
-                //LOCAL
-                let addr = JSON.parse(localStorage.getItem('smartyStreetsRealAddress'));
-                let key = JSON.parse(localStorage.getItem('aKG'));
-                var queryURL = `https://www.googleapis.com/civicinfo/v2/representatives?address=${addr}&includeOffices=true&key=${key}&levels=locality`;
-                $.ajax({
-                    url: queryURL,
-                    method: "GET"
-                }).then(function(resp_lcl) {
-                    //console.log(resp_lcl);
-                    /////LCLLLLLLLL DISPLAY STARTS///////
-                    let cb = JSON.parse(localStorage.getItem('cbs_lcl'));
-                    //console.log(cb);
-                    if (cb) {
-
-                    }
-                    /////LCLLLLLLLL DISPLAY ENDS/////////
-                    //STATE
-                    let addr = JSON.parse(localStorage.getItem('smartyStreetsRealAddress'));
-                    let key = JSON.parse(localStorage.getItem('aKG'));
-                    var queryURL = `https://www.googleapis.com/civicinfo/v2/representatives?address=${addr}&includeOffices=true&key=${key}&levels=administrativeArea1`;
-                    $.ajax({
-                        url: queryURL,
-                        method: "GET"
-                    }).then(function(resp_st) {
-                        //console.log(resp_st);
-                        /////STTTATTTTTTE DISPLAY STARTS///////
-                        let cb = JSON.parse(localStorage.getItem('cbs_st'));
-                        //console.log(cb);
-                        if (cb) {}
-                        /////STTTATTTTTTE DISPLAY ENDS/////////
-
-                        //FEDERAL
-                        let addr = JSON.parse(localStorage.getItem('smartyStreetsRealAddress'));
-                        let key = JSON.parse(localStorage.getItem('aKG'));
-                        var queryURL = `https://www.googleapis.com/civicinfo/v2/representatives?address=${addr}&includeOffices=true&key=${key}&levels=country`;
-                        $.ajax({
-                            url: queryURL,
-                            method: "GET"
-                        }).then(function(resp_fd) {
-                            //console.log(resp_fd);
-                            /////FEDERALLLL DISPLAY STARTS///////
-                            let cb = JSON.parse(localStorage.getItem('cbs_fd'));
-                            //console.log(cb);
-                            if (cb) {}
-                            /////FEDERALLLL DISPLAY ENDS/////////
-                        });
-                    });
-                });
-            });
-            return 0;
-        }
-
     };
 
-    su = searchUI;
 
-    $(document.body).on("click", "#proceed-btn", function() {
-        event.preventDefault();
-        su.resolveCivicInformation();
-        return 0;
-    });
+/// EVENT LISTENERS FOR UI
+su = searchUI;
+ah = apiHandler;
 
-    $("#row-state-select").change(function() {
-        event.preventDefault();
-        su.setState($('#ddl-sel').val());
-    });
+$(document.body).on("click", "#proceed-btn", function () {
+    event.preventDefault();
+    ah.civicInfoResolve();
+    return 0;
+});
 
-    $("#cb-cnty").on("change", function() {
-        event.preventDefault();
-        if ($(this).is(":checked")) {
-            su.cntyStatusTrue();
-        } else {
-            su.cntyStatusFalse();
-        }
-    });
+$("#row-state-select").change(function () {
+    event.preventDefault();
+    su.setState($('#ddl-sel').val());
+});
 
-    $("#cb-lcl").on("change", function() {
-        event.preventDefault();
-        if ($(this).is(":checked")) {
-            su.lclStatusTrue();
-        } else {
-            su.lclStatusFalse();
-        }
-    });
-
-    $("#cb-st").on("change", function() {
-        event.preventDefault();
-        if ($(this).is(":checked")) {
-            su.stStatusTrue();
-        } else {
-            su.stStatusFalse();
-        }
-    });
-
-    $("#cb-fd").on("change", function() {
-        event.preventDefault();
-        if ($(this).is(":checked")) {
-            su.fdStatusTrue();
-        } else {
-            su.fdStatusFalse();
-        }
-    });
-
-    $("#clear-btn").click(function(event) {
-        event.preventDefault();
-        $("#search-address1").val("");
-        $("#search-address2").val("");
-        $("#search-city").val("");
-        $("#search-zipcode").val("");
-        $("#ddl-sel").val('1');
-        $("select").formSelect();
-        $("#cb-cnty").prop("checked", false);
-        $("#cb-lcl").prop("checked", false);
-        $("#cb-st").prop("checked", false);
-        $("#cb-fd").prop("checked", false);
-        $("#card-row-d").html("");
-        localStorage.removeItem('smartyStreetsRealAddress');
-        su.resetCBLS();
-    });
-
-    $("#search-btn").click(function(event) {
-        event.preventDefault();
-        localStorage.removeItem('smartyStreetsRealAddress');
-        su.getUIInput();
-        su.resolveSmartyStreets();
-    });
-
-    function initialState() {
-        console.clear();
-        su.resetInputValues();
-        localStorage.removeItem('smartyStreetsRealAddress');
-        /*TEMP*/
-        localStorage.setItem("aICity", JSON.stringify("cdc47e30-51ff-ea66-8d9d-5620f5658d99"));
-        localStorage.setItem("aTCity", JSON.stringify("e44LyMX0izU6e9hyL7xD"));
-        localStorage.setItem("aKG", JSON.stringify("AIzaSyDYsucFLhfwF4iEpT9CrAD7rCFdUvrQ87E"));
-        /*TEMP*/
-        su.setKeys();
-        su.resetCBLS();
-
+$("#cb-cnty").on("change", function () {
+    event.preventDefault();
+    if ($(this).is(":checked")) {
+        su.cntyStatusTrue();
     }
+    else {
+        su.cntyStatusFalse();
+    }
+});
 
-    initialState();
+$("#cb-lcl").on("change", function () {
+    event.preventDefault();
+    if ($(this).is(":checked")) {
+        su.lclStatusTrue();
+    }
+    else {
+        su.lclStatusFalse();
+    }
+});
+
+$("#cb-st").on("change", function () {
+    event.preventDefault();
+    if ($(this).is(":checked")) {
+        su.stStatusTrue();
+    }
+    else {
+        su.stStatusFalse();
+    }
+});
+
+$("#cb-fd").on("change", function () {
+    event.preventDefault();
+    if ($(this).is(":checked")) {
+        su.fdStatusTrue();
+    }
+    else {
+        su.fdStatusFalse();
+    }
+});
+
+$("#clear-btn").click(function (event) {
+    event.preventDefault();
+    su.clearUI();
+    su.resetUIInputLS();
+});
+
+$("#search-btn").click(function (event) {
+    event.preventDefault();
+    su.saveUIInputLS();
+    ah.addressResolve();
+    
+});
+
+function initialState() {
+    console.clear();
+    su.clearUI();
+    su.resetUIInputLS();
+    su.resetAPIRespLS();
+    ah.loadApiKeys();
+}
+
+initialState();
 
 });
