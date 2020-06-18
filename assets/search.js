@@ -83,6 +83,29 @@ $(document).ready(function () {
             $("#card-row-d").html("");
         },
 
+
+        loadModalinfo: function() {
+            //build this function to load all the representative information 
+            //into modal elements
+            // create modal elements in the html
+            // grab the data from the following parameters 
+            /// repOffice
+            /// repName
+            /// repParty
+            /// repPartyDisplay
+            /// repEmail
+            /// repPhone
+            /// repPhotoUrl
+            /// repAddress
+
+            ///create text input for message subject 
+            ///create text area email content
+            ///create a button for sending email
+            ///create a button to save contact
+            ///crate a button to exit modal 
+            
+        },
+
         setState: function (state) {
             this.val_state = state;
         },
@@ -125,6 +148,11 @@ $(document).ready(function () {
 su = searchUI;
 ah = apiHandler;
 
+//// please add the event listeners for each of the buttons in this section
+///create a button for sending email
+///create a button to save contact
+///crate a button to exit modal 
+
 $(document.body).on("click", "div[rep-office]", function() {
     let repOffice = String($(this).attr('rep-office'));
     let repName = String($(this).attr('rep-name'));
@@ -134,12 +162,17 @@ $(document.body).on("click", "div[rep-office]", function() {
     let repPhone = String($(this).attr('rep-phone'));
     let repPhotoUrl = String($(this).attr('rep-photo-url'));
     let repAddress = String($(this).attr('rep-adress'));
-    /*console.log(`${repOffice} ${repName} ${repParty} ${repPartyDisplay} ${repEmail} ${repPhone} ${repPhotoUrl} ${repAddress}`);*/
+    console.log(`${repOffice} ${repName} ${repParty} ${repPartyDisplay} ${repEmail} ${repPhone} ${repPhotoUrl} ${repAddress}`);
+    
     su.saveRepresentativeInfo(repOffice, repName, repParty, repPartyDisplay, repEmail, repPhone, repPhotoUrl, repAddress);
+    
     $('.modal').modal('open', "#modal1");
+    
     /// when you click on a representative row modal is invoqued
+    
     /// incovation >>>>> $('.modal').modal('open', "#modal1");
     /// close >>>>>>>> $('.modal').modal('close', "#modal1");
+    
     /// please create a function inside searchUI Object and use the following parameters to load display data in the UI
     /// repOffice
     /// repName
@@ -156,7 +189,8 @@ $(document.body).on("click", "div[rep-office]", function() {
     /// create text box for sending email
     /// create button to send email  
     /// create buttons to save to directory (local storage)
-    /// create button to exit modal 
+    /// create button to exit modal
+
 });
 
 $(document.body).on("click", "#proceed-btn", function () {
