@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,6 +18,7 @@
         <link rel="stylesheet" href="./assets/style.css">
     </head>
 </head>
+
 <body id="body-area">
     <!-- NAV STARTS -->
     <nav id="nav-cont" class="nav-wrapper indigo">
@@ -32,13 +35,36 @@
     </ul>
     <!-- NAV ENDS -->
     <!-- MAIN STARTS -->
+
+
+    <div class="btn" data-rep="Margo" id='modal-trigger'>Modal</div>
+
+
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+        <a href="#!" style='position: absolute; right: 5px; top: 2px' class="modal-close waves-effect waves-green btn-flat">X</a>
+        <div class="modal-content">
+            <h4>JUNK thank shouldnt be here</h4>
+        </div>
+        <div class="modal-footer">
+        </div>
+    </div>
+    <div id="card-row-d"></div>
+
+
+
+
     <main>
         <div id="main-container" class="container">
+
+
+
+
             <div class="row"></div>
             <div class="row">
                 <div class="col s12 m2"></div>
                 <div class="col s12 m8">
-                    <div id="main-card"class="card-panel">
+                    <div id="main-card" class="card-panel">
                         <form id="card-form">
                             <div id="card-row" class="row">
                                 <h4 id="main-title">Search.Rep</h4>
@@ -137,7 +163,7 @@
                                 <div id="card-row-div-cb" class="col s12 m3">
                                     <p id="card-row-div-cb-p">
                                         <label id="cb-cnty-lbl">
-                                            <input id="cb-cnty" type="checkbox" class="filled-in"/>
+                                            <input id="cb-cnty" type="checkbox" class="filled-in" />
                                             <span id="cb-cnty-sp">County</span>
                                         </label>
                                     </p>
@@ -147,7 +173,7 @@
                                 <div id="card-row-div-cb" class="col s12 m3">
                                     <p id="card-row-div-cb-p">
                                         <label id="cb-lcl-lbl">
-                                            <input id="cb-lcl" type="checkbox" class="filled-in"/>
+                                            <input id="cb-lcl" type="checkbox" class="filled-in" />
                                             <span id="cb-lcl-sp">Local</span>
                                         </label>
                                     </p>
@@ -157,7 +183,7 @@
                                 <div id="card-row-div-cb" class="col s12 m3">
                                     <p id="card-row-div-cb-p">
                                         <label id="cb-st-lbl">
-                                            <input id="cb-st" type="checkbox" class="filled-in"/>
+                                            <input id="cb-st" type="checkbox" class="filled-in" />
                                             <span id="cb-st-sp">State</span>
                                         </label>
                                     </p>
@@ -167,7 +193,7 @@
                                 <div id="card-row-div-cb" class="col s12 m3">
                                     <p id="card-row-div-cb-p">
                                         <label id="cb-fd-lbl">
-                                            <input id="cb-fd" type="checkbox" class="filled-in"/>
+                                            <input id="cb-fd" type="checkbox" class="filled-in" />
                                             <span id="cb-fd-sp">Federal</span>
                                         </label>
                                     </p>
@@ -180,8 +206,12 @@
                                 <div id="card-row-div-sb" class="col s12 m6">
                                     <a id="search-btn" class="waves-effect waves-light btn-large">Rslv.Addr</a>
                                 </div>
+                                <div id="card-row-div-sb" class="col s12 m6">
+                                    <a id="modal-btn" class="waves-effect waves-light btn-large">Modal</a>
+                                </div>
                             </div>
-                            <div id="card-row-d"></div>
+
+                           
                         </form>
                     </div>
                 </div>
@@ -203,7 +233,7 @@
     <!-- STICKY FOOTER START -->
     <footer class="page-footer">
         <div id="main-footer-cp" class="footer-copyright">
-            <div id="main-footer"class="container right-align">Copyright © Gatito <i class="fas fa-cat"></i></div>
+            <div id="main-footer" class="container right-align">Copyright © Gatito <i class="fas fa-cat"></i></div>
         </div>
     </footer>
     <!-- STICKY FOOTER END -->
@@ -215,9 +245,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <!-- STICKY NAV START -->
     <script>
-        $(document).ready(function(){
-            $(window).scroll(function(){
-                if($(window).scrollTop()>150) {
+        $(document).ready(function () {
+            $(window).scroll(function () {
+                if ($(window).scrollTop() > 150) {
                     $('nav').addClass('sticky-nav');
                 }
                 else {
@@ -225,21 +255,25 @@
                 }
             });
         });
-    </script> 
+    </script>
     <!-- STICKY NAV END -->
     <!-- SIDENAV HANDLER -->
     <script>
-        $(document).ready(function(event) {
+        $(document).ready(function (event) {
             $('.sidenav').sidenav();
         });
     </script>
     <!-- DROPDOWN HANDLER -->
     <script>
-    $(document).ready(function(){
-        $('select').formSelect();
-    });
+        $(document).ready(function () {
+            $('select').formSelect();
+        });
     </script>
+    <script src="./assets/handleModal.js"></script>
     <script src="./assets/search.js"></script>
+    <script>
+      
+    </script>
 </body>
-</html>
 
+</html>

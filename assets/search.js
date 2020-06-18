@@ -1,4 +1,4 @@
-$(document).ready(function() {
+
 
 let searchUI = {
 
@@ -336,7 +336,6 @@ $("#search-btn").click(function(event) {
 });
 
 function initialState() { 
-    console.clear();
     su.resetInputValues();
     localStorage.removeItem('smartyStreetsRealAddress');
     /*TEMP*/
@@ -351,5 +350,4 @@ function initialState() {
 
 initialState();
 
-});
 
