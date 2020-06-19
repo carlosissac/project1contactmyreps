@@ -193,6 +193,8 @@ $(document.body).on("click", "div[rep-office]", function() {
 
 });
 
+let cblock = 0;
+
 $(document.body).on("click", "#proceed-btn", function () {
     event.preventDefault();
     ah.civicInfoResolve();
@@ -249,6 +251,7 @@ $("#clear-btn").click(function (event) {
     su.clearUI();
     su.resetUIInputLS();
 });
+
 
 $("#search-btn").click(function (event) {
     event.preventDefault();
