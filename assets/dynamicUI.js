@@ -29,35 +29,34 @@ let dynamicUi = {
     },
         
     displayResolvedAddress: function() {
-        let cr = $("<div id=\"card-row\" class='row'>");
+        let cr = $("<div id='card-row' class='row'>");
         if (this.addressSuccess) {
             let crds1 = $("<div id='card-row-div-sb' class='col s12 m6'>");
-            let crds2 = $("<div id=\"card-row-div-sb\" class=\"col s12 m6\">");
+            let crds2 = $("<div id='card-row-div-sb' class='col s12 m6'>");
             var crdt = $("<h6>").text(this.addressReal);
-            var crdb = $("<div id=\"proceed-btn\" class=\"waves-effect waves-light btn-large orange\">");
-            $(crdb).text("Show Representatives");
+            var crdb = $("<div id='proceed-btn' class='waves-effect waves-light btn-large orange'>");
+            $(crdb).text("Show");
             crds1.append(crdt);
             crds2.append(crdb);
             cr.append(crds1);
             cr.append(crds2);
         }
         else {
-            let crds = $("<div id=\"card-row-div-sb\" class=\"col s12 m12\">");
+            let crds = $("<div id='card-row-div-sb' class='col s12 m12'>");
             var crdt = $("<h6>").text("Address could not be Resolved");
             $(crdt).css("color", "red");
             crds.append(crdt);
             cr.append(crds);
         }
-        //changed append for address fail
         $("#card-row-d").html(cr);
     },
 
 
     displayNoInfoFound: function (level) {
 
-        let crh = $("<div id=\"card-row\" class=\"row\">");
-        let crds = $("<div id=\"card-row-div-sb\" class=\"col s12 m12\">");
-        let crdt = $("<h5>").text(`No.${level}.Reps.Found`);
+        let crh = $("<div id='card-row' class='row'>");
+        let crds = $("<div id='card-row-div-sb' class='col s12 m12'>");
+        let crdt = $("<h5>").text(`No ${level} Reps Found`);
         $(crdt).css("color", "red");
         crds.append(crdt);
         crh.append(crds);
@@ -65,9 +64,9 @@ let dynamicUi = {
     },
 
     titleRowBuilder: function (level) {
-        let crh = $("<div id=\"card-row\" class=\"row\">");
-        let crds = $("<div id=\"card-row-div-sb\" class=\"col s12 m12\">");
-        let crdt = $("<h5>").text(`${level}.Reps`);
+        let crh = $("<div id='card-row' class='row'>");
+        let crds = $("<div id='card-row-div-sb' class='col s12 m12'>");
+        let crdt = $("<h5>").text(`${level} Reps`);
         $(crdt).css("color", "blue");
         crds.append(crdt);
         crh.append(crds);
@@ -76,7 +75,7 @@ let dynamicUi = {
 
     representativeRowBuilder: function (level) {
 
-        let tr = $("<div id=\"card-row-rep\" class='row'>");
+        let tr = $("<div id='card-row-rep' class='row'>");
         $(tr).attr("rep-office",this.repOffice);
         $(tr).attr("rep-name",this.repName);
         $(tr).attr("rep-party",this.repParty);
@@ -85,12 +84,12 @@ let dynamicUi = {
         $(tr).attr("rep-phone",this.repPhone);
         $(tr).attr("rep-photo-url",this.repPhotoUrl);
         $(tr).attr("rep-address",this.repAddress);
-        let crds1 = $("<div id=\"card-row-div-sb\" class=\"col s12 m4\">");
-        let crds2 = $("<div id=\"card-row-div-sb\" class=\"col s12 m4\">");
-        let crds3 = $("<div id=\"card-row-div-sb\" class=\"col s12 m4\">");
+        let crds1 = $("<div id='card-row-div-sb' class='col s12 m4'>");
+        let crds2 = $("<div id='card-row-div-sb' class='col s12 m4'>");
+        let crds3 = $("<div id='card-row-div-sb' class='col s12 m4'>");
         let crdt1 = $("<h6>").text(this.repName + this.repPartyDisplay);
         let crdt2 = $("<h6>").text(this.repOffice);
-        let crdp = $("<img id=\"rep-pic\">");
+        let crdp = $("<img id='rep-pic'>");
         crdp.attr('src', this.repPhotoUrl);
         crdp.appendTo('#repPic');
         crds1.append(crdt1);
