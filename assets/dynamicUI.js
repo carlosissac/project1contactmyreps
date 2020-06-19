@@ -29,13 +29,13 @@ let dynamicUi = {
     },
         
     displayResolvedAddress: function() {
-        let cr = $("<div id=\"card-row\" class=\"row\">");
+        let cr = $("<div id=\"card-row\" class='row'>");
         if (this.addressSuccess) {
-            let crds1 = $("<div id=\"card-row-div-sb\" class=\"col s12 m6\">");
+            let crds1 = $("<div id='card-row-div-sb' class='col s12 m6'>");
             let crds2 = $("<div id=\"card-row-div-sb\" class=\"col s12 m6\">");
             var crdt = $("<h6>").text(this.addressReal);
             var crdb = $("<div id=\"proceed-btn\" class=\"waves-effect waves-light btn-large orange\">");
-            $(crdb).text("Srch.Rep");
+            $(crdb).text("Show Representatives");
             crds1.append(crdt);
             crds2.append(crdb);
             cr.append(crds1);
@@ -48,7 +48,8 @@ let dynamicUi = {
             crds.append(crdt);
             cr.append(crds);
         }
-        $("#card-row-d").append(cr);
+        //changed append for address fail
+        $("#card-row-d").html(cr);
     },
 
 
@@ -75,7 +76,7 @@ let dynamicUi = {
 
     representativeRowBuilder: function (level) {
 
-        let tr = $("<div id=\"card-row-rep\" class=\"row\">");
+        let tr = $("<div id=\"card-row-rep\" class='row'>");
         $(tr).attr("rep-office",this.repOffice);
         $(tr).attr("rep-name",this.repName);
         $(tr).attr("rep-party",this.repParty);
@@ -169,7 +170,7 @@ let dynamicUi = {
                         this.repPhotoUrl = "./assets/blank-person.jpg";
                     }
                     else {
-                        this.repPhotoUrl = response[0].officials[oi].photoUrl;;
+                        this.repPhotoUrl = response[0].officials[oi].photoUrl;
                     }
                     if (!response[0].officials[oi].hasOwnProperty('address')) {
                         this.repAddress = "";

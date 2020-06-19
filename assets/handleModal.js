@@ -1,4 +1,4 @@
-  console.log('we are in this file');
+//   console.log('we are in this file');
 
   var AllRepData = {
     Margo: {
@@ -27,20 +27,15 @@
   
     instance.open();
   }
-  
+
+  $("#card-row-d").on("click","representative",function(){
+        console.log($(this))
   $('#modal-trigger').click(handleModal);
+
+
+  })
+
   
   
  
 
-
-// Modal Ticket Data needed. 
-// repName ----- 	Rreprsentative Name
-// repParty ---- 	Democratic Party, Republican Party, Nonpartisan
-// repOffice --- 	Posistion Title
-// repPartyDisp -	R, D, or I to be displayed next to the Representatives name
-// repEmail -----  Email
-// repPhone -----  Phone
-// repPhotoUrl---  we will send a live link to a photo or a link to a stock picture (./assets/blak-person.jpg)
-// repAddr ------- the Address to be displayed
-// Text Area for a small email.

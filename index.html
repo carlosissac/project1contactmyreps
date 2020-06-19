@@ -193,18 +193,22 @@
         </div>
     </main>
     <!-- MAIN ENDS -->
-    <!-- MODAL CONTACT STARTS -->
+    <!-- MODAL CONTACT INFO STARTS -->
     <div id="modal1" class="modal">
         <div class="modal-content">
             <h4>Modal Header</h4>
             <p>A bunch of text</p>
         </div>
         <div class="modal-footer">
-            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+    <!--SAVE, SEND MESSAGE, CLOSE BUTTONS-->
+            <a href="#!" class="save btn-flat waves-effect waves-green">Save</a>
+            <a href="mailto:someAddress@killersites.com" id="email" class="save btn-flat waves-effect waves-orange">Send EMAIL</a>
+        
+            <a href="#!" class="modal-close waves-effect waves-red btn-flat">Close</a>
         </div>
     </div>
 
-    <!-- MODAL CONTACT ENDS -->
+    <!-- MODAL CONTACT INFO ENDS -->
     <!-- STICKY FOOTER START -->
     <footer class="page-footer">
         <div id="main-footer-cp" class="footer-copyright">
@@ -219,6 +223,7 @@
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <!-- STICKY NAV START -->
+    <!--Materialize Element Invocation-->
     <script>
         $(document).ready(function() {
             $(window).scroll(function() {
@@ -228,24 +233,8 @@
                     $('nav').removeClass('sticky-nav');
                 }
             });
-        });
-    </script>
-    <!-- STICKY NAV END -->
-    <!-- SIDENAV HANDLER -->
-    <script>
-        $(document).ready(function (event) {
             $('.sidenav').sidenav();
-        });
-    </script>
-    <!-- DROPDOWN HANDLER -->
-    <script>
-        $(document).ready(function() {
             $('select').formSelect();
-        });
-    </script>
-    <!-- MODAL HANDLER -->
-    <script>
-        $(document).ready(function(){
             $('.modal').modal();
         });
     </script>

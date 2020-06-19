@@ -83,29 +83,6 @@ $(document).ready(function () {
             $("#card-row-d").html("");
         },
 
-
-        loadModalinfo: function() {
-            //build this function to load all the representative information 
-            //into modal elements
-            // create modal elements in the html
-            // grab the data from the following parameters 
-            /// repOffice
-            /// repName
-            /// repParty
-            /// repPartyDisplay
-            /// repEmail
-            /// repPhone
-            /// repPhotoUrl
-            /// repAddress
-
-            ///create text input for message subject 
-            ///create text area email content
-            ///create a button for sending email
-            ///create a button to save contact
-            ///crate a button to exit modal 
-            
-        },
-
         setState: function (state) {
             this.val_state = state;
         },
@@ -148,11 +125,6 @@ $(document).ready(function () {
 su = searchUI;
 ah = apiHandler;
 
-//// please add the event listeners for each of the buttons in this section
-///create a button for sending email
-///create a button to save contact
-///crate a button to exit modal 
-
 $(document.body).on("click", "div[rep-office]", function() {
     let repOffice = String($(this).attr('rep-office'));
     let repName = String($(this).attr('rep-name'));
@@ -167,31 +139,16 @@ $(document.body).on("click", "div[rep-office]", function() {
     su.saveRepresentativeInfo(repOffice, repName, repParty, repPartyDisplay, repEmail, repPhone, repPhotoUrl, repAddress);
     
     $('.modal').modal('open', "#modal1");
-    
-    /// when you click on a representative row modal is invoqued
-    
-    /// incovation >>>>> $('.modal').modal('open', "#modal1");
-    /// close >>>>>>>> $('.modal').modal('close', "#modal1");
-    
-    /// please create a function inside searchUI Object and use the following parameters to load display data in the UI
-    /// repOffice
-    /// repName
-    /// repParty
-    /// repPartyDisplay
-    /// repEmail
-    /// repPhone
-    /// repPhotoUrl
-    /// repAddress
-
-    /// create function to load this data to modal
-    /// please display rep picture if available
-    /// create text box for email subject 
-    /// create text box for sending email
-    /// create button to send email  
-    /// create buttons to save to directory (local storage)
-    /// create button to exit modal
-
+    $(".modal-content").html(`<div class='class'>
+    <h5>${repOffice}</h5><h6>${repName}</h6>
+    <p>${repPartyDisplay}</p><p>${repEmail}</p> 
+    <p>${repPhone}</p><img src='${repPhotoUrl}' />
+    <p>${repAddress}</p>`)
+    $("#email").attr("href",`mailto:${repEmail}`);
+    //working on the clear UI on close
+    // $(".modal").modal('close',(clearUI));
 });
+
 
 $(document.body).on("click", "#proceed-btn", function () {
     event.preventDefault();
