@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +17,6 @@
         <link rel="stylesheet" href="./assets/style.css">
     </head>
 </head>
-
 <body id="body-area">
     <!-- NAV STARTS -->
     <nav id="nav-cont" class="nav-wrapper indigo">
@@ -45,7 +43,7 @@
                     <div id="main-card" class="card-panel">
                         <form id="card-form">
                             <div id="card-row" class="row">
-                                <h4 id="main-title">Search.Rep</h4>
+                                <h4 id="main-title">Search Rep</h4>
                             </div>
                             <div id="card-row" class="row">
                                 <div id="card-row-div" class="col s12 m12">
@@ -71,7 +69,7 @@
                                     </div>
                                 </div>
                                 <div id="card-row-div" class="col s12 m5">
-                                    <div id="row-state-select" class="input-field col s12">
+                                    <div id="row-state-select" class="input-field col s12 grey-text">
                                         <select id="ddl-sel">
                                             <option value="" disabled selected>State</option>
                                             <option value="AL">AL</option>
@@ -125,7 +123,6 @@
                                             <option value="WI">WI</option>
                                             <option value="WY">WY</option>
                                         </select>
-                                        <!-- <label>State</label> -->
                                     </div>
                                 </div>
                             </div>
@@ -193,17 +190,25 @@
             </div>
             <div class="row"></div>
             <div class="row"></div>
-            <div class="row"></div>
-            <div class="row"></div>
-            <div class="row"></div>
-            <div class="row"></div>
-            <div class="row"></div>
-            <div class="row"></div>
-            <div class="row"></div>
-            <div class="row"></div>
         </div>
     </main>
     <!-- MAIN ENDS -->
+    <!-- MODAL CONTACT INFO STARTS -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <h4>Modal Header</h4>
+            <p>A bunch of text</p>
+        </div>
+        <div class="modal-footer">
+    <!--SAVE, SEND MESSAGE, CLOSE BUTTONS-->
+            <a href="#!" class="save btn-flat waves-effect waves-green">Save</a>
+            <a href="mailto:someAddress@killersites.com" id="email" class="save btn-flat waves-effect waves-orange">Send EMAIL</a>
+        
+            <a href="#!" class="modal-close waves-effect waves-red btn-flat">Close</a>
+        </div>
+    </div>
+
+    <!-- MODAL CONTACT INFO ENDS -->
     <!-- STICKY FOOTER START -->
     <footer class="page-footer">
         <div id="main-footer-cp" class="footer-copyright">
@@ -212,12 +217,13 @@
     </footer>
     <!-- STICKY FOOTER END -->
     <!-- JQEURY LINKAGE -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery.js"></script>
     <!-- MOMENT.JS LINKAGE -->
     <script src="https://momentjs.com/downloads/moment-with-locales.min.js"></script>
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <!-- STICKY NAV START -->
+    <!--Materialize Element Invocation-->
     <script>
         $(document).ready(function() {
             $(window).scroll(function() {
@@ -227,25 +233,14 @@
                     $('nav').removeClass('sticky-nav');
                 }
             });
-        });
-    </script>
-    <!-- STICKY NAV END -->
-    <!-- SIDENAV HANDLER -->
-    <script>
-        $(document).ready(function (event) {
             $('.sidenav').sidenav();
-        });
-    </script>
-    <!-- DROPDOWN HANDLER -->
-    <script>
-        $(document).ready(function() {
             $('select').formSelect();
+            $('.modal').modal();
         });
     </script>
     <script src="./assets/dynamicUI.js"></script>
     <script src="./assets/apiHandler.js"></script>
     <script src="./assets/search.js"></script>
-    <!-- <script src="./assets/search2.js"></script> -->
 </body>
 
 </html>

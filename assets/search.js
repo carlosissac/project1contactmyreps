@@ -10,11 +10,31 @@ $(document).ready(function () {
         "cb-st": false,
         "cb-fd": false,
 
+        "repOffice" : "",
+        "repName" : "",
+        "repParty" : "",
+        "repPartyDisplay" : "",
+        "repEmail" : "",
+        "repPhone" : "",
+        "repPhotoUrl" : "",
+        "repAddress" : "",
+
         resetInputValues: function () {
             this["cb-cnty"] = false;
             this["cb-lcl"] = false;
             this["cb-st"] = false;
             this["cb-fd"] = false;
+        },
+
+        saveRepresentativeInfo: function (office, name, party, partyDisplay, email, phone, photoUrl, address) {
+            this.repOffice = office;
+            this.repName = name;
+            this.repParty = party;
+            this.repPartyDisplay = partyDisplay;
+            this.repEmail = email;
+            this.repPhone = phone;
+            this.repPhotoUrl = photoUrl;
+            this.address = address;
         },
 
         saveUIInputLS: function () {
@@ -101,10 +121,34 @@ $(document).ready(function () {
 
     };
 
-
 /// EVENT LISTENERS FOR UI
 su = searchUI;
 ah = apiHandler;
+
+$(document.body).on("click", "div[rep-office]", function() {
+    let repOffice = String($(this).attr('rep-office'));
+    let repName = String($(this).attr('rep-name'));
+    let repParty = String($(this).attr('rep-party'));
+    let repPartyDisplay = String($(this).attr('rep-party-display'));
+    let repEmail = String($(this).attr('rep-email'));
+    let repPhone = String($(this).attr('rep-phone'));
+    let repPhotoUrl = String($(this).attr('rep-photo-url'));
+    let repAddress = String($(this).attr('rep-adress'));
+    console.log(`${repOffice} ${repName} ${repParty} ${repPartyDisplay} ${repEmail} ${repPhone} ${repPhotoUrl} ${repAddress}`);
+    
+    su.saveRepresentativeInfo(repOffice, repName, repParty, repPartyDisplay, repEmail, repPhone, repPhotoUrl, repAddress);
+    
+    $('.modal').modal('open', "#modal1");
+    $(".modal-content").html(`<div class='class'>
+    <h5>${repOffice}</h5><h6>${repName}</h6>
+    <p>${repPartyDisplay}</p><p>${repEmail}</p> 
+    <p>${repPhone}</p><img src='${repPhotoUrl}' />
+    <p>${repAddress}</p>`)
+    $("#email").attr("href",`mailto:${repEmail}`);
+    //working on the clear UI on close
+    // $(".modal").modal('close',(clearUI));
+});
+
 
 $(document.body).on("click", "#proceed-btn", function () {
     event.preventDefault();

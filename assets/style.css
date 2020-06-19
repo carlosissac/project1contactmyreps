@@ -92,6 +92,10 @@
     padding: 0.5rem;
     margin: 0px;
 }
+/*attempt to change state color*/
+.select {
+    color: grey;
+}
 
 #clear-btn,
 #search-btn {
