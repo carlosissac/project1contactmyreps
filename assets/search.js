@@ -69,6 +69,15 @@ $(document).ready(function () {
             localStorage.removeItem('civicInfoApiRespFederal');
         },
 
+        clearForm: function() {
+            $("#search-address1").val("");
+            $("#search-address2").val("");
+            $("#search-city").val("");
+            $("#search-zipcode").val("");
+            $("#ddl-sel").val('1');
+            $("select").formSelect();
+        },
+
         clearUI: function () {
             $("#search-address1").val("");
             $("#search-address2").val("");
@@ -146,7 +155,7 @@ $(document.body).on("click", "div[rep-office]", function() {
     <p>${repAddress}</p>`)
     $("#email").attr("href",`mailto:${repEmail}`);
     // working on the clear UI on close
-    $(".modal-close").modal(su.clearUI());
+    $(".modal-close").modal(su.clearForm());
 });
 
 
