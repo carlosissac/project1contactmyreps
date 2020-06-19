@@ -145,8 +145,8 @@ $(document.body).on("click", "div[rep-office]", function() {
     <p>${repPhone}</p><img src='${repPhotoUrl}' />
     <p>${repAddress}</p>`)
     $("#email").attr("href",`mailto:${repEmail}`);
-    //working on the clear UI on close
-    // $(".modal").modal('close',(clearUI));
+    // working on the clear UI on close
+    $(".modal-close").modal(su.clearUI());
 });
 
 
