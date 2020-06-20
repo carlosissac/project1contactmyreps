@@ -19,6 +19,8 @@ Googele Fonts and Fontawesome.
 
 JavaScript and JQuery.
 
+Moment JS for a time stamp unique identifier for each representative in directory.
+
 API Smarty Streets(https://smartystreets.com) to verify street addresses.
 
 API Civic Info (https://developers.google.com/civic-information) to get the representative results.  
