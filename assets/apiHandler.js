@@ -93,14 +93,13 @@ let apiHandler = {
             ]);
             this.du.parseRepresentativeInfo(promiseFederal,"Federal");
         }
-
     }
 }
 
 function apiKeySet() {
     /*TEMP*/
-    localStorage.setItem("appIDSmartyStreets", JSON.stringify("942ac2b5-1d6c-5c87-9c02-f7e1a6c74c32"));
-    localStorage.setItem("authTokenSmartyStreets", JSON.stringify("IGKyW6I6E1MuUTtrwWuO"));
+    localStorage.setItem("appIDSmartyStreets", JSON.stringify("e9d70270-b768-6b33-d14c-11207bb6d4f3"));
+    localStorage.setItem("authTokenSmartyStreets", JSON.stringify("X5JfMEr6aPM3ud7WdpNv"));
     localStorage.setItem("appKeyGoogle", JSON.stringify("AIzaSyDYsucFLhfwF4iEpT9CrAD7rCFdUvrQ87E"));
     /*TEMP*/
 }

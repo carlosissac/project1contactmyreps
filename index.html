@@ -27,9 +27,8 @@
         </div>
     </nav>
     <ul class="sidenav" id="slide-out">
-        <li><a href="./about.html">About</a></li>
         <li><a href="./directory.html">Directory</a></li>
-        <li><a href="./index.html">Home</a></li>
+        <li><a href="./index.html">Search</a></li>
     </ul>
     <!-- NAV ENDS -->
     <!-- MAIN STARTS -->
@@ -190,6 +189,8 @@
             </div>
             <div class="row"></div>
             <div class="row"></div>
+            <div class="row"></div>
+            <div class="row"></div>
         </div>
     </main>
     <!-- MAIN ENDS -->
@@ -201,9 +202,8 @@
         </div>
         <div class="modal-footer">
     <!--SAVE, SEND MESSAGE, CLOSE BUTTONS-->
-            <a href="#!" class="save btn-flat waves-effect waves-green">Save</a>
-            <a href="mailto:someAddress@killersites.com" id="email" class="save btn-flat waves-effect waves-orange">Send EMAIL</a>
-        
+            <a href="#!" id="modal-btn-save" class="save btn-flat waves-effect waves-green">Save</a>
+            <a href="mailto:someAddress@killersites.com" id="modal-btn-email" class="save btn-flat waves-effect waves-orange">Send Email</a>
             <a href="#!" class="modal-close waves-effect waves-red btn-flat">Close</a>
         </div>
     </div>
@@ -238,6 +238,7 @@
             $('.modal').modal();
         });
     </script>
+    <script src="./assets/storage.js"></script>
     <script src="./assets/dynamicUI.js"></script>
     <script src="./assets/apiHandler.js"></script>
     <script src="./assets/search.js"></script>

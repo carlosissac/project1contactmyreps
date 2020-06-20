@@ -10,6 +10,8 @@ $(document).ready(function () {
         "cb-st": false,
         "cb-fd": false,
 
+        "hash" : "",
+        "repLevel" : "",
         "repOffice" : "",
         "repName" : "",
         "repParty" : "",
@@ -26,7 +28,10 @@ $(document).ready(function () {
             this["cb-fd"] = false;
         },
 
-        saveRepresentativeInfo: function (office, name, party, partyDisplay, email, phone, photoUrl, address) {
+        saveRepresentativeInfo: function (hash, ordIndex, level, office, name, party, partyDisplay, email, phone, photoUrl, address) {
+            this.hash = hash;
+            this.repOrdIndex = ordIndex;
+            this.repLevel = level;
             this.repOffice = office;
             this.repName = name;
             this.repParty = party;
@@ -34,7 +39,7 @@ $(document).ready(function () {
             this.repEmail = email;
             this.repPhone = phone;
             this.repPhotoUrl = photoUrl;
-            this.address = address;
+            this.repAddress = address;
         },
 
         saveUIInputLS: function () {
@@ -69,6 +74,18 @@ $(document).ready(function () {
             localStorage.removeItem('civicInfoApiRespFederal');
         },
 
+        enableUIAfterSearch: function () {
+            $("#search-btn").removeClass('disabled');
+            $("#proceed-btn").removeClass('disabled');
+            return 0;
+        },
+
+        disableUIAfterSearch: function () {
+            $("#search-btn").addClass('disabled');
+            $("#proceed-btn").addClass('disabled');
+            return 0;
+        },
+
         clearUI: function () {
             $("#search-address1").val("");
             $("#search-address2").val("");
@@ -81,6 +98,39 @@ $(document).ready(function () {
             $("#cb-st").prop("checked", false);
             $("#cb-fd").prop("checked", false);
             $("#card-row-d").html("");
+        },
+
+        clearForm: function () {
+            $("#search-address1").val("");
+            $("#search-address2").val("");
+            $("#search-city").val("");
+            $("#search-zipcode").val("");
+            $("#ddl-sel").val('1');
+            $("select").formSelect();
+            $("#cb-cnty").prop("checked", false);
+            $("#cb-lcl").prop("checked", false);
+            $("#cb-st").prop("checked", false);
+            $("#cb-fd").prop("checked", false);
+        },
+
+
+        searchModal: function (storageHandler) {    
+            $('.modal').modal('open', "#modal1");
+            $('#modal-btn-email').addClass('disabled');
+            if(String(this.repEmail) !== "") { 
+                $('#modal-btn-email').removeClass('disabled');
+            }
+            $('#modal-btn-save').addClass('disabled');
+            if(!storageHandler.duplicateCheckLS(this.repName,this.repOffice)) {
+                $('#modal-btn-save').removeClass('disabled');
+            }
+            $(".modal-content").html(`<div class='class'>
+            <h5>${this.repOffice}</h5><h6>${this.repName}&nbsp;${this.repPartyDisplay}</h6>
+            <p>${this.repEmail}</p> 
+            <p>${this.repPhone}</p><img id="rep-pic-modal" src='${this.repPhotoUrl}'/>
+            <p>${this.repAddress}</p>`);
+            $("#email").attr("href",`mailto:${this.repEmail}`);
+            return 0;
         },
 
         setState: function (state) {
@@ -124,8 +174,12 @@ $(document).ready(function () {
 /// EVENT LISTENERS FOR UI
 su = searchUI;
 ah = apiHandler;
+sh = storageHandler; 
 
 $(document.body).on("click", "div[rep-office]", function() {
+    let hash = String($(this).attr('hash'));
+    let repOrdIndex = String($(this).attr('rep-ord-idx'));
+    let repLevel = String($(this).attr('rep-level'));
     let repOffice = String($(this).attr('rep-office'));
     let repName = String($(this).attr('rep-name'));
     let repParty = String($(this).attr('rep-party'));
@@ -133,26 +187,26 @@ $(document.body).on("click", "div[rep-office]", function() {
     let repEmail = String($(this).attr('rep-email'));
     let repPhone = String($(this).attr('rep-phone'));
     let repPhotoUrl = String($(this).attr('rep-photo-url'));
-    let repAddress = String($(this).attr('rep-adress'));
-    console.log(`${repOffice} ${repName} ${repParty} ${repPartyDisplay} ${repEmail} ${repPhone} ${repPhotoUrl} ${repAddress}`);
+    let repAddress = String($(this).attr('rep-address'));
+    /*console.log(`${hash} ${repOrdIndex} ${repLevel} ${repOffice} ${repName} ${repParty} ${repPartyDisplay} ${repEmail} ${repPhone} ${repPhotoUrl} ${repAddress}`);*/
+    su.saveRepresentativeInfo(hash, repOrdIndex, repLevel, repOffice, repName, repParty, repPartyDisplay, repEmail, repPhone, repPhotoUrl, repAddress);
+    su.searchModal(sh);
+    su.clearForm();
+    //disable UI only Clear Btn available
     
-    su.saveRepresentativeInfo(repOffice, repName, repParty, repPartyDisplay, repEmail, repPhone, repPhotoUrl, repAddress);
-    
-    $('.modal').modal('open', "#modal1");
-    $(".modal-content").html(`<div class='class'>
-    <h5>${repOffice}</h5><h6>${repName}</h6>
-    <p>${repPartyDisplay}</p><p>${repEmail}</p> 
-    <p>${repPhone}</p><img src='${repPhotoUrl}' />
-    <p>${repAddress}</p>`)
-    $("#email").attr("href",`mailto:${repEmail}`);
-    //working on the clear UI on close
-    // $(".modal").modal('close',(clearUI));
 });
 
+$("#modal-btn-save").click(function (event) {
+    event.preventDefault();
+    sh.saveToLS(su)
+    sh.sortLS();
+    $(".modal").modal('close',(modal1))
+});
 
 $(document.body).on("click", "#proceed-btn", function () {
     event.preventDefault();
     ah.civicInfoResolve();
+    su.disableUIAfterSearch();
     return 0;
 });
 
@@ -204,6 +258,7 @@ $("#cb-fd").on("change", function () {
 $("#clear-btn").click(function (event) {
     event.preventDefault();
     su.clearUI();
+    su.enableUIAfterSearch();
     su.resetUIInputLS();
 });
 
@@ -219,6 +274,7 @@ function initialState() {
     su.clearUI();
     su.resetUIInputLS();
     su.resetAPIRespLS();
+    //su.enableUIAfterSearch();
     ah.loadApiKeys();
 }
 
