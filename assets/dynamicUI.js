@@ -3,6 +3,9 @@ let dynamicUi = {
     addressReal : "",
     addressSuccess : false,
 
+    hash : "",
+    repOrdIndex : "",
+    repLevel : "",
     repOffice : "",
     repName : "",
     repParty : "",
@@ -12,6 +15,37 @@ let dynamicUi = {
     repAddress : "",
     repPhotoUrl : "",
     
+    lsObjectHandler: function () {
+
+        if(localStorage.getItem('repDirectoryLS')) {
+            let buffer = JSON.parse(localStorage.getItem('repDirectoryLS'));
+            let i=0;
+            for(i=0; i<buffer.length; i++) {
+                this.hash = buffer[i].hash;
+                this.repOrdIndex = buffer[i].repOrdIndex;
+                this.repLevel = buffer[i].repLevel;
+                this.repOffice = buffer[i].repOffice;
+                this.repName = buffer[i].repName;
+                this.repParty= buffer[i].repParty;
+                this.repPartyDisplay = buffer[i].repPartyDisplay;
+                this.repEmail = buffer[i].repEmail;
+                this.repPhone = buffer[i].repPhone;
+                this.repAddress = buffer[i].repAddress;
+                this.repPhotoUrl = buffer[i].repPhotoUrl;
+                /*console.log(`${this.hash} ${this.repOrdIndex} ${this.repLevel} ${this.repOffice} ${this.repName} ${this.repParty} ${this.repPartyDisplay} ${this.repEmail} ${this.repPhone} ${this.repPhotoUrl} ${this.repAddress}`);*/
+                this.representativeRowBuilder();
+                }
+                if(i=== buffer.length) {
+                    return 0;
+                }
+        }
+        else {
+            this.displayLsEmpty();
+            return 1;
+            //hide Clear button
+        }
+    },
+
     parseAddress: function (response) {
         let pre = response[0][0].metadata.precision;
         let dmc = response[0][0].analysis.dpv_match_code;     
@@ -25,7 +59,6 @@ let dynamicUi = {
         let addrsLine2 = response[0][0].last_line;
         this.addressReal = `${addrsLine1} ${addrsLine2}`;
         this.addressSuccess = lock;
-
     },
         
     displayResolvedAddress: function() {
@@ -51,9 +84,17 @@ let dynamicUi = {
         $("#card-row-d").html(cr);
     },
 
+    displayLsEmpty: function (level) {
+        let crh = $("<div id='card-row' class='row'>");
+        let crds = $("<div id='card-row-div-sb' class='col s12 m12'>");
+        let crdt = $("<h5>").text(`No Contacts Saved`);
+        $(crdt).css("color", "red");
+        crds.append(crdt);
+        crh.append(crds);
+        $("#card-row-d").append(crh);
+    },
 
     displayNoInfoFound: function (level) {
-
         let crh = $("<div id='card-row' class='row'>");
         let crds = $("<div id='card-row-div-sb' class='col s12 m12'>");
         let crdt = $("<h5>").text(`No ${level} Reps Found`);
@@ -74,8 +115,10 @@ let dynamicUi = {
     },
 
     representativeRowBuilder: function (level) {
-
         let tr = $("<div id='card-row-rep' class='row'>");
+        $(tr).attr("hash",this.hash); 
+        $(tr).attr("rep-ord-idx",this.repOrdIndex);
+        $(tr).attr("rep-level",this.repLevel);
         $(tr).attr("rep-office",this.repOffice);
         $(tr).attr("rep-name",this.repName);
         $(tr).attr("rep-party",this.repParty);
@@ -102,7 +145,7 @@ let dynamicUi = {
     },
 
     parseRepresentativeInfo: function (response,level) {
-
+        this.repLevel = level;
         let personsArrayLenght = "";
         if (!response[0].hasOwnProperty('officials')) {
             personsArrayLenght = "";
@@ -126,6 +169,7 @@ let dynamicUi = {
                 let oilen = response[0].offices[i].officialIndices.length;
                 for(let j=0; j<oilen; j++) {
                     oi = response[0].offices[i].officialIndices[j];
+                    this.repOrdIndex = oi;
                     if (!response[0].officials[oi].hasOwnProperty('name')) {
                         this.repName = "";
                     }
@@ -175,7 +219,7 @@ let dynamicUi = {
                         this.repAddress = "";
                     }
                     else {
-                        this.repAddress = response[0].officials[oi].address[0].line1;;
+                        this.repAddress = response[0].officials[oi].address[0].line1 + " " +response[0].officials[oi].address[0].city + " " + response[0].officials[oi].address[0].state + " " + response[0].officials[oi].address[0].zip;
                     }
                     this.representativeRowBuilder();
                 }
@@ -187,8 +231,5 @@ let dynamicUi = {
         }
 
     }
-
-
-
     
 };
