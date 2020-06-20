@@ -5,25 +5,32 @@ let apiHandler = {
     localAPIResp : "", 
     stateAPIResp : "",
     federalAPIResp : "",
+    keySmarty : "",
     appIDSmarty : "",
     authTokenSmarty : "",
     appIDGoogle : "",
     du : dynamicUi, 
 
     loadApiKeys: function () {
+        this.keySmarty = `3738001108134117`;
         this.appIDSmarty = JSON.parse(localStorage.getItem("appIDSmartyStreets"));
         this.authTokenSmarty = JSON.parse(localStorage.getItem("authTokenSmartyStreets"));
         this.appKeyGoogle = JSON.parse(localStorage.getItem("appKeyGoogle"));
     },
 
     async addressResolve() {
+        let keyS = this.keySmarty;
         let add1 = JSON.parse(localStorage.getItem("add1"));
         let add2 = JSON.parse(localStorage.getItem("add2"));
         let city = JSON.parse(localStorage.getItem("city"));
         let state = JSON.parse(localStorage.getItem("state"));
         let zip = JSON.parse(localStorage.getItem("zip"));
 
-        let queryURL = `https://us-street.api.smartystreets.com/street-address?auth-id=${this.appIDSmarty}&auth-token=${this.authTokenSmarty}&candidates=1&match=invalid&street=${add1}&street2=${add2}&city=${city}&state=${state}&zipcode=${zip}`;
+        //Local Host URL 
+        //let queryURL = `https://us-street.api.smartystreets.com/street-address?auth-id=${this.appIDSmarty}&auth-token=${this.authTokenSmarty}&candidates=1&match=invalid&street=${add1}&street2=${add2}&city=${city}&state=${state}&zipcode=${zip}`;
+
+        //Public Website URL
+        let queryURL = `https://us-street.api.smartystreets.com/street-address?candidates=1&match=invalid&street=${encodeURIComponent(add1)}&street2=${encodeURIComponent(add2)}&city=${encodeURIComponent(city)}&state=${encodeURIComponent(state)}&zipcode=${encodeURIComponent(zip)}&key=${encodeURIComponent(keyS)}`;
 
         let promise = await Promise.all([
             $.ajax({
@@ -46,7 +53,7 @@ let apiHandler = {
         let selectFederal = JSON.parse(localStorage.getItem("cbs_fd"));
         
         if(selectCounty) {
-            let queryUrlCounty = `https://www.googleapis.com/civicinfo/v2/representatives?address=${this.du.addressReal}&includeOffices=true&key=${this.appKeyGoogle}&levels=administrativeArea2`;
+            let queryUrlCounty = `https://www.googleapis.com/civicinfo/v2/representatives?address=${encodeURIComponent(this.du.addressReal)}&includeOffices=true&key=${encodeURIComponent(this.appKeyGoogle)}&levels=administrativeArea2`;
             
             let promiseCounty = await Promise.all([
                 $.ajax({
@@ -57,9 +64,8 @@ let apiHandler = {
             this.du.parseRepresentativeInfo(promiseCounty,"County");
         }
 
-
         if(selectLocal) {
-            let queryUrlLocal = `https://www.googleapis.com/civicinfo/v2/representatives?address=${this.du.addressReal}&includeOffices=true&key=${this.appKeyGoogle}&levels=locality`;
+            let queryUrlLocal = `https://www.googleapis.com/civicinfo/v2/representatives?address=${encodeURIComponent(this.du.addressReal)}&includeOffices=true&key=${encodeURIComponent(this.appKeyGoogle)}&levels=locality`;
             
             let promiseLocal = await Promise.all([
                 $.ajax({
@@ -71,7 +77,7 @@ let apiHandler = {
         }
 
         if(selectState) {
-            let queryUrlState = `https://www.googleapis.com/civicinfo/v2/representatives?address=${this.du.addressReal}&includeOffices=true&key=${this.appKeyGoogle}&levels=administrativeArea1`;
+            let queryUrlState = `https://www.googleapis.com/civicinfo/v2/representatives?address=${encodeURIComponent(this.du.addressReal)}&includeOffices=true&key=${encodeURIComponent(this.appKeyGoogle)}&levels=administrativeArea1`;
             
             let promiseState = await Promise.all([
                 $.ajax({
@@ -83,7 +89,7 @@ let apiHandler = {
         }
 
         if(selectFederal) {
-            let queryUrlFederal = `https://www.googleapis.com/civicinfo/v2/representatives?address=${this.du.addressReal}&includeOffices=true&key=${this.appKeyGoogle}&levels=country`;
+            let queryUrlFederal = `https://www.googleapis.com/civicinfo/v2/representatives?address=${encodeURIComponent(this.du.addressReal)}&includeOffices=true&key=${encodeURIComponent(this.appKeyGoogle)}&levels=country`;
             
             let promiseFederal = await Promise.all([
                 $.ajax({
@@ -98,8 +104,8 @@ let apiHandler = {
 
 function apiKeySet() {
     /*TEMP*/
-    localStorage.setItem("appIDSmartyStreets", JSON.stringify("e9d70270-b768-6b33-d14c-11207bb6d4f3"));
-    localStorage.setItem("authTokenSmartyStreets", JSON.stringify("X5JfMEr6aPM3ud7WdpNv"));
+    localStorage.setItem("appIDSmartyStreets", JSON.stringify("64dbbfab-9906-6e7c-23ae-bf82bafd8720"));
+    localStorage.setItem("authTokenSmartyStreets", JSON.stringify("6BKo0kIp3IwZD3o3wt7B"));
     localStorage.setItem("appKeyGoogle", JSON.stringify("AIzaSyDYsucFLhfwF4iEpT9CrAD7rCFdUvrQ87E"));
     /*TEMP*/
 }
