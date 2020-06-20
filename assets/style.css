@@ -97,6 +97,8 @@
     color: #9e9e9e;
 }
 
+#testdata-btn,
+#clearall-btn,
 #clear-btn,
 #search-btn {
     width: 100%;
@@ -106,9 +108,15 @@
     width: 100%;
 }
 
+
 #rep-pic {
     /*object-fit: contain;*/
     max-width: 50px;
+}
+
+#rep-pic-modal {
+    /*object-fit: contain;*/
+    max-width: 200px;
 }
 
 .page-footer {
