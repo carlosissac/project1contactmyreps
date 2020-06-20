@@ -10,16 +10,16 @@ $(document).ready(function () {
         "cb-st": false,
         "cb-fd": false,
 
-        "hash" : "",
-        "repLevel" : "",
-        "repOffice" : "",
-        "repName" : "",
-        "repParty" : "",
-        "repPartyDisplay" : "",
-        "repEmail" : "",
-        "repPhone" : "",
-        "repPhotoUrl" : "",
-        "repAddress" : "",
+        "hash": "",
+        "repLevel": "",
+        "repOffice": "",
+        "repName": "",
+        "repParty": "",
+        "repPartyDisplay": "",
+        "repEmail": "",
+        "repPhone": "",
+        "repPhotoUrl": "",
+        "repAddress": "",
 
         resetInputValues: function () {
             this["cb-cnty"] = false;
@@ -47,7 +47,7 @@ $(document).ready(function () {
             localStorage.setItem("add2", JSON.stringify($("#search-address2").val()));
             localStorage.setItem("city", JSON.stringify($("#search-city").val()));
             localStorage.setItem("state", JSON.stringify(this.val_state));
-            localStorage.setItem("zip", JSON.stringify($("#search-zipcode").val()));            
+            localStorage.setItem("zip", JSON.stringify($("#search-zipcode").val()));
             localStorage.setItem("cbs_cn", JSON.stringify(this["cb-cnty"]));
             localStorage.setItem("cbs_lcl", JSON.stringify(this["cb-lcl"]));
             localStorage.setItem("cbs_st", JSON.stringify(this["cb-st"]));
@@ -74,13 +74,6 @@ $(document).ready(function () {
             localStorage.removeItem('civicInfoApiRespFederal');
         },
 
-        clearForm: function() {
-            $("#search-address1").val("");
-            $("#search-address2").val("");
-            $("#search-city").val("");
-            $("#search-zipcode").val("");
-            $("#ddl-sel").val('1');
-            $("select").formSelect();
         enableUIAfterSearch: function () {
             $("#search-btn").removeClass('disabled');
             $("#proceed-btn").removeClass('disabled');
@@ -121,14 +114,14 @@ $(document).ready(function () {
         },
 
 
-        searchModal: function (storageHandler) {    
+        searchModal: function (storageHandler) {
             $('.modal').modal('open', "#modal1");
             $('#modal-btn-email').addClass('disabled');
-            if(String(this.repEmail) !== "") { 
+            if (String(this.repEmail) !== "") {
                 $('#modal-btn-email').removeClass('disabled');
             }
             $('#modal-btn-save').addClass('disabled');
-            if(!storageHandler.duplicateCheckLS(this.repName,this.repOffice)) {
+            if (!storageHandler.duplicateCheckLS(this.repName, this.repOffice)) {
                 $('#modal-btn-save').removeClass('disabled');
             }
             $(".modal-content").html(`<div class='class'>
@@ -136,7 +129,7 @@ $(document).ready(function () {
             <p>${this.repEmail}</p> 
             <p>${this.repPhone}</p><img id="rep-pic-modal" src='${this.repPhotoUrl}'/>
             <p>${this.repAddress}</p>`);
-            $("#email").attr("href",`mailto:${this.repEmail}`);
+            $("#email").attr("href", `mailto:${this.repEmail}`);
             return 0;
         },
 
@@ -178,113 +171,128 @@ $(document).ready(function () {
 
     };
 
-/// EVENT LISTENERS FOR UI
-su = searchUI;
-ah = apiHandler;
-sh = storageHandler; 
+    /// EVENT LISTENERS FOR UI
+    su = searchUI;
+    ah = apiHandler;
+    sh = storageHandler;
 
-$(document.body).on("click", "div[rep-office]", function() {
-    let hash = String($(this).attr('hash'));
-    let repOrdIndex = String($(this).attr('rep-ord-idx'));
-    let repLevel = String($(this).attr('rep-level'));
-    let repOffice = String($(this).attr('rep-office'));
-    let repName = String($(this).attr('rep-name'));
-    let repParty = String($(this).attr('rep-party'));
-    let repPartyDisplay = String($(this).attr('rep-party-display'));
-    let repEmail = String($(this).attr('rep-email'));
-    let repPhone = String($(this).attr('rep-phone'));
-    let repPhotoUrl = String($(this).attr('rep-photo-url'));
-    let repAddress = String($(this).attr('rep-address'));
-    /*console.log(`${hash} ${repOrdIndex} ${repLevel} ${repOffice} ${repName} ${repParty} ${repPartyDisplay} ${repEmail} ${repPhone} ${repPhotoUrl} ${repAddress}`);*/
-    su.saveRepresentativeInfo(hash, repOrdIndex, repLevel, repOffice, repName, repParty, repPartyDisplay, repEmail, repPhone, repPhotoUrl, repAddress);
-    su.searchModal(sh);
-    su.clearForm();
-    //disable UI only Clear Btn available
-    
-});
+    $(document.body).on("click", "div[rep-office]", function () {
+        let hash = String($(this).attr('hash'));
+        let repOrdIndex = String($(this).attr('rep-ord-idx'));
+        let repLevel = String($(this).attr('rep-level'));
+        let repOffice = String($(this).attr('rep-office'));
+        let repName = String($(this).attr('rep-name'));
+        let repParty = String($(this).attr('rep-party'));
+        let repPartyDisplay = String($(this).attr('rep-party-display'));
+        let repEmail = String($(this).attr('rep-email'));
+        let repPhone = String($(this).attr('rep-phone'));
+        let repPhotoUrl = String($(this).attr('rep-photo-url'));
+        let repAddress = String($(this).attr('rep-address'));
+        /*console.log(`${hash} ${repOrdIndex} ${repLevel} ${repOffice} ${repName} ${repParty} ${repPartyDisplay} ${repEmail} ${repPhone} ${repPhotoUrl} ${repAddress}`);*/
+        su.saveRepresentativeInfo(hash, repOrdIndex, repLevel, repOffice, repName, repParty, repPartyDisplay, repEmail, repPhone, repPhotoUrl, repAddress);
+        su.searchModal(sh);
+        su.clearForm();
+        //disable UI only Clear Btn available
 
-$("#modal-btn-save").click(function (event) {
-    event.preventDefault();
-    sh.saveToLS(su)
-    sh.sortLS();
-    $(".modal").modal('close',(modal1))
-});
+    });
 
-$(document.body).on("click", "#proceed-btn", function () {
-    event.preventDefault();
-    ah.civicInfoResolve();
-    su.disableUIAfterSearch();
-    return 0;
-});
+    $("#modal-btn-save").click(function (event) {
+        event.preventDefault();
+        sh.saveToLS(su)
+        sh.sortLS();
+        $(".modal").modal('close', (modal1))
+    });
 
-$("#row-state-select").change(function () {
-    event.preventDefault();
-    su.setState($('#ddl-sel').val());
-});
+    $(document.body).on("click", "#proceed-btn", function () {
+        event.preventDefault();
+        ah.civicInfoResolve();
+        su.disableUIAfterSearch();
+        return 0;
+    });
 
-$("#cb-cnty").on("change", function () {
-    event.preventDefault();
-    if ($(this).is(":checked")) {
-        su.cntyStatusTrue();
+    $("#row-state-select").change(function () {
+        event.preventDefault();
+        su.setState($('#ddl-sel').val());
+    });
+
+    $("#cb-cnty").on("change", function () {
+        event.preventDefault();
+        if ($(this).is(":checked")) {
+            su.cntyStatusTrue();
+        }
+        else {
+            su.cntyStatusFalse();
+        }
+    });
+
+    $("#cb-lcl").on("change", function () {
+        event.preventDefault();
+        if ($(this).is(":checked")) {
+            su.lclStatusTrue();
+        }
+        else {
+            su.lclStatusFalse();
+        }
+    });
+
+    $("#cb-st").on("change", function () {
+        event.preventDefault();
+        if ($(this).is(":checked")) {
+            su.stStatusTrue();
+        }
+        else {
+            su.stStatusFalse();
+        }
+    });
+
+    $("#cb-fd").on("change", function () {
+        event.preventDefault();
+        if ($(this).is(":checked")) {
+            su.fdStatusTrue();
+        }
+        else {
+            su.fdStatusFalse();
+        }
+    });
+
+    $("#clear-btn").click(function (event) {
+        event.preventDefault();
+        su.clearUI();
+        su.enableUIAfterSearch();
+        su.resetUIInputLS();
+    });
+
+    $("#search-btn").click(function (event) {
+        event.preventDefault();
+        su.saveUIInputLS();
+        // ah.addressResolve();
+        if ($('#address1').val().length == 0) {
+            $('#address1').html(`<span class="helper-text" data-error="wrong" data-success="right">Adress Required</span>`);
+        };
+        if ($('#citySearch').val().length == 0) {
+            $('#citySearch').html(`<span class="helper-text" data-error="wrong" data-success="right">City Required</span>`);
+        };
+        //This ends the option for dropdown menu-needs adjustments
+        if ($('#row-state-select').val() == "") {
+            $('#row-state-select').html(`<span class="helper-text" data-error="wrong" data-success="right">State Required</span>`);
+            //looking to reload dropdown-not working
+            // $(dropdown).formSelect();
+        };
+        if ($('#zipCode').val().length == 0) {
+            $('#zipCode').html(`<span class="helper-text" data-error="wrong" data-success="right">Zip Code Required</span>`);
+        };
+    });
+
+
+    function initialState() {
+        console.clear();
+        su.clearUI();
+        su.resetUIInputLS();
+        su.resetAPIRespLS();
+        //su.enableUIAfterSearch();
+        ah.loadApiKeys();
     }
-    else {
-        su.cntyStatusFalse();
-    }
-});
 
-$("#cb-lcl").on("change", function () {
-    event.preventDefault();
-    if ($(this).is(":checked")) {
-        su.lclStatusTrue();
-    }
-    else {
-        su.lclStatusFalse();
-    }
-});
-
-$("#cb-st").on("change", function () {
-    event.preventDefault();
-    if ($(this).is(":checked")) {
-        su.stStatusTrue();
-    }
-    else {
-        su.stStatusFalse();
-    }
-});
-
-$("#cb-fd").on("change", function () {
-    event.preventDefault();
-    if ($(this).is(":checked")) {
-        su.fdStatusTrue();
-    }
-    else {
-        su.fdStatusFalse();
-    }
-});
-
-$("#clear-btn").click(function (event) {
-    event.preventDefault();
-    su.clearUI();
-    su.enableUIAfterSearch();
-    su.resetUIInputLS();
-});
-
-$("#search-btn").click(function (event) {
-    event.preventDefault();
-    su.saveUIInputLS();
-    ah.addressResolve();
-    
-});
-
-function initialState() {
-    console.clear();
-    su.clearUI();
-    su.resetUIInputLS();
-    su.resetAPIRespLS();
-    //su.enableUIAfterSearch();
-    ah.loadApiKeys();
-}
-
-initialState();
+    initialState();
 
 });
