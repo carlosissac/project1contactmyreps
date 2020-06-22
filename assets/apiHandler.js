@@ -12,7 +12,7 @@ let apiHandler = {
     du : dynamicUi, 
 
     loadApiKeys: function () {
-        this.keySmarty = `3738001108134117`;
+        this.keySmarty = `15268446145831291`;
         this.appIDSmarty = JSON.parse(localStorage.getItem("appIDSmartyStreets"));
         this.authTokenSmarty = JSON.parse(localStorage.getItem("authTokenSmartyStreets"));
         this.appKeyGoogle = JSON.parse(localStorage.getItem("appKeyGoogle"));
@@ -38,6 +38,8 @@ let apiHandler = {
                 method: "GET"
             })
         ]);
+
+        console.log(promise);
 
         this.du.parseAddress(promise);
         this.du.displayResolvedAddress();
@@ -104,8 +106,8 @@ let apiHandler = {
 
 function apiKeySet() {
     /*TEMP*/
-    localStorage.setItem("appIDSmartyStreets", JSON.stringify("64dbbfab-9906-6e7c-23ae-bf82bafd8720"));
-    localStorage.setItem("authTokenSmartyStreets", JSON.stringify("6BKo0kIp3IwZD3o3wt7B"));
+    localStorage.setItem("appIDSmartyStreets", JSON.stringify("030789af-7de7-e378-4479-a86c83c31546"));
+    localStorage.setItem("authTokenSmartyStreets", JSON.stringify("tG3l4uhIF7ryeu53qeLq"));
     localStorage.setItem("appKeyGoogle", JSON.stringify("AIzaSyDYsucFLhfwF4iEpT9CrAD7rCFdUvrQ87E"));
     /*TEMP*/
 }
