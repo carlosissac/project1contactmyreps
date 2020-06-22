@@ -36,7 +36,6 @@ $(document).ready(function () {
     }
 
     $(document.body).on("click", "div[rep-office]", function() {
-
         let dir_entry = {
             'hash' : String($(this).attr('hash')),
             'repOrdIndex' : String($(this).attr('rep-ord-idx')),
@@ -69,9 +68,11 @@ $(document).ready(function () {
 
     $("#testdata-btn").click(function (event) {
         event.preventDefault();
+        //testDataModal();
         sh.loadTestDataLS();
         sh.sortLS();
-        $("#card-row-d").html("");
+        $("#card-row-d1").html("");
+        $("#card-row-d2").html("");
         if(du.lsObjectHandler()) {
             $('#clearall-btn').addClass('disabled');
         }
@@ -83,7 +84,8 @@ $(document).ready(function () {
     $("#clearall-btn").click(function (event) {
         event.preventDefault();
         localStorage.removeItem('repDirectoryLS');
-        $("#card-row-d").html("");
+        $("#card-row-d1").html("");
+        $("#card-row-d2").html("");
         if(du.lsObjectHandler()) {
             $('#clearall-btn').addClass('disabled');
         }

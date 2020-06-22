@@ -40,6 +40,7 @@ $(document).ready(function () {
             this.repPhone = phone;
             this.repPhotoUrl = photoUrl;
             this.repAddress = address;
+            return 0;
         },
 
         saveUIInputLS: function () {
@@ -52,6 +53,7 @@ $(document).ready(function () {
             localStorage.setItem("cbs_lcl", JSON.stringify(this["cb-lcl"]));
             localStorage.setItem("cbs_st", JSON.stringify(this["cb-st"]));
             localStorage.setItem("cbs_fd", JSON.stringify(this["cb-fd"]));
+            return 0;
         },
 
         resetUIInputLS: function () {
@@ -64,6 +66,7 @@ $(document).ready(function () {
             localStorage.setItem("cbs_lcl", JSON.stringify(false));
             localStorage.setItem("cbs_st", JSON.stringify(false));
             localStorage.setItem("cbs_fd", JSON.stringify(false));
+            return 0;
         },
 
         resetAPIRespLS: function () {
@@ -72,32 +75,52 @@ $(document).ready(function () {
             localStorage.removeItem('civicInfoApiRespLocal');
             localStorage.removeItem('civicInfoApiRespState');
             localStorage.removeItem('civicInfoApiRespFederal');
+            return 0;
         },
 
         enableUIAfterSearch: function () {
             $("#search-btn").removeClass('disabled');
             $("#proceed-btn").removeClass('disabled');
+            $("#cb-cnty").removeProp("disabled");
+            $("#cb-lcl").removeProp("disabled");
+            $("#cb-st").removeProp("disabled");
+            $("#cb-fd").removeProp("disabled");
+            $("#search-address1").attr('disabled',false);
+            $("#search-address2").attr('disabled',false);
+            $("#search-city").attr('disabled',false);
+            $("#search-zipcode").attr('disabled',false);
+            
+
+
             return 0;
         },
 
         disableUIAfterSearch: function () {
             $("#search-btn").addClass('disabled');
             $("#proceed-btn").addClass('disabled');
-            return 0;
-        },
+            $("#cb-cnty").attr("disabled","disabled");
+            $("#cb-lcl").attr("disabled","disabled");
+            $("#cb-st").attr("disabled","disabled");
+            $("#cb-fd").attr("disabled","disabled");
+            $("#search-address1").attr('disabled',true);
+            $("#search-address2").attr('disabled',true);
+            $("#search-city").attr('disabled',true);
+            $("#search-zipcode").attr('disabled',true);
+            
+            /*$(".selected").addClass('disabled');
+            $(".option").addClass('disabled');
+            $("#ddl-sel").addClass('disabled');*/
 
-        clearUI: function () {
-            $("#search-address1").val("");
-            $("#search-address2").val("");
-            $("#search-city").val("");
-            $("#search-zipcode").val("");
-            $("#ddl-sel").val('1');
-            $("select").formSelect();
-            $("#cb-cnty").prop("checked", false);
-            $("#cb-lcl").prop("checked", false);
-            $("#cb-st").prop("checked", false);
-            $("#cb-fd").prop("checked", false);
-            $("#card-row-d").html("");
+            /*$(".selected").attr('disabled',true);
+            $(".option").attr('disabled',true);
+            $("#ddl-sel").attr('disabled',true);*/
+
+            //$(".selected").attr('disabled',"disabled");
+            //$(".option").attr('disabled',"disabled");
+            //$("#ddl-sel").attr('disabled',"disabled");
+            //$("#state-wrapper").attr('disabled',"disabled");
+
+            return 0;
         },
 
         clearForm: function () {
@@ -111,8 +134,16 @@ $(document).ready(function () {
             $("#cb-lcl").prop("checked", false);
             $("#cb-st").prop("checked", false);
             $("#cb-fd").prop("checked", false);
+            this.enableUIAfterSearch();
+            return 0;
         },
 
+        clearUI: function () {
+            this.clearForm();
+            $("#card-row-d1").html("");
+            $("#card-row-d2").html("");
+            return 0;
+        },
 
         searchModal: function (storageHandler) {    
             $('.modal').modal('open', "#modal1");
@@ -200,7 +231,7 @@ $("#modal-btn-save").click(function (event) {
     event.preventDefault();
     sh.saveToLS(su)
     sh.sortLS();
-    $(".modal").modal('close',(modal1))
+    $(".modal").modal('close',(modal1));
 });
 
 $(document.body).on("click", "#proceed-btn", function () {
@@ -255,6 +286,81 @@ $("#cb-fd").on("change", function () {
     }
 });
 
+function inputValidation() {
+
+    let lock = 0;
+    let cblock = 0;
+    if($("#search-address1").val() === "") {
+        $("#add1-lbl").text("Address-1 Required");
+        $("#add1-lbl").css("color", "red");
+    }
+    else {
+        $("#add1-lbl").text("Address-1");
+        $("#add1-lbl").css("color", "darkgrey");
+        lock++;
+    }
+    if($("#search-city").val() === "") {
+        $("#city-lbl").text("City Required");
+        $("#city-lbl").css("color", "red");
+    }
+    else {
+        $("#city-lbl").text("City");
+        $("#city-lbl").css("color", "darkgrey");
+        lock++;
+    }
+    if($("#search-zipcode").val() === "") {
+        $("#zip-lbl").text("Zip-Code Required");
+        $("#zip-lbl").css("color", "red");
+    }
+    else {
+        $("#zip-lbl").text("Zip-Code");
+        $("#zip-lbl").css("color", "darkgrey");
+        lock++;
+    }
+    if($('#ddl-sel').val() === null) {
+        $("#lbl-ddl-sel-state").text("Select State Required");
+        $("#lbl-ddl-sel-state").css("color", "red");
+    }
+    else {
+        $("#lbl-ddl-sel-state").text("Select State");
+        $("#lbl-ddl-sel-state").css("color", "darkgrey");
+        lock++;
+    }
+
+    let selCnty = JSON.parse(localStorage.getItem("cbs_cn"));
+    let selLcl = JSON.parse(localStorage.getItem("cbs_lcl"));
+    let selSt = JSON.parse(localStorage.getItem("cbs_st"));
+    let selFed = JSON.parse(localStorage.getItem("cbs_fd"));
+
+    if(selCnty) {
+        cblock++;
+    }
+    if(selLcl) {
+        cblock++;
+    }
+    if(selSt) {
+        cblock++;
+    }
+    if(selFed) {
+        cblock++;
+    }
+    if(!cblock) {
+        $("#gob-level-title").text("At Least 1 Gov Level Selected is Required");
+        $("#gob-level-title").css("color", "red");
+    }
+    else {
+        $("#gob-level-title").text("Level Of Goverment");
+        $("#gob-level-title").css("color", "black");
+    }
+    if(lock===4) {
+        return 0;
+    }
+    else {
+        return 1;
+    }
+    
+}
+
 $("#clear-btn").click(function (event) {
     event.preventDefault();
     su.clearUI();
@@ -265,16 +371,16 @@ $("#clear-btn").click(function (event) {
 $("#search-btn").click(function (event) {
     event.preventDefault();
     su.saveUIInputLS();
-    ah.addressResolve();
-    
+    if(!inputValidation()) {
+        ah.addressResolve();
+    }
 });
 
 function initialState() {
-    console.clear();
     su.clearUI();
     su.resetUIInputLS();
     su.resetAPIRespLS();
-    //su.enableUIAfterSearch();
+    su.enableUIAfterSearch();
     ah.loadApiKeys();
 }
 

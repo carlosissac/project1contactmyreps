@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <head>
         <meta charset="UTF-8">
@@ -26,13 +25,18 @@
             </a>
         </div>
     </nav>
-    <ul class="sidenav" id="slide-out">
-        <li><a href="./directory.html">Directory</a></li>
-        <li><a href="./index.html">Search</a></li>
+    <ul id="slide-out" class="sidenav">
+        <li>
+            <div id="sidenav-head" class="user-view">
+            </div>
+        </li>
+        <div id="sidenav-city-list">
+            <li><a id="search-rep" class="waves-effect" href="#">Search.Rep</a></li>
+            <li><a id="directory" class="waves-effect" href="./directory.html">Directory</a></li>
+        </div>
     </ul>
     <!-- NAV ENDS -->
     <!-- MAIN STARTS -->
-
     <main>
         <div id="main-container" class="container">
             <div class="row"></div>
@@ -41,36 +45,39 @@
                 <div class="col s12 m8">
                     <div id="main-card" class="card-panel">
                         <form id="card-form">
-                            <div id="card-row" class="row">
+                            <div id="title-card-row" class="row">
                                 <h4 id="main-title">Search Rep</h4>
                             </div>
                             <div id="card-row" class="row">
                                 <div id="card-row-div" class="col s12 m12">
-                                    <div class="input-field">
+                                    <div id="card-row-text" class="input-field">
                                         <input type="text" name="address1" id="search-address1">
-                                        <label id="address1" for="search-address1">Address-1</label>
+                                        <label id="add1-lbl" for="search-address1">Address-1</label>
                                     </div>
                                 </div>
                             </div>
                             <div id="card-row" class="row">
                                 <div id="card-row-div" class="col s12 m12">
-                                    <div class="input-field">
+                                    <div id="card-row-text" class="input-field">
                                         <input type="text" name="address2" id="search-address2">
-                                        <label for="search-address2">Address-2</label>
+                                        <label id="add2-lbl" for="search-address2">Address-2</label>
                                     </div>
                                 </div>
                             </div>
-                            <div id="card-row" class="row">
-                                <div id="card-row-div" class="col s12 m7">
-                                    <div id="row-city-input" class="input-field">
-                                        <input type="text" name="search-city" id="search-city">
-                                        <label id="citySearch" for="search-city">City</label>
+                            <div id="card-row-city" class="row">
+                                <div id="card-row-div" class="col s12 m12">
+                                    <div id="card-row-text" class="input-field">
+                                        <input type="text" name="city" id="search-city">
+                                        <label id="city-lbl" for="search-city">City</label>
                                     </div>
                                 </div>
-                                <div id="card-row-div" class="col s12 m5">
-                                    <div id="row-state-select" class="input-field col s12 grey-text">
+                            </div>
+                            <div id="card-row-ddl" class="row">
+                                <div id="card-row-div" class="col s12 m12">
+                                    <div id="state-wrapper" class="select-wrapper">
+                                        <label id="lbl-ddl-sel-state">Select State</label>
                                         <select id="ddl-sel">
-                                            <option value="" disabled selected>State</option>
+                                            <option value="" disabled selected>State</option> 
                                             <option value="AL">AL</option>
                                             <option value="AK">AK</option>
                                             <option value="AZ">AZ</option>
@@ -125,19 +132,22 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="card-row" class="row">
+                            <div id="card-row-z" class="row">
                                 <div id="card-row-div" class="col s12 m12">
-                                    <div class="input-field">
+                                    <div id="card-row-text" class="input-field">
                                         <input type="text" name="zipcode" id="search-zipcode">
-                                        <label id="zipCode" for="search-zipcode">Zip-Code</label>
+                                        <label id="zip-lbl" for="search-zipcode">Zip-Code</label>
                                     </div>
                                 </div>
+                            </div>
+                            <div id="card-row-cb-title" class="row">
+                                <h6 id="gob-level-title">Level Of Goverment:</h6>
                             </div>
                             <div id="card-row-cb" class="row">
                                 <div id="card-row-div-cb" class="col s12 m3">
                                     <p id="card-row-div-cb-p">
                                         <label id="cb-cnty-lbl">
-                                            <input id="cb-cnty" type="checkbox" class="filled-in" />
+                                            <input id="cb-cnty" type="checkbox" class="filled-in"/>
                                             <span id="cb-cnty-sp">County</span>
                                         </label>
                                     </p>
@@ -147,7 +157,7 @@
                                 <div id="card-row-div-cb" class="col s12 m3">
                                     <p id="card-row-div-cb-p">
                                         <label id="cb-lcl-lbl">
-                                            <input id="cb-lcl" type="checkbox" class="filled-in" />
+                                            <input id="cb-lcl" type="checkbox" class="filled-in"/>
                                             <span id="cb-lcl-sp">Local</span>
                                         </label>
                                     </p>
@@ -157,7 +167,7 @@
                                 <div id="card-row-div-cb" class="col s12 m3">
                                     <p id="card-row-div-cb-p">
                                         <label id="cb-st-lbl">
-                                            <input id="cb-st" type="checkbox" class="filled-in" />
+                                            <input id="cb-st" type="checkbox" class="filled-in"/>
                                             <span id="cb-st-sp">State</span>
                                         </label>
                                     </p>
@@ -167,13 +177,13 @@
                                 <div id="card-row-div-cb" class="col s12 m3">
                                     <p id="card-row-div-cb-p">
                                         <label id="cb-fd-lbl">
-                                            <input id="cb-fd" type="checkbox" class="filled-in" />
+                                            <input id="cb-fd" type="checkbox" class="filled-in"/>
                                             <span id="cb-fd-sp">Federal</span>
                                         </label>
                                     </p>
                                 </div>
                             </div>
-                            <div id="card-row" class="row">
+                            <div id="card-row-btn" class="row">
                                 <div id="card-row-div-sb" class="col s12 m6">
                                     <a id="clear-btn" class="waves-effect waves-light btn-large red">Clear</a>
                                 </div>
@@ -181,7 +191,10 @@
                                     <a id="search-btn" class="waves-effect waves-light btn-large green">Search Address</Address></a>
                                 </div>
                             </div>
-                            <div id="card-row-d"></div>
+                            <div id="card-row-bottom" class="row"></div>
+                            <div id="card-row-bottom" class="row"></div>
+                            <div id="card-row-d1"></div>
+                            <div id="card-row-d2"></div>
                         </form>
                     </div>
                 </div>
@@ -237,6 +250,13 @@
             $('select').formSelect();
             $('.modal').modal();
         });
+    </script>
+    <!--Materialize Option List Font Color Change-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('select');
+        var instances = M.FormSelect.init(elems);
+    });
     </script>
     <script src="./assets/storage.js"></script>
     <script src="./assets/dynamicUI.js"></script>

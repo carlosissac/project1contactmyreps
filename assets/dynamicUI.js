@@ -33,7 +33,7 @@ let dynamicUi = {
                 this.repAddress = buffer[i].repAddress;
                 this.repPhotoUrl = buffer[i].repPhotoUrl;
                 /*console.log(`${this.hash} ${this.repOrdIndex} ${this.repLevel} ${this.repOffice} ${this.repName} ${this.repParty} ${this.repPartyDisplay} ${this.repEmail} ${this.repPhone} ${this.repPhotoUrl} ${this.repAddress}`);*/
-                this.representativeRowBuilder();
+                this.representativeRowBuilder(i);
                 }
                 if(i=== buffer.length) {
                     return 0;
@@ -47,17 +47,27 @@ let dynamicUi = {
     },
 
     parseAddress: function (response) {
-        let pre = response[0][0].metadata.precision;
-        let dmc = response[0][0].analysis.dpv_match_code;     
-        if (dmc !== "Y") {
+        let dmc = "";
+        let lock = false;
+        if (!response[0][0].analysis.dpv_match_code) {
+            dmc = "";
             lock = false;
         }
         else {
-            lock = true;
+            dmc = response[0][0].analysis.dpv_match_code;
+            if ((dmc === "Y") || (dmc === "S") || (dmc === "D") || (dmc === "")) {
+                lock = true;
+            }
+            else if (dmc === "N") {
+                lock = false;
+            } 
+            else {
+                console.log("parseAddress NA");
+            }
+            let addrsLine1 = response[0][0].delivery_line_1;
+            let addrsLine2 = response[0][0].last_line;
+            this.addressReal = `${addrsLine1} ${addrsLine2}`;    
         }
-        let addrsLine1 = response[0][0].delivery_line_1;
-        let addrsLine2 = response[0][0].last_line;
-        this.addressReal = `${addrsLine1} ${addrsLine2}`;
         this.addressSuccess = lock;
     },
         
@@ -73,6 +83,7 @@ let dynamicUi = {
             crds2.append(crdb);
             cr.append(crds1);
             cr.append(crds2);
+            $("#card-row-d1").html(cr);
         }
         else {
             let crds = $("<div id='card-row-div-sb' class='col s12 m12'>");
@@ -80,42 +91,49 @@ let dynamicUi = {
             $(crdt).css("color", "red");
             crds.append(crdt);
             cr.append(crds);
+            $("#card-row-d1").html(cr);
         }
-        $("#card-row-d").html(cr);
     },
 
     displayLsEmpty: function (level) {
-        let crh = $("<div id='card-row' class='row'>");
+        let crh = $("<div id='card-row-dirls' class='row'>");
         let crds = $("<div id='card-row-div-sb' class='col s12 m12'>");
-        let crdt = $("<h5>").text(`No Contacts Saved`);
+        let crdt = $("<h5 id='card-row-div-text'>").text(`No Contacts Saved`);
         $(crdt).css("color", "red");
         crds.append(crdt);
         crh.append(crds);
-        $("#card-row-d").append(crh);
+        $("#card-row-d1").append(crh);
     },
 
     displayNoInfoFound: function (level) {
-        let crh = $("<div id='card-row' class='row'>");
+        let crh = $("<div id='card-row-rep-t' class='row'>");
         let crds = $("<div id='card-row-div-sb' class='col s12 m12'>");
-        let crdt = $("<h5>").text(`No ${level} Reps Found`);
+        let crdt = $("<h5 id='card-row-div-text'>").text(`No ${level} Reps Found`);
         $(crdt).css("color", "red");
         crds.append(crdt);
         crh.append(crds);
-        $("#card-row-d").append(crh);
+        $("#card-row-d2").append(crh);
     },
 
     titleRowBuilder: function (level) {
-        let crh = $("<div id='card-row' class='row'>");
+        let crh = $("<div id='card-row-rep-t' class='row'>");
         let crds = $("<div id='card-row-div-sb' class='col s12 m12'>");
-        let crdt = $("<h5>").text(`${level} Reps`);
+        let crdt = $("<h5 id='card-row-div-text'>").text(`${level} Reps`);
         $(crdt).css("color", "blue");
         crds.append(crdt);
         crh.append(crds);
-        $("#card-row-d").append(crh);
+        $("#card-row-d2").append(crh);
     },
 
-    representativeRowBuilder: function (level) {
-        let tr = $("<div id='card-row-rep' class='row'>");
+    representativeRowBuilder: function (index) {
+        let tr = $("<div class='row'>");
+        if(index%2) {
+            $(tr).addClass("row blue lighten-4");
+        }
+        else {
+            $(tr).addClass("row  blue-grey lighten-5");
+        }
+        $(tr).attr("id","card-row-rep");
         $(tr).attr("hash",this.hash); 
         $(tr).attr("rep-ord-idx",this.repOrdIndex);
         $(tr).attr("rep-level",this.repLevel);
@@ -141,7 +159,7 @@ let dynamicUi = {
         tr.append(crds1);
         tr.append(crds2);
         tr.append(crds3);
-        $("#card-row-d").append(tr);
+        $("#card-row-d2").append(tr);
     },
 
     parseRepresentativeInfo: function (response,level) {
@@ -162,11 +180,13 @@ let dynamicUi = {
             positionsArrayLenght = response[0].offices.length;
         }
 
+        let rowCount = 0;
         if ((personsArrayLenght) && (positionsArrayLenght)) {
             this.titleRowBuilder(level);
             for(let i=0; i<positionsArrayLenght; i++) {
                 this.repOffice = response[0].offices[i].name;
                 let oilen = response[0].offices[i].officialIndices.length;
+                let modj = 0;
                 for(let j=0; j<oilen; j++) {
                     oi = response[0].offices[i].officialIndices[j];
                     this.repOrdIndex = oi;
@@ -221,7 +241,8 @@ let dynamicUi = {
                     else {
                         this.repAddress = response[0].officials[oi].address[0].line1 + " " +response[0].officials[oi].address[0].city + " " + response[0].officials[oi].address[0].state + " " + response[0].officials[oi].address[0].zip;
                     }
-                    this.representativeRowBuilder();
+                    rowCount++;
+                    this.representativeRowBuilder(rowCount);
                 }
             }
 
