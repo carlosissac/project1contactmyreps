@@ -89,9 +89,6 @@ $(document).ready(function () {
             $("#search-address2").attr('disabled',false);
             $("#search-city").attr('disabled',false);
             $("#search-zipcode").attr('disabled',false);
-            
-
-
             return 0;
         },
 
@@ -107,19 +104,6 @@ $(document).ready(function () {
             $("#search-city").attr('disabled',true);
             $("#search-zipcode").attr('disabled',true);
             
-            /*$(".selected").addClass('disabled');
-            $(".option").addClass('disabled');
-            $("#ddl-sel").addClass('disabled');*/
-
-            /*$(".selected").attr('disabled',true);
-            $(".option").attr('disabled',true);
-            $("#ddl-sel").attr('disabled',true);*/
-
-            //$(".selected").attr('disabled',"disabled");
-            //$(".option").attr('disabled',"disabled");
-            //$("#ddl-sel").attr('disabled',"disabled");
-            //$("#state-wrapper").attr('disabled',"disabled");
-
             return 0;
         },
 
@@ -147,13 +131,14 @@ $(document).ready(function () {
 
         searchModal: function (storageHandler) {    
             $('.modal').modal('open', "#modal1");
-            $('#modal-btn-email').addClass('disabled');
+            $('#modal-btn-email1').addClass('disabled');
             if(String(this.repEmail) !== "") { 
-                $('#modal-btn-email').removeClass('disabled');
+                $('#modal-btn-email1').removeClass('disabled');
+                $('#modal-btn-email1').attr("href",`mailto:${this.repEmail}`);
             }
-            $('#modal-btn-save').addClass('disabled');
+            $('#modal-btn-save1').addClass('disabled');
             if(!storageHandler.duplicateCheckLS(this.repName,this.repOffice)) {
-                $('#modal-btn-save').removeClass('disabled');
+                $('#modal-btn-save1').removeClass('disabled');
             }
             $(".modal-content").html(`<div class='class'>
             <h5>${this.repOffice}</h5><h6>${this.repName}&nbsp;${this.repPartyDisplay}</h6>
@@ -227,7 +212,7 @@ $(document.body).on("click", "div[rep-office]", function() {
     
 });
 
-$("#modal-btn-save").click(function (event) {
+$("#modal-btn-save1").click(function (event) {
     event.preventDefault();
     sh.saveToLS(su)
     sh.sortLS();
@@ -352,7 +337,8 @@ function inputValidation() {
         $("#gob-level-title").text("Level Of Goverment");
         $("#gob-level-title").css("color", "black");
     }
-    if(lock===4) {
+
+    if((lock===4) && (cblock)) {
         return 0;
     }
     else {
@@ -370,9 +356,11 @@ $("#clear-btn").click(function (event) {
 
 $("#search-btn").click(function (event) {
     event.preventDefault();
+    su.resetUIInputLS();
     su.saveUIInputLS();
     if(!inputValidation()) {
         ah.addressResolve();
+        $("#search-btn").addClass('disabled');
     }
 });
 

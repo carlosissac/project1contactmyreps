@@ -17,21 +17,33 @@ $(document).ready(function () {
     sh = storageHandler;
     d = directory;
 
-    function directoryModal(obj) {
+    function directoryModal(obj,mode) {
         $('.modal').modal('open', "#modal2");
-        $('#modal-btn-email').addClass('disabled');
-        if(String(obj.repEmail) !== "") { 
-            $('#modal-btn-email').removeClass('disabled');
+        $('#modal-btn-rem2').removeClass('disabled');
+        $('#modal-btn-email2').addClass('disabled');
+        $('#modal-btn-close').removeClass('disabled');
+        $(".modal-content").html("");
+        if(mode === 2) {
+            if(String(obj.repEmail) !== "") {
+                $('#modal-btn-email2').removeClass('disabled');
+                $('#modal-btn-email2').attr("href",`mailto:${obj.repEmail}`);
+            }
+            $(".modal-content").html(`<div class='class'>
+            <h5>${obj.repOffice}</h5><h6>${obj.repName}&nbsp;${obj.repPartyDisplay}</h6>
+            <p>${obj.repEmail}</p> 
+            <p>${obj.repPhone}</p><img id="rep-pic-modal" src='${obj.repPhotoUrl}'/>
+            <p>${obj.repAddress}</p>`);
+            d.setHashcode(obj.hash);
         }
-        $(".modal-content").html(`<div class='class'>
-        <h5>${obj.repOffice}</h5><h6>${obj.repName}&nbsp;${obj.repPartyDisplay}</h6>
-        <p>${obj.repEmail}</p> 
-        <p>${obj.repPhone}</p><img id="rep-pic-modal" src='${obj.repPhotoUrl}'/>
-        <p>${obj.repAddress}</p>`);
-        $("#email").attr("href",`mailto:${obj.repEmail}`);
-        //working on the clear UI on close
-        // $(".modal").modal('close',(clearUI))
-        d.setHashcode(obj.hash);
+        if(mode === 3) {
+            $(".modal-content").html(`<div class='class'>
+            <h5>Test.Data</h5>
+            <h6>This will clear all entries in current directory and load test data</h6>
+            <p>For testing purposes only</p>`);
+            $('#modal-btn-rem2').addClass('disabled');
+            $('#modal-btn-email2').addClass('disabled');
+            $('#modal-btn-close2').addClass('disabled');            
+        }
         return 0;
     }
 
@@ -50,14 +62,14 @@ $(document).ready(function () {
             'repAddress' : String($(this).attr('rep-address')),
         };
         /*console.log(`${dir_entry.hash} ${dir_entry.repOrdIndex} ${dir_entry.repLevel} ${dir_entry.repOffice} ${dir_entry.repName} ${dir_entry.repParty} ${dir_entry.repPartyDisplay} ${dir_entry.repEmail} ${dir_entry.repPhone} ${dir_entry.repPhotoUrl} ${dir_entry.repAddress}`);*/
-        directoryModal(dir_entry);
+        directoryModal(dir_entry,2);
     });
 
-    $("#modal-btn-rem").click(function (event) {
+    $("#modal-btn-rem2").click(function (event) {
         event.preventDefault();
         let v = sh.removeEntryLS(d.getHascode());
         sh.sortLS();
-        $("#card-row-d").html("");
+        $("#card-row-d2").html("");
         if(!v) {
             du.displayLsEmpty();
             $('#clearall-btn').addClass('disabled');
@@ -66,9 +78,11 @@ $(document).ready(function () {
         $(".modal").modal('close',(modal2))
     });
 
-    $("#testdata-btn").click(function (event) {
+    $("#testData").click(function (event) {
+        let dir_entry = {}
         event.preventDefault();
-        //testDataModal();
+        directoryModal(dir_entry,3);
+        $('.sidenav').sidenav('close');
         sh.loadTestDataLS();
         sh.sortLS();
         $("#card-row-d1").html("");

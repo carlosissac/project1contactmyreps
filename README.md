@@ -26,18 +26,9 @@ API Smarty Streets(https://smartystreets.com) to verify street addresses.
 API Civic Info (https://developers.google.com/civic-information) to get the representative results.  
 
 ## Future Enhancements
-Input validation fully implemented.
-
-Get rid of media queries.
-
-Dynamic row styling.
-
-Local live server configuration.
-
 Civic information 404 photo link return handler.
 
 Find SmartyStreets permanent and free alternative.
-
 
 ## Deployment
 Live link: https://carlosissac.github.io/project1contactmyreps/

@@ -70,6 +70,22 @@
     right: 195px;
 }
 
+#sidenav-head {
+    height: 7rem;
+    margin: 0px;
+}
+
+#search-rep,
+#about,
+#testData {
+    text-align: right;
+}
+
+#sidenav-pic2,
+#sidenav-pic1 {
+    object-fit: cover;
+}
+
 #body-area {
     background-image: url("./socialjustice.jpg");
     background-repeat: no-repeat;
@@ -194,8 +210,6 @@
     margin: 0px;
     padding: 0.15rem;
 }
-
-
 
 #card-row-dirls {
     margin: 0px;

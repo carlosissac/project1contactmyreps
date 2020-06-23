@@ -27,10 +27,10 @@ let apiHandler = {
         let zip = JSON.parse(localStorage.getItem("zip"));
 
         //Local Host URL 
-        //let queryURL = `https://us-street.api.smartystreets.com/street-address?auth-id=${this.appIDSmarty}&auth-token=${this.authTokenSmarty}&candidates=1&match=invalid&street=${add1}&street2=${add2}&city=${city}&state=${state}&zipcode=${zip}`;
+        let queryURL = `https://us-street.api.smartystreets.com/street-address?auth-id=${this.appIDSmarty}&auth-token=${this.authTokenSmarty}&candidates=1&match=invalid&street=${add1}&street2=${add2}&city=${city}&state=${state}&zipcode=${zip}`;
 
         //Public Website URL
-        let queryURL = `https://us-street.api.smartystreets.com/street-address?candidates=1&match=invalid&street=${encodeURIComponent(add1)}&street2=${encodeURIComponent(add2)}&city=${encodeURIComponent(city)}&state=${encodeURIComponent(state)}&zipcode=${encodeURIComponent(zip)}&key=${encodeURIComponent(keyS)}`;
+        //let queryURL = `https://us-street.api.smartystreets.com/street-address?candidates=1&match=invalid&street=${encodeURIComponent(add1)}&street2=${encodeURIComponent(add2)}&city=${encodeURIComponent(city)}&state=${encodeURIComponent(state)}&zipcode=${encodeURIComponent(zip)}&key=${encodeURIComponent(keyS)}`;
 
         let promise = await Promise.all([
             $.ajax({
@@ -38,8 +38,6 @@ let apiHandler = {
                 method: "GET"
             })
         ]);
-
-        console.log(promise);
 
         this.du.parseAddress(promise);
         this.du.displayResolvedAddress();
