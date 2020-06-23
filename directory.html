@@ -27,18 +27,22 @@
         </div>
     </nav>
     <ul id="slide-out" class="sidenav">
-        <li>
-            <div id="sidenav-head" class="user-view">
+        <li><div id="sidenav-head" class="user-view">
+            <div class="background">
+                <img id="sidenav-pic2" src="assets/pins.png">
             </div>
         </li>
-        <div id="sidenav-city-list">
+        <div id="sidenav-list">
             <li><a id="search-rep" class="waves-effect" href="./index.html">Search.Rep</a></li>
-            <li><a id="directory" class="waves-effect" href="#!">Directory</a></li>
+            <!-- <li><a id="about" class="waves-effect" href="./about.html">About</a></li> -->
+            <li><a id="testData" class="waves-effect" href="#modal3">Test.Data</a></li>
+            <div class="background">
+                <img id="sidenav-pic2" src="assets/pins.png">
+            </div>
         </div>
     </ul>
     <!-- NAV ENDS -->
     <!-- MAIN STARTS -->
-
     <main>
         <div id="main-container" class="container">
             <div class="row"></div>
@@ -57,9 +61,9 @@
                                 <div id="card-row-div-sb" class="col s12 m12">
                                     <a id="clearall-btn" class="waves-effect waves-light btn-large red">Clear All</a>
                                 </div>
-                                <div id="card-row-div-sb" class="col s12 m12">
-                                    <a id="testdata-btn" class="waves-effect waves-light btn-large blue">Test Data</a>
-                                </div>
+                                <!-- <div id="card-row-div-sb" class="col s12 m12"> -->
+                                    <!-- <a id="testdata-btn" class="waves-effect waves-light btn-large blue">Test Data</a> -->
+                                <!-- </div> -->
                             </div>
                         </form>
                     </div>
@@ -81,9 +85,9 @@
         </div>
         <div class="modal-footer">
     <!--SAVE, SEND MESSAGE, CLOSE BUTTONS-->
-            <a href="#!" id="modal-btn-rem" class="save btn-flat waves-effect waves-green">Remove</a>
-            <a href="mailto:someAddress@killersites.com" id="modal-btn-email" class="save btn-flat waves-effect waves-orange">Send Email</a>
-            <a href="#!" class="modal-close waves-effect waves-red btn-flat">Close</a>
+            <a id="modal-btn-rem2" class="save btn-flat waves-effect waves-green">Remove</a>
+            <a id="modal-btn-email2" class="save btn-flat waves-effect waves-orange">Send Email</a>
+            <a id="modal-btn-close2" class="modal-close waves-effect waves-red btn-flat">Close</a>
         </div>
     </div>
     <!-- MODAL CONTACT INFO ENDS -->
@@ -115,6 +119,8 @@
             $('select').formSelect();
             $('.modal').modal();
         });
+    </script>
+    <script>
     </script>
     <script src="./assets/storage.js"></script>
     <script src="./assets/dynamicUI.js"></script>
