@@ -72,7 +72,7 @@ let dynamicUi = {
     },
         
     displayResolvedAddress: function() {
-        let cr = $("<div id='card-row' class='row'>");
+        let cr = $("<div class='row' style='margin:0px'>");
         if (this.addressSuccess) {
             let crds1 = $("<div id='card-row-div-sb' class='col s12 m6'>");
             let crds2 = $("<div id='card-row-div-sb' class='col s12 m6'>");
@@ -128,7 +128,7 @@ let dynamicUi = {
     representativeRowBuilder: function (index) {
         let tr = $("<div class='row'>");
         if(index%2) {
-            $(tr).addClass("row blue lighten-4");
+            $(tr).addClass("row blue lighten-5");
         }
         else {
             $(tr).addClass("row  blue-grey lighten-5");

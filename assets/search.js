@@ -132,6 +132,7 @@ $(document).ready(function () {
         searchModal: function (storageHandler) {    
             $('.modal').modal('open', "#modal1");
             $('#modal-btn-email1').addClass('disabled');
+            
             if(String(this.repEmail) !== "") { 
                 $('#modal-btn-email1').removeClass('disabled');
                 $('#modal-btn-email1').attr("href",`mailto:${this.repEmail}`);
@@ -140,11 +141,14 @@ $(document).ready(function () {
             if(!storageHandler.duplicateCheckLS(this.repName,this.repOffice)) {
                 $('#modal-btn-save1').removeClass('disabled');
             }
-            $(".modal-content").html(`<div class='class'>
-            <h5>${this.repOffice}</h5><h6>${this.repName}&nbsp;${this.repPartyDisplay}</h6>
-            <p>${this.repEmail}</p> 
-            <p>${this.repPhone}</p><img id="rep-pic-modal" src='${this.repPhotoUrl}'/>
-            <p>${this.repAddress}</p>`);
+            $(".modal-content").html(`<div>
+            <h5 id="modal-reptitle">${this.repOffice}</h5>
+            <h6 id="modal-repname">${this.repName}&nbsp;${this.repPartyDisplay}</h6>
+            <p id="modal-repemail">${this.repEmail}</p> 
+            <p id="modal-repphone">${this.repPhone}</p>
+            <img id="modal-reppic" src='${this.repPhotoUrl}'/>
+            <p id="modal-repaddr">${this.repAddress}</p>
+            </div>`);
             $("#email").attr("href",`mailto:${this.repEmail}`);
             return 0;
         },
@@ -207,9 +211,6 @@ $(document.body).on("click", "div[rep-office]", function() {
     /*console.log(`${hash} ${repOrdIndex} ${repLevel} ${repOffice} ${repName} ${repParty} ${repPartyDisplay} ${repEmail} ${repPhone} ${repPhotoUrl} ${repAddress}`);*/
     su.saveRepresentativeInfo(hash, repOrdIndex, repLevel, repOffice, repName, repParty, repPartyDisplay, repEmail, repPhone, repPhotoUrl, repAddress);
     su.searchModal(sh);
-    su.clearForm();
-    //disable UI only Clear Btn available
-    
 });
 
 $("#modal-btn-save1").click(function (event) {
