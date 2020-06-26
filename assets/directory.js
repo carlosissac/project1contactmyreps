@@ -16,6 +16,7 @@ $(document).ready(function () {
     du = dynamicUi;
     sh = storageHandler;
     d = directory;
+    datalock = false;
 
     function directoryModal(obj,mode) {
         $('.modal').modal('open', "#modal2");
@@ -24,25 +25,32 @@ $(document).ready(function () {
         $('#modal-btn-close').removeClass('disabled');
         $(".modal-content").html("");
         if(mode === 2) {
+            $('#modal-btn-close2').text('Close');
             if(String(obj.repEmail) !== "") {
                 $('#modal-btn-email2').removeClass('disabled');
                 $('#modal-btn-email2').attr("href",`mailto:${obj.repEmail}`);
             }
-            $(".modal-content").html(`<div class='class'>
-            <h5>${obj.repOffice}</h5><h6>${obj.repName}&nbsp;${obj.repPartyDisplay}</h6>
-            <p>${obj.repEmail}</p> 
-            <p>${obj.repPhone}</p><img id="rep-pic-modal" src='${obj.repPhotoUrl}'/>
-            <p>${obj.repAddress}</p>`);
+            $(".modal-content").html(`<div>
+            <h5 id="modal-reptitle">${obj.repOffice}</h5>
+            <h6 id="modal-repname">${obj.repName}&nbsp;${obj.repPartyDisplay}</h6>
+            <p id="modal-repemail">${obj.repEmail}</p> 
+            <p id="modal-repphone">${obj.repPhone}</p>
+            <img id="modal-reppic" src='${obj.repPhotoUrl}'/>
+            <p id="modal-repaddr">${obj.repAddress}</p>
+            </div>`);
             d.setHashcode(obj.hash);
         }
         if(mode === 3) {
-            $(".modal-content").html(`<div class='class'>
-            <h5>Test.Data</h5>
-            <h6>This will clear all entries in current directory and load test data</h6>
-            <p>For testing purposes only</p>`);
+            datalock = true;
+            $(".modal-content").html(`<div>
+            <h5 id="modal-reptitle">Test.Data</h5>
+            <h6 id="modal-repname">This will clear all entries in current directory and load test data</h6>
+            <p id="modal-repphone">For testing purposes only</p>
+            </div>`);
             $('#modal-btn-rem2').addClass('disabled');
             $('#modal-btn-email2').addClass('disabled');
-            $('#modal-btn-close2').addClass('disabled');            
+            $('#modal-btn-close2').removeClass('disabled');
+            $('#modal-btn-close2').text('Load Data');
         }
         return 0;
     }
@@ -65,6 +73,22 @@ $(document).ready(function () {
         directoryModal(dir_entry,2);
     });
 
+
+    $('#modal-btn-close2').click(function (event) {
+            if(datalock) {
+                sh.loadTestDataLS();
+                sh.sortLS();
+                $("#card-row-d1").html("");
+                $("#card-row-d2").html("");
+                if(du.lsObjectHandler()) {
+                    $('#clearall-btn').addClass('disabled');
+                }
+                else {
+                    $('#clearall-btn').removeClass('disabled');
+                }
+            }
+    });
+
     $("#modal-btn-rem2").click(function (event) {
         event.preventDefault();
         let v = sh.removeEntryLS(d.getHascode());
@@ -83,16 +107,6 @@ $(document).ready(function () {
         event.preventDefault();
         directoryModal(dir_entry,3);
         $('.sidenav').sidenav('close');
-        sh.loadTestDataLS();
-        sh.sortLS();
-        $("#card-row-d1").html("");
-        $("#card-row-d2").html("");
-        if(du.lsObjectHandler()) {
-            $('#clearall-btn').addClass('disabled');
-        }
-        else {
-            $('#clearall-btn').removeClass('disabled');
-        }
     });
 
     $("#clearall-btn").click(function (event) {

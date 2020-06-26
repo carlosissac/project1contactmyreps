@@ -34,8 +34,7 @@
         </li>
         <div id="sidenav-list">
             <li><a id="search-rep" class="waves-effect" href="./index.html">SearchRep</a></li>
-            <li><a id="about" class="waves-effect" href="./about.html">About</a></li>
-            <li><a id="testData" class="waves-effect" href="#modal3">TestData</a></li>
+            <li><a id="about" class="waves-effect" href="./directory.html">SavedReps</a></li>
             <div class="background">
                 <img id="sidenav-pic2" src="assets/pins.png">
             </div>
@@ -51,16 +50,22 @@
                 <div class="col s12 m8">
                     <div id="main-card" class="card-panel">
                         <form id="card-form">
-                            <div id="card-row-dir" class="row">
-                                <h4 id="main-title">SavedReps</h4>
+                            <div id="card-row-dir-title" class="row"><h4 id="main-title">About</h4></div>
+                            <div id="card-row-dir" class="row"><h5 id="main-title">Project-1: ContactMyReps</h4></div>
+                            <h5 id="card-row-dir-list-header" class="row">How To Use:</h5>
+                            <ul id="about-list" class="collection with-header">
+                                <li class="collection-header" id="about-card-subtxt" class="card-text text-muted">1.- <a style="color:blue;">Write</a> a valid US address.</li>
+                                <li class="collection-header" id="about-card-subtxt" class="card-text text-muted">2.- Make sure to <a style="color:blue;">Select</a> at least one level of Goverment to include in the search by clicking on one of the checkboxes.</li>
+                                <li class="collection-header" id="about-card-subtxt" class="card-text text-muted">3.- If address is resolved <a style="color:blue;">Click</a> on the <a style="color:blue;">Search</a> button in order to resolve address.</li>
+                                <li class="collection-header" id="about-card-subtxt" class="card-text text-muted">4.- If address successfully resolved <a style="color:blue;">Click</a> on <a style="color:blue;">Show</a> button in order to list representatives.</li>
+                                <li class="collection-header" id="about-card-subtxt" class="card-text text-muted">5.- List will be displayed showing all the representatives assigned to that address, <a style="color:blue;">Click</a> on the row of the person you are interested in contacting and a pop up with their contact info will appear.</li>
+                                <li class="collection-header" id="about-card-subtxt" class="card-text text-muted">6.- After pop up is shown <a style="color:blue;">Click</a> on <a style="color:blue;">Save</a> to save to personal Directory, <a style="color:blue;">Send Email</a> in order to contact representative if email is available, and <a style="color:blue;">Close</a> to exit pop up window</li>
+                            </ul>
+                            <div id="card-row-dir-link" class="row">
+                                <a target="_blank" href="https://github.com/carlosissac/project1contactmyreps" class="card-link">GitHub Repo</a>
                             </div>
-                            <div id="card-row-d1" class="row"></div>
-                            <div id="card-row-d2" class="row"></div>
-                            <div id="card-row-d3" class="row"></div>
-                            <div id="card-row-dir" class="row">
-                                <div id="card-row-div-sb" class="col s12 m12">
-                                    <a id="clearall-btn" class="waves-effect waves-light btn-large red">Clear All</a>
-                                </div>
+                            <div id="card-row-dir-link" class="row">
+                                <a target="_blank" href="https://materializecss.com/" class="card-link">Materialize CSS Theme</a>
                             </div>
                         </form>
                     </div>
@@ -74,20 +79,6 @@
         </div>
     </main>
     <!-- MAIN ENDS -->
-    <!-- MODAL CONTACT INFO STARTS -->
-    <div id="modal2" class="modal">
-        <div id="modal2-content" class="modal-content">
-            <h4>Modal Header</h4>
-            <p>A bunch of text</p>
-        </div>
-        <!--SAVE, SEND MESSAGE, CLOSE BUTTONS-->
-        <div id="modal2-footer" class="modal-footer">
-            <a id="modal-btn-rem2" class="save btn-flat waves-effect waves-green">Remove</a>
-            <a id="modal-btn-email2" class="save btn-flat waves-effect waves-orange">Send Email</a>
-            <a id="modal-btn-close2" class="modal-close waves-effect waves-red btn-flat">Close</a>
-        </div>
-    </div>
-    <!-- MODAL CONTACT INFO ENDS -->
     <!-- STICKY FOOTER START -->
     <footer class="page-footer">
         <div id="main-footer-cp" class="footer-copyright">
